@@ -1,0 +1,1 @@
+web: java -jar web/target/web-1.5.10.RELEASE.jar
