@@ -1,6 +1,6 @@
 package cn.colams.web.controller;
 
-import cn.colams.ticks.TicksBiz;
+import cn.colams.biz.ticks.TicksBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

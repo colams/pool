@@ -1,4 +1,4 @@
-package cn.colams.common;
+package cn.colams.biz.common;
 
 public class PageNameSetting {
 
