@@ -1,6 +1,6 @@
 package cn.colams.ticks;
 
-import cn.colams.common.DataSourceManager;
+import cn.colams.common.DataSourceBiz;
 import cn.colams.model.Ticks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import java.util.List;
 public class TicksBiz {
 
     @Autowired
-    private DataSourceManager dataSourceManager;
+    private DataSourceBiz dataSourceManager;
 
     public List<Ticks> list() throws Exception {
         DataSource dataSource = dataSourceManager.getHikariDataSource();
