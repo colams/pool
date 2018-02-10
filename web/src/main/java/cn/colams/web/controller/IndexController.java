@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+
 /**
  * Created by zhangzt on 2018/2/9.
  */
@@ -41,5 +43,13 @@ public class IndexController {
     @RequestMapping("/conn")
     public String conn() throws Exception {
         return url;
+    }
+
+    @RequestMapping("/hello")
+    public String hello(Map<String, Object> map) throws Exception {
+
+        map.put("name", "colams");
+
+        return "hello";
     }
 }
