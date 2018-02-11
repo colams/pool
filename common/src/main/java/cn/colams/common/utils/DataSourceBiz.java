@@ -1,4 +1,4 @@
-package cn.colams.biz.common;
+package cn.colams.common.utils;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

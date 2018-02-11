@@ -36,6 +36,10 @@
         <dependency>
             <groupId>cn.colams</groupId>
             <artifactId>biz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.colams.common</groupId>
+            <artifactId>common</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
