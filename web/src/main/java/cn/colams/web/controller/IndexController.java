@@ -1,6 +1,6 @@
 package cn.colams.web.controller;
 
-import cn.colams.biz.common.PageNameSetting;
+import cn.colams.common.setting.PageNameSetting;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
