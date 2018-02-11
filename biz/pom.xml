@@ -10,6 +10,7 @@
         <version>1.0</version>
     </parent>
 
+    <groupId>cn.colams.biz</groupId>
     <artifactId>biz</artifactId>
     <packaging>jar</packaging>
 

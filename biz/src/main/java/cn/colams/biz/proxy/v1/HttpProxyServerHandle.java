@@ -1,11 +1,10 @@
 package cn.colams.biz.proxy.v1;
 
+import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.HttpResponse;
-import io.netty.handler.codec.http.HttpVersion;
+import io.netty.handler.codec.http.*;
 
 public class HttpProxyServerHandle extends ChannelInboundHandlerAdapter {
 
@@ -23,7 +22,7 @@ public class HttpProxyServerHandle extends ChannelInboundHandlerAdapter {
             if (temp.length > 1) {
                 port = Integer.parseInt(temp[1]);
             } else {
-                if (request.getUri().indexOf("https") == 0) {
+                if (request.uri().indexOf("https") == 0) {
                     port = 443;
                 }
             }
@@ -31,10 +30,20 @@ public class HttpProxyServerHandle extends ChannelInboundHandlerAdapter {
             this.host = temp[0];
             this.port = port;
 
-            if ("CONNECT".equalsIgnoreCase(request.getMethod().name())){
-                HttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, NettyHttpProxyServer.SUCCESS);
-
+            if ("CONNECT".equalsIgnoreCase(request.method().name())) {
+                HttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+                ctx.writeAndFlush(response);
+                ctx.pipeline().remove("httpCodec");
+                ctx.pipeline().remove("httpObject");
+                return;
             }
+
+            Bootstrap bootstrap = new Bootstrap();
+            bootstrap.group(ctx.channel().eventLoop())
+                    .channel(ctx.channel().getClass())
+                    .handler(new HttpProxyInitializer(ctx.channel()));
+
+
         }
     }
 
