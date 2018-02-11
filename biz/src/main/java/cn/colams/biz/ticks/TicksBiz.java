@@ -1,7 +1,7 @@
 package cn.colams.biz.ticks;
 
 import cn.colams.biz.common.DataSourceBiz;
-import cn.colams.biz.model.Ticks;
+import cn.colams.model.Ticks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

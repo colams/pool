@@ -8,11 +8,6 @@
     <artifactId>pool</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
-    <modules>
-        <module>web</module>
-        <module>biz</module>
-        <module>common</module>
-    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

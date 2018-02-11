@@ -1,4 +1,4 @@
-package cn.colams.common;
+package cn.colams.model;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

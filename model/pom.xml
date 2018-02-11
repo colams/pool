@@ -7,11 +7,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.colams.common</groupId>
-    <artifactId>common</artifactId>
+    <groupId>cn.colams.model</groupId>
+    <artifactId>model</artifactId>
     <packaging>jar</packaging>
 
-    <name>common</name>
+    <name>model</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
