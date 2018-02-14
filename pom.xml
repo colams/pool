@@ -111,22 +111,22 @@
             <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.artifactId}</groupId>
+            <groupId>cn.colams.biz</groupId>
             <artifactId>biz</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>${project.artifactId}</groupId>
+            <groupId>cn.colams.common</groupId>
             <artifactId>common</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>${project.artifactId}</groupId>
+            <groupId>cn.colams.model</groupId>
             <artifactId>model</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>${project.artifactId}</groupId>
+            <groupId>cn.colams.web</groupId>
             <artifactId>web</artifactId>
             <version>1.0</version>
         </dependency>
