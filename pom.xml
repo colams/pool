@@ -107,26 +107,26 @@
             <artifactId>HikariCP</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>cn.colams.biz</groupId>
-            <artifactId>biz</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.colams.common</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.colams.model</groupId>
-            <artifactId>model</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.colams.web</groupId>
-            <artifactId>web</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cn.colams.biz</groupId>-->
+            <!--<artifactId>biz</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>cn.colams.common</groupId>-->
+            <!--<artifactId>common</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>cn.colams.model</groupId>-->
+            <!--<artifactId>model</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>cn.colams.web</groupId>-->
+            <!--<artifactId>web</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
     </dependencies>
 
 </project>
