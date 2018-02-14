@@ -10,7 +10,6 @@
     <groupId>cn.colams.common</groupId>
     <artifactId>common</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
 
     <name>common</name>
 

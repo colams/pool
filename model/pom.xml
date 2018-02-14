@@ -10,7 +10,6 @@
     <groupId>cn.colams.model</groupId>
     <artifactId>model</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
 
     <name>model</name>
 

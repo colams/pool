@@ -17,11 +17,11 @@
     </modules>
 
     <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>nexus-aliyun</id>-->
-            <!--<name>Nexus aliyun</name>-->
-            <!--<url>http://maven.aliyun.com/nexus/content/groups/public</url>-->
-        <!--</repository>-->
+    <!--<repository>-->
+    <!--<id>nexus-aliyun</id>-->
+    <!--<name>Nexus aliyun</name>-->
+    <!--<url>http://maven.aliyun.com/nexus/content/groups/public</url>-->
+    <!--</repository>-->
     <!--</repositories>-->
 
 
@@ -114,6 +114,22 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.artifactId}</groupId>
+            <artifactId>biz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.artifactId}</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.artifactId}</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.artifactId}</groupId>
+            <artifactId>web</artifactId>
         </dependency>
     </dependencies>
 
