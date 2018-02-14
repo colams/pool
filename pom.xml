@@ -106,10 +106,7 @@
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>cn.colams.biz</groupId>
             <artifactId>biz</artifactId>
