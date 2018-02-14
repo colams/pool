@@ -101,11 +101,6 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
             <version>1.4.3.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>1.4.3.RELEASE</version>
-        </dependency>
 
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -118,18 +113,22 @@
         <dependency>
             <groupId>${project.artifactId}</groupId>
             <artifactId>biz</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>${project.artifactId}</groupId>
             <artifactId>common</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>${project.artifactId}</groupId>
             <artifactId>model</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>${project.artifactId}</groupId>
             <artifactId>web</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 
