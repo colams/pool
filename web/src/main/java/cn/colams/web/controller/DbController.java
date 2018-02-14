@@ -4,12 +4,15 @@ import cn.colams.biz.ticks.TicksBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @Controller
+@RestController
 public class DbController {
 
     @Value("${spring.datasource.url}")
@@ -20,24 +23,24 @@ public class DbController {
 
 
     @ResponseBody
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public Object list() throws Exception {
         return ticksBiz.list();
     }
 
     @ResponseBody
-    @RequestMapping("/add")
+    @PostMapping("/add")
     public Object add() throws Exception {
         return ticksBiz.add();
     }
 
     @ResponseBody
-    @RequestMapping("/conn")
+    @GetMapping("/conn")
     public String conn() throws Exception {
         return url;
     }
 
-    @RequestMapping("/hello")
+    @GetMapping("/hello")
     public String hello(Map<String, Object> map) throws Exception {
 
         map.put("name", "colams");

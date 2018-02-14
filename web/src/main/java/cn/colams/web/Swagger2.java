@@ -13,6 +13,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class Swagger2 {
     @Bean
     public Docket createRestApi() {
+        // http://localhost:5000/swagger-ui.html
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()

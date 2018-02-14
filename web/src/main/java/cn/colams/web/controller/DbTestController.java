@@ -3,8 +3,8 @@ package cn.colams.web.controller;
 import cn.colams.biz.ticks.TicksBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,24 +21,24 @@ public class DbTestController {
 
 
     @ResponseBody
-    @RequestMapping("/list1")
+    @GetMapping("/list1")
     public Object list() throws Exception {
         return ticksBiz.list();
     }
 
     @ResponseBody
-    @RequestMapping("/add1")
+    @PostMapping("/add1")
     public Object add() throws Exception {
         return ticksBiz.add();
     }
 
     @ResponseBody
-    @RequestMapping("/conn1")
+    @GetMapping("/conn1")
     public String conn() throws Exception {
         return url;
     }
 
-    @RequestMapping("/hello1")
+    @GetMapping("/hello1")
     public String hello(Map<String, Object> map) throws Exception {
 
         map.put("name", "colams");
