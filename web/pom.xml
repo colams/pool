@@ -6,6 +6,7 @@
     <groupId>cn.colams.web</groupId>
     <artifactId>web</artifactId>
     <packaging>jar</packaging>
+    <version>1.0</version>
 
     <name>web</name>
     <description>project for Spring Boot</description>

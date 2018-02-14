@@ -128,6 +128,7 @@
         <dependency>
             <groupId>cn.colams.web</groupId>
             <artifactId>web</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 
