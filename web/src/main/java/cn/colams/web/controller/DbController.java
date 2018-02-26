@@ -3,15 +3,12 @@ package cn.colams.web.controller;
 import cn.colams.biz.ticks.TicksBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@Controller
 @RestController
 public class DbController {
 
@@ -29,7 +26,7 @@ public class DbController {
     }
 
     @ResponseBody
-    @PostMapping("/add")
+    @GetMapping("/add")
     public Object add() throws Exception {
         return ticksBiz.add();
     }
