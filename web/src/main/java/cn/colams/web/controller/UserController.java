@@ -18,6 +18,13 @@ public class UserController {
     @GetMapping("/uuid")
     public String getUUID(HttpSession session) {
         String uuid = UuidUtils.getUuid();
+        session.setAttribute(uuid, uuid);
+        return uuid;
+    }
+
+    @GetMapping("/uuid1")
+    public String getUUID1(HttpSession session) {
+        String uuid = UuidUtils.getUuid();
         List<String> uuidList = null;
 
         Object obj = session.getAttribute("uuid");
