@@ -6,7 +6,7 @@ public class BaseDTO<T> {
 
     private String message;
 
-    private T model;
+    private T result;
 
     public int getResultCode() {
         return resultCode;
@@ -25,11 +25,11 @@ public class BaseDTO<T> {
     }
 
 
-    public T getModel() {
-        return model;
+    public T getResult() {
+        return result;
     }
 
-    public void setModel(T model) {
-        this.model = model;
+    public void setResult(T result) {
+        this.result = result;
     }
 }
