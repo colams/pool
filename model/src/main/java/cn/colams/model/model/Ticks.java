@@ -1,4 +1,4 @@
-package cn.colams.model;
+package cn.colams.model.model;
 
 import java.sql.Timestamp;
 

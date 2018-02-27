@@ -1,4 +1,4 @@
-package cn.colams;
+package cn.colams.model;
 
 /**
  * Hello world!
