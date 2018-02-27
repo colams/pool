@@ -1,8 +1,9 @@
 package cn.colams.web.controller;
 
 import cn.colams.common.utils.UuidUtils;
-import cn.colams.model.dto.Acount;
+import cn.colams.model.dto.Account;
 import cn.colams.model.dto.BaseDTO;
+import cn.colams.model.enums.RetCode;
 import cn.colams.web.utils.ResultUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +17,35 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @GetMapping("/uuid")
-    public BaseDTO<Acount> getUUID(HttpSession session) {
+    public BaseDTO<Account> getUUID(HttpSession session) {
         String uuid = UuidUtils.getUuid();
 
-        Acount acount = new Acount();
-        acount.setUuid(uuid);
-        acount.setLevel(0);
-        acount.setUserName("李苏女士");
+        Account account = new Account();
+        account.setUuid(uuid);
+        account.setLevel(0);
+        account.setUserName("测试");
 
-        session.setAttribute(uuid, acount);
+        session.setAttribute(uuid, account);
 
-        return ResultUtils.createResult(acount);
+        return ResultUtils.createResult(account, RetCode.SUCCESS);
+    }
+
+    @GetMapping("/valid")
+    public BaseDTO<Account> validUser(HttpSession session, String uuid) {
+
+        Account account = null;
+        RetCode retCode;
+        Object object = session.getAttribute(uuid);
+        if (object != null && object instanceof Account) {
+            account = (Account) object;
+        }
+
+        if (account == null) {
+            retCode = RetCode.FAILURE;
+        } else {
+            retCode = RetCode.SUCCESS;
+        }
+
+        return ResultUtils.createResult(account, retCode);
     }
 }

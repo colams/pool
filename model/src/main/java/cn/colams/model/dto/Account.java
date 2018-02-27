@@ -1,6 +1,6 @@
 package cn.colams.model.dto;
 
-public class Acount {
+public class Account {
 
     /**
      *
