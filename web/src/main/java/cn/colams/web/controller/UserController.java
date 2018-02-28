@@ -7,6 +7,7 @@ import cn.colams.model.enums.RetCode;
 import cn.colams.web.utils.ResultUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/valid")
-    public BaseDTO<Account> validUser(HttpSession session, String uuid) {
+    public BaseDTO<Account> validUser(HttpSession session, @RequestParam String uuid) {
 
         Account account = null;
         RetCode retCode;
