@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">飘痕の博客</a>
+            <a class="navbar-brand" href="#">飘痕の博客---------v1</a>
         </div>
 
         <!-- 右导航菜单 -->
