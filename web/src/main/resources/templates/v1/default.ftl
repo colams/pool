@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的首页</title>
+    <title>我的首页-v1.0</title>
     <link href="/v1/css/bootstrap.min.css" rel="stylesheet">
     <link href="/v1/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/v1/css/comment.css" rel="stylesheet">
