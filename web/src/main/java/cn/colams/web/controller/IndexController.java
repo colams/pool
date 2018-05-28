@@ -13,6 +13,7 @@ public class IndexController {
 
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
     public String root() {
+        System.out.println(PageNameSetting.DefaultPage);
         return PageNameSetting.DefaultPage;
     }
 

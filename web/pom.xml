@@ -39,6 +39,11 @@
             <artifactId>biz</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>cn.colams.dal</groupId>
+            <artifactId>dal</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
