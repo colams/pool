@@ -4,12 +4,14 @@ import cn.colams.biz.ticks.TicksBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
+@RequestMapping("/db")
 public class DbController {
 
     @Value("${spring.datasource.url}")
@@ -36,14 +38,4 @@ public class DbController {
     public String conn() throws Exception {
         return url;
     }
-
-    @GetMapping("/hello")
-    public String hello(Map<String, Object> map) throws Exception {
-
-        map.put("name", "colams");
-
-        return "hello";
-    }
-
-
 }

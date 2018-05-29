@@ -25,6 +25,7 @@ public class dalTest {
     @Test
     public void main() {
         Object obj = ticksEntityExtensionDao.selectByPrimaryKey(1);
+        // Object obj = ticksEntityExtensionDao.selectByExample(1);
         System.out.println(obj);
     }
 
