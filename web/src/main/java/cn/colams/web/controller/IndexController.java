@@ -1,6 +1,7 @@
 package cn.colams.web.controller;
 
 import cn.colams.common.setting.PageNameSetting;
+import cn.colams.common.setting.PageNameSettingV1;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,16 @@ public class IndexController {
 
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
     public String root() {
-        System.out.println(PageNameSetting.DefaultPage);
-        return PageNameSetting.DefaultPage;
+        String page = PageNameSettingV1.DefaultPage;
+        System.out.println(page);
+        return page;
+    }
+
+    @RequestMapping(value = "/v", method = {RequestMethod.GET, RequestMethod.POST})
+    public String rootV() {
+        String page = PageNameSetting.DefaultPage;
+        System.out.println(page);
+        return page;
     }
 
 
@@ -27,5 +36,20 @@ public class IndexController {
         map.put("name", "colams");
 
         return "hello";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        String page = PageNameSettingV1.AboutPage;
+        System.out.println(page);
+        return page;
+    }
+
+
+    @GetMapping("/error")
+    public String error() {
+        String page = PageNameSetting.ErrorPage;
+        System.out.println(page);
+        return page;
     }
 }
