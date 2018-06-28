@@ -9,11 +9,11 @@ import org.springframework.web.servlet.config.annotation.*;
  */
 @EnableWebMvc
 @Configuration
-public class WebConfigurer extends WebMvcConfigurationSupport {
+public class WebConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/templates/");
-        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
+        registry.addResourceHandler("/v1/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/v1/");
         super.addResourceHandlers(registry);
     }
 }
