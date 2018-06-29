@@ -60,6 +60,15 @@
             <property name="useActualColumnNames" value="true"/>
             <columnRenamingRule searchString="_" replaceString=""/>
         </table>
+        <table tableName="weight_history" domainObjectName="WeightHistory"
+               mapperName="WeightHistoryDao"
+               enableInsert="true" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true" enableSelectByExample="true" enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+            <property name="useActualColumnNames" value="true"/>
+            <columnRenamingRule searchString="_" replaceString=""/>
+        </table>
     </context>
 
 
