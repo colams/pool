@@ -1,41 +1,76 @@
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">
-                关于站点
-            </h4>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>我的首页-v1.0</title>
+    <link href="v1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="v1/css/bootstrap-theme.min.css" rel="stylesheet"/>
+    <link href="v1/css/comment.css" rel="stylesheet"/>
+    <script src="v1/js/jquery.min.js"></script>
+    <script src="v1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="padding-top: 70px;">
+<!-- 导航菜单 -->
+<div th:replace="v1/common/navbar :: html"></div>
+<!-- 主体内容 -->
+<div id="blog-header" class="container" style="background-color: #FFF;">
+    <!-- header -->
+    <div th:replace="v1/common/header :: html"></div>
+
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            关于站点
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <h2 style="margin:0 0 5px 10px;">
+                            Welcome access my zone!
+                        </h2>
+                        <p style="margin:0 0 5px 15px;">
+                            In building...
+                        </p>
+                        <p style="margin:0 0 5px 15px;">
+                            Connect with me:
+                            <a style="color:red;" href="#">
+                                Twitter
+                            </a>
+                        </p>
+                        <p style="margin:0 0 5px 15px;">
+                            本站点使用Heroku云平台建立，仅用于学习Java。
+                        </p>
+                        <p style="margin:0 0 5px 15px;">
+                            基于Spring3.0 MVC 与 Hibernate3.6。
+                        </p>
+                        <p style="margin:0 0 5px 15px;">
+                            本应用主要供个人使用,因此采用的时区是GMT+8，即北京时间。
+                        </p>
+                        <p style="margin:0 0 5px 15px;">
+                            联系我：wzhanger@sina.com
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            确定
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <h2 style="margin:0 0 5px 10px;">
-                Welcome access my zone!
-            </h2>
-            <p style="margin:0 0 5px 15px;">
-                In building...
-            </p>
-            <p style="margin:0 0 5px 15px;">
-                Connect with me:
-                <a style="color:red;" href="#">
-                    Twitter
-                </a>
-            </p>
-            <p style="margin:0 0 5px 15px;">
-                本站点使用Heroku云平台建立，仅用于学习Java。
-            </p>
-            <p style="margin:0 0 5px 15px;">
-                基于Spring3.0 MVC 与 Hibernate3.6。
-            </p>
-            <p style="margin:0 0 5px 15px;">
-                本应用主要供个人使用,因此采用的时区是GMT+8，即北京时间。
-            </p>
-            <p style="margin:0 0 5px 15px;">
-                联系我：wzhanger@sina.com
-            </p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-                确定
-            </button>
-        </div>
+
+        <!-- right sider -->
+        <div th:replace="v1/common/right-sider :: html"></div>
     </div>
+
+    <!-- footer -->
+    <div th:replace="v1/common/footer :: html"></div>
+
 </div>
+</body>
+</html>

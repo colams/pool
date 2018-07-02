@@ -54,4 +54,11 @@ public class IndexController {
         System.out.println(page);
         return page;
     }
+
+    @GetMapping("/change_password")
+    public String changePassword() {
+        String page = PageNameSettingV1.ChangePasswordPage;
+        System.out.println(page);
+        return page;
+    }
 }
