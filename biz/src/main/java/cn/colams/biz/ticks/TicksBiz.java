@@ -21,6 +21,7 @@ public class TicksBiz {
     @Autowired
     private DataSourceUtils dataSourceManager;
 
+
     public List<Ticks> list() throws Exception {
         DataSource dataSource = dataSourceManager.getHikariDataSource();
         List<Ticks> ticksList = new ArrayList<>();
