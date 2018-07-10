@@ -18,17 +18,17 @@
             <property name="addRemarkComments" value="true"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
-        <!--<jdbcConnection driverClass="${jdbc.driver}"-->
-        <!--connectionURL="${jdbc.url}"-->
-        <!--userId="${jdbc.username}"-->
-        <!--password="${jdbc.password}">-->
-        <!--&lt;!&ndash;<jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}">&ndash;&gt;-->
-        <!--</jdbcConnection>-->
-        <jdbcConnection driverClass="${driver}"
-                        connectionURL="${url}"
-                        userId="${username}"
-                        password="${password}">
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+            <!--<jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}">-->
         </jdbcConnection>
+        <!--<jdbcConnection driverClass="${driver}"-->
+                        <!--connectionURL="${url}"-->
+                        <!--userId="${username}"-->
+                        <!--password="${password}">-->
+        <!--</jdbcConnection>-->
         <javaTypeResolver>
             <!--
             true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
@@ -38,6 +38,7 @@
                 scale=0;length[5,9]：使用Integer；
                 scale=0;length<5：使用Short；
             -->
+            <property name="useJSR310Types" value="true"/>
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
 
