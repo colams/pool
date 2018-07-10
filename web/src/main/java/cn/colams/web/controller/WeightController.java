@@ -25,12 +25,6 @@ public class WeightController {
     }
 
     @ResponseBody
-    @GetMapping("/ticketList")
-    public Object ticketList() throws Exception {
-        return weightBiz.ticketList();
-    }
-
-    @ResponseBody
     @GetMapping("/insert")
     public Object insert() throws Exception {
         return weightBiz.insert();

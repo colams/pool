@@ -20,18 +20,9 @@ public class WeightBiz {
     @Autowired
     WeightHistoryExtensionDao weightHistoryExtensionDao;
 
-    @Autowired
-    TicksEntityExtensionDao ticksEntityExtensionDao;
-
-
     public List<WeightHistory> list() {
         WeightHistoryExample example = new WeightHistoryExample();
         return weightHistoryExtensionDao.selectByExample(example);
-    }
-
-    public List<TicksEntity> ticketList() {
-        TicksEntityExample example = new TicksEntityExample();
-        return ticksEntityExtensionDao.selectByExample(example);
     }
 
     public boolean insert() {
