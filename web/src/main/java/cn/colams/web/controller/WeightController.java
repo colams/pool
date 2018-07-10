@@ -16,7 +16,6 @@ import java.util.List;
  * Created by zhangzt on 2018/7/4.
  */
 @Controller
-// @RequestMapping({"/weight", "/weight/"})
 @RequestMapping("weight")
 public class WeightController {
 
