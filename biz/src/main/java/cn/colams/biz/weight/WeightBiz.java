@@ -9,6 +9,7 @@ import cn.colams.dal.extension.WeightHistoryExtensionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,12 +23,15 @@ public class WeightBiz {
 
     public List<WeightHistory> list() {
         WeightHistoryExample example = new WeightHistoryExample();
-        return weightHistoryExtensionDao.selectByExample(example);
+        List<WeightHistory> list = weightHistoryExtensionDao.selectByExample(example);
+        return list;
     }
 
     public boolean insert() {
         WeightHistory weightHistory = new WeightHistory();
         weightHistory.setWeight(50D);
-        return weightHistoryExtensionDao.insertSelective(weightHistory) > 0;
+        weightHistory.setCreatedate(new Date());
+        boolean result = weightHistoryExtensionDao.insertSelective(weightHistory) > 0;
+        return result;
     }
 }

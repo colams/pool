@@ -8,7 +8,7 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="weight" jdbcType="DOUBLE" property="weight" />
-    <result column="create_date" jdbcType="DATE" property="createdate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createdate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -136,7 +136,7 @@
     -->
     insert into weight_history (id, weight, create_date
       )
-    values (#{id,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{createdate,jdbcType=DATE}
+    values (#{id,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{createdate,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.colams.dal.entity.WeightHistory">
@@ -164,7 +164,7 @@
         #{weight,jdbcType=DOUBLE},
       </if>
       <if test="createdate != null">
-        #{createdate,jdbcType=DATE},
+        #{createdate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -192,7 +192,7 @@
         weight = #{record.weight,jdbcType=DOUBLE},
       </if>
       <if test="record.createdate != null">
-        create_date = #{record.createdate,jdbcType=DATE},
+        create_date = #{record.createdate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -207,7 +207,7 @@
     update weight_history
     set id = #{record.id,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=DOUBLE},
-      create_date = #{record.createdate,jdbcType=DATE}
+      create_date = #{record.createdate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -223,7 +223,7 @@
         weight = #{weight,jdbcType=DOUBLE},
       </if>
       <if test="createdate != null">
-        create_date = #{createdate,jdbcType=DATE},
+        create_date = #{createdate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -235,7 +235,7 @@
     -->
     update weight_history
     set weight = #{weight,jdbcType=DOUBLE},
-      create_date = #{createdate,jdbcType=DATE}
+      create_date = #{createdate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="cn.colams.dal.entity.WeightHistoryExample" resultMap="BaseResultMap">

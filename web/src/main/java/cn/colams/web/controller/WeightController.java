@@ -1,11 +1,14 @@
 package cn.colams.web.controller;
 
 import cn.colams.biz.weight.WeightBiz;
+import cn.colams.dal.entity.WeightHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created by zhangzt on 2018/7/4.
@@ -20,7 +23,7 @@ public class WeightController {
 
     @ResponseBody
     @GetMapping("/list")
-    public Object list() throws Exception {
+    public List<WeightHistory> list() throws Exception {
         return weightBiz.list();
     }
 
