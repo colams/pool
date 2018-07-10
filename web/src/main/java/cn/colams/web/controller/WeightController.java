@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zhangzt on 2018/7/4.
  */
 @Controller
-@RequestMapping("/weight")
+// @RequestMapping({"/weight", "/weight/"})
+@RequestMapping("weight")
 public class WeightController {
 
 
@@ -25,18 +25,18 @@ public class WeightController {
     public WeightBiz weightBiz;
 
     @ResponseBody
-    @GetMapping("/list")
+    @GetMapping("list")
     public List<WeightHistory> list() throws Exception {
         return weightBiz.list();
     }
 
     @ResponseBody
-    @GetMapping("/insert")
+    @GetMapping("insert")
     public Object insert() throws Exception {
         return weightBiz.insert();
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index(ModelMap map) {
         map.put("hello", "world");
         return PageNameSetting.DailyWeightListPage;
