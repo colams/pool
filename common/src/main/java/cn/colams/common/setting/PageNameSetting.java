@@ -8,5 +8,7 @@ public class PageNameSetting {
 
     public final static String ErrorPage = "error";
 
+    public final static String DailyWeightListPage = "daily/index";
+
 
 }
