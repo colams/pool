@@ -1,1 +1,1 @@
-web: java -jar web/target/web-1.0.jar
+web: java -jar web/target/web-1.0.war
