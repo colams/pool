@@ -1,6 +1,5 @@
-package cn.colams.biz.proxy;
+package cn.colams.biz;
 
-import cn.colams.dal.dao.TicksEntityDao;
 import cn.colams.dal.entity.WeightHistoryExample;
 import cn.colams.dal.extension.TicksEntityExtensionDao;
 import cn.colams.dal.extension.WeightHistoryExtensionDao;
