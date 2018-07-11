@@ -21,12 +21,11 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-
-
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.test")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() throws Exception {
-        return DataSourceBuilder.create().build();
+        DataSource dataSource = DataSourceBuilder.create().build();
+        return dataSource;
     }
 
     @Bean
