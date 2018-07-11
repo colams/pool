@@ -5,7 +5,7 @@
 
     <groupId>cn.colams.web</groupId>
     <artifactId>web</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <version>1.0</version>
 
     <name>web</name>
