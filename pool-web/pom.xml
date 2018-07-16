@@ -32,18 +32,23 @@
         </dependency>
         <dependency>
             <groupId>cn.colams.biz</groupId>
-            <artifactId>biz</artifactId>
+            <artifactId>pool-biz</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>cn.colams.dal</groupId>
-            <artifactId>dal</artifactId>
+            <artifactId>pool-dal</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.colams.dal</groupId>
+            <artifactId>pool-dal</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

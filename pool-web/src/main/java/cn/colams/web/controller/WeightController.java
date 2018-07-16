@@ -1,7 +1,7 @@
 package cn.colams.web.controller;
 
-import cn.colams.common.setting.PageNameSetting;
 import cn.colams.biz.weight.WeightBiz;
+import cn.colams.common.setting.PageNameSetting;
 import cn.colams.dal.entity.WeightHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
