@@ -7,11 +7,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.colams.model</groupId>
-    <artifactId>model</artifactId>
+    <groupId>cn.colams.common</groupId>
+    <artifactId>pool-common</artifactId>
     <packaging>jar</packaging>
-
-    <name>model</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

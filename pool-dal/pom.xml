@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>cn.colams.dal</groupId>
-    <artifactId>dal</artifactId>
+    <artifactId>pool-dal</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

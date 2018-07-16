@@ -10,11 +10,11 @@
     <version>1.0</version>
 
     <modules>
-        <module>web</module>
-        <module>biz</module>
-        <module>common</module>
-        <module>model</module>
-        <module>dal</module>
+        <module>pool-web</module>
+        <module>pool-biz</module>
+        <module>pool-common</module>
+        <module>pool-model</module>
+        <module>pool-dal</module>
     </modules>
 
     <repositories>

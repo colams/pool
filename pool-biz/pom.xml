@@ -11,23 +11,23 @@
     </parent>
 
     <groupId>cn.colams.biz</groupId>
-    <artifactId>biz</artifactId>
+    <artifactId>pool-biz</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>cn.colams.model</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>pool-model</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>cn.colams.common</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>pool-common</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>cn.colams.dal</groupId>
-            <artifactId>dal</artifactId>
+            <artifactId>pool-dal</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
