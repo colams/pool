@@ -7,7 +7,6 @@ import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletCont
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.WebApplicationInitializer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
