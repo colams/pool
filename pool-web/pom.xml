@@ -5,7 +5,7 @@
 
     <groupId>cn.colams.web</groupId>
     <artifactId>pool-web</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0</version>
 
     <description>project for Spring Boot</description>
