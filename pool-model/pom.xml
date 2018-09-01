@@ -11,8 +11,6 @@
     <artifactId>pool-model</artifactId>
     <packaging>jar</packaging>
 
-    <name>model</name>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
