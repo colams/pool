@@ -17,7 +17,6 @@ public class ExceptionAspect {
 
     // @Around("org.springframework.boot.autoconfigure.web.execution()")
     @Around("execution(* org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(..))")
-
     public void loggerError(){
 
     }
