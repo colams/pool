@@ -1,6 +1,6 @@
 package cn.colams.web.controller;
 
-import cn.colams.common.utils.UuidUtils;
+import cn.colams.common.utils.UUIDUtils;
 import cn.colams.model.dto.Account;
 import cn.colams.model.dto.BaseDTO;
 import cn.colams.model.enums.RetCode;
@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("/uuid")
     public BaseDTO<Account> getUUID(HttpSession session) {
-        String uuid = UuidUtils.getUuid();
+        String uuid = UUIDUtils.getUuid();
 
         Account account = new Account();
         account.setUuid(uuid);

@@ -10,5 +10,6 @@ public class PageNameSetting {
 
     public final static String DailyWeightListPage = "daily/index";
 
+    public final static String ChangePasswordPage = "change_password";
 
 }
