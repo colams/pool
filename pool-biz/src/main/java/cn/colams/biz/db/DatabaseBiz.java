@@ -5,8 +5,6 @@ import cn.colams.dal.DataSourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.util.List;
@@ -37,7 +35,7 @@ public class DatabaseBiz {
 
     public List<Map<Integer, List<String>>> getColumns() throws Exception {
         DatabaseMetaData dbmd = dataSourceConfig.getDataBaseMetaData();
-        ResultSet ts = dbmd.getColumns("d2mc9geiuafi3r", null, "ticks", null);
+        ResultSet ts = dbmd.getColumns("d2mc9geiuafi3r", null, "weight_history", null);
         return ResultSetUtils.getResultSet(ts);
     }
 

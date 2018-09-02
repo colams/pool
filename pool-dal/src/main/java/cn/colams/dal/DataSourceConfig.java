@@ -25,7 +25,7 @@ public class DataSourceConfig {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() throws Exception {
+    public DataSource dataSource() {
         DataSource dataSource = DataSourceBuilder.create().build();
         return dataSource;
     }
@@ -38,12 +38,12 @@ public class DataSourceConfig {
     }
 
     @Bean
-    public DataSourceTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) throws Exception {
+    public DataSourceTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dataSource") DataSource dataSource, ResourceLoader resourceLoader) throws Exception {
+    public SqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dataSource") DataSource dataSource, ResourceLoader resourceLoader) {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setConfigLocation(resourceLoader.getResource("classpath:mybatis-config.xml"));
