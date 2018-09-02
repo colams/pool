@@ -13,7 +13,6 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/templates/");
-        registry.addResourceHandler("/v1/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/v1/");
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
         super.addResourceHandlers(registry);
     }
