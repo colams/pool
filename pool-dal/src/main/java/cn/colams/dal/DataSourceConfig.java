@@ -13,6 +13,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 
 /**
  * Created by zhangzt on 2018/5/28.
@@ -26,6 +28,13 @@ public class DataSourceConfig {
     public DataSource dataSource() throws Exception {
         DataSource dataSource = DataSourceBuilder.create().build();
         return dataSource;
+    }
+
+    public DatabaseMetaData getDataBaseMetaData() throws Exception {
+        DataSource dataSource = dataSource();
+        Connection conn = dataSource.getConnection();
+        DatabaseMetaData dbmd = conn.getMetaData();
+        return dbmd;
     }
 
     @Bean
