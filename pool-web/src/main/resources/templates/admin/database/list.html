@@ -1,21 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>databases</title>
-
-    <link href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.css" rel="stylesheet"/>
     <link href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet"/>
-
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
-
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.js"></script>
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
-
 </head>
 <body>
 <div class="am-u-sm-12 am-u-md-12 am-u-lg-6">
@@ -32,18 +22,15 @@
                    class="am-table am-table-compact am-table-bordered am-table-radius am-table-striped tpl-table-black "
                    id="example-r">
                 <thead>
-                <tr>
-                    <th>文章标题</th>
-                    <th>作者</th>
-                    <th>时间</th>
+                <tr th:each="model:${header}">
+                    <th th:each="entity: ${model.value}" th:text="${entity}"></th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="gradeX">
-                    <td>Amaze UI 模式窗口</td>
-                    <td>张鹏飞</td>
-                    <td>2016-09-26</td>
+                <tr th:each="model,iterStat:${list}">
+                    <td th:each="entity: ${model.get(iterStat.index+1)}" th:text="${entity==null?'null':entity}">
+                    </td>
                     <td>
                         <div class="tpl-table-black-operation">
                             <a href="javascript:;">
@@ -54,84 +41,8 @@
                             </a>
                         </div>
                     </td>
-                </tr>
-                <tr class="even gradeC">
-                    <td>有适配微信小程序的计划吗</td>
-                    <td>天纵之人</td>
-                    <td>2016-09-26</td>
-                    <td>
-                        <div class="tpl-table-black-operation">
-                            <a href="javascript:;">
-                                <i class="am-icon-pencil"></i> 编辑
-                            </a>
-                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                <i class="am-icon-trash"></i> 删除
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="gradeX">
-                    <td>请问有没有amazeui 分享插件</td>
-                    <td>王宽师</td>
-                    <td>2016-09-26</td>
-                    <td>
-                        <div class="tpl-table-black-operation">
-                            <a href="javascript:;">
-                                <i class="am-icon-pencil"></i> 编辑
-                            </a>
-                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                <i class="am-icon-trash"></i> 删除
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="even gradeC">
-                    <td>关于input输入框的问题</td>
-                    <td>着迷</td>
-                    <td>2016-09-26</td>
-                    <td>
-                        <div class="tpl-table-black-operation">
-                            <a href="javascript:;">
-                                <i class="am-icon-pencil"></i> 编辑
-                            </a>
-                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                <i class="am-icon-trash"></i> 删除
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="even gradeC">
-                    <td>有没有发现官网上的下载包不好用</td>
-                    <td>醉里挑灯看键</td>
-                    <td>2016-09-26</td>
-                    <td>
-                        <div class="tpl-table-black-operation">
-                            <a href="javascript:;">
-                                <i class="am-icon-pencil"></i> 编辑
-                            </a>
-                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                <i class="am-icon-trash"></i> 删除
-                            </a>
-                        </div>
-                    </td>
-                </tr>
 
-                <tr class="even gradeC">
-                    <td>我建议WEB版本文件引入问题</td>
-                    <td>罢了</td>
-                    <td>2016-09-26</td>
-                    <td>
-                        <div class="tpl-table-black-operation">
-                            <a href="javascript:;">
-                                <i class="am-icon-pencil"></i> 编辑
-                            </a>
-                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                <i class="am-icon-trash"></i> 删除
-                            </a>
-                        </div>
-                    </td>
                 </tr>
-                <!-- more data -->
                 </tbody>
             </table>
 

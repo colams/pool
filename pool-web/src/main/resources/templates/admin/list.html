@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>databases</title>
+
+
+</head>
+<body>
+<div class="am-u-sm-12 am-u-md-12 am-u-lg-6">
+
+    <table class="table">
+        <thead>
+        <!--<th th:each="userhead : ${userhead}" th:text="${userhead.key}"></th>-->
+        <th th:each="userhead : ${userhead}" th:text="${userhead.value}"></th>
+        </thead>
+        <tbody >
+        <td th:each="userinfo:${userinfo}" th:text="${userinfo}"></td>
+        </tbody>
+    </table>
+
+    <ul th:each="lm : ${listmap}">
+        <li th:each="entry : ${lm}" th:text="${entry.key}" ></li>
+        <li th:each="entry : ${lm}" th:text="${entry.value}"></li>
+    </ul>
+
+</div>
+</body>
+</html>
