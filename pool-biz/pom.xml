@@ -5,30 +5,39 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>pool</artifactId>
         <groupId>cn.colams</groupId>
+        <artifactId>pool</artifactId>
         <version>1.0</version>
     </parent>
 
-    <groupId>cn.colams.biz</groupId>
     <artifactId>pool-biz</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>cn.colams.model</groupId>
+            <groupId>cn.colams</groupId>
             <artifactId>pool-model</artifactId>
-            <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.colams.common</groupId>
+            <groupId>cn.colams</groupId>
             <artifactId>pool-common</artifactId>
-            <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.colams.dal</groupId>
+            <groupId>cn.colams</groupId>
             <artifactId>pool-dal</artifactId>
-            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
         </dependency>
     </dependencies>
 

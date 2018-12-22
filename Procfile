@@ -1,1 +1,1 @@
-web: java -jar pool-web/target/pool-web-1.0.jar
+web: java -jar pool-web/target/pool-web-1.0.war
