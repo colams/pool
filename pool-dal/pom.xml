@@ -5,12 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>pool</artifactId>
         <groupId>cn.colams</groupId>
+        <artifactId>pool</artifactId>
         <version>1.0</version>
     </parent>
 
-    <groupId>cn.colams.dal</groupId>
     <artifactId>pool-dal</artifactId>
     <packaging>jar</packaging>
 
@@ -30,11 +29,19 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.mchange</groupId>-->
-            <!--<artifactId>c3p0</artifactId>-->
-            <!--<version>${com.mchange.c3p0.version}</version>-->
-        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
 
     </dependencies>
 
