@@ -1,6 +1,5 @@
 package cn.colams.web;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -13,9 +12,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication(scanBasePackages = {"cn.colams"})
 public class WebApplication extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class, args);
-    }
+//     public static void main(String[] args) {
+//         SpringApplication.run(WebApplication.class, args);
+//     }
 
     /**
      * Configure your application when it’s launched by the servlet container
