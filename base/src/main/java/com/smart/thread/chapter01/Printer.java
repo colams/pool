@@ -10,6 +10,7 @@ public class Printer implements Runnable {
         this.message = message;
     }
 
+
     /**
      * When an object implementing interface <code>Runnable</code> is used
      * to create a thread, starting the thread causes the object's
