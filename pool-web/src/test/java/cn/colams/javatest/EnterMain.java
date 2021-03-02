@@ -1,6 +1,8 @@
 package cn.colams.javatest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EnterMain {
 
@@ -85,12 +87,26 @@ public class EnterMain {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
 
+        Map<Integer, Integer> tempMap = new HashMap<>();
         int nums2_index = 0;
+        int[] tempArray = new int[m];
+
+        for (int i = 0; i < nums1.length; i++) {
+
+            if (nums1[i]<=nums2[0]){
+
+            }
+
+        }
+
+
         int nums_index = 0;
 
         int tempVal = 0;
 
         for (int i = 0; i < m; i++) {
+
+
             int index_i = binarySearch(nums2, nums1[i]);
 
             if (index_i > -1) {
