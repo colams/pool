@@ -12,9 +12,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication(scanBasePackages = {"cn.colams"})
 public class WebApplication extends SpringBootServletInitializer {
 
-//     public static void main(String[] args) {
-//         SpringApplication.run(WebApplication.class, args);
-//     }
+     public static void main(String[] args) {
+         SpringApplication.run(WebApplication.class, args);
+     }
 
     /**
      * Configure your application when it’s launched by the servlet container
