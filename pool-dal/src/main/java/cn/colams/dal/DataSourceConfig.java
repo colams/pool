@@ -8,9 +8,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -50,10 +49,13 @@ public class DataSourceConfig {
 //        return sqlSessionFactoryBean;
 //    }
 
-    @Bean(name="sqlSessionFactoryBean")
+    @Bean(name = "sqlSessionFactoryBean")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
+
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        bean.setConfigLocation(resolver.getResource("classpath:mybatis-config.xml"));
         return bean.getObject();
     }
 }
