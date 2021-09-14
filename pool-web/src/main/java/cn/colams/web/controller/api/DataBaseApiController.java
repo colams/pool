@@ -25,26 +25,26 @@ public class DataBaseApiController {
     }
 
 
-//    @RequestMapping("/tables")
-//    public Object getTableTypes() throws Exception {
-//        return databaseBiz.getTableTypes();
-//    }
-//
-//
-//    @RequestMapping("/catalogs")
-//    public Object getCatalogs() throws Exception {
-//        return databaseBiz.getCatalogs();
-//    }
-//
-//    @RequestMapping("/table")
-//    public Object getTables() throws Exception {
-//        return databaseBiz.getTables();
-//    }
-//
-//    @RequestMapping("/columns")
-//    public Object getColumns() throws Exception {
-//        return databaseBiz.getColumns();
-//    }
+    @RequestMapping("/tables")
+    public Object getTableTypes() throws Exception {
+        return databaseBiz.getTableTypes();
+    }
+
+
+    @RequestMapping("/catalogs")
+    public Object getCatalogs() throws Exception {
+        return databaseBiz.getCatalogs();
+    }
+
+    @RequestMapping("/table")
+    public Object getTables() throws Exception {
+        return databaseBiz.getTables();
+    }
+
+    @RequestMapping("/columns")
+    public Object getColumns() throws Exception {
+        return databaseBiz.getColumns();
+    }
 
 
 }

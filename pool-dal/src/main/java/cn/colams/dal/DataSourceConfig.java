@@ -30,12 +30,12 @@ public class DataSourceConfig {
         return dataSource;
     }
 
-//    public DatabaseMetaData getDataBaseMetaData() throws Exception {
-//        DataSource dataSource = dataSource();
-//        Connection conn = dataSource.getConnection();
-//        DatabaseMetaData dbmd = conn.getMetaData();
-//        return dbmd;
-//    }
+    public DatabaseMetaData getDataBaseMetaData() throws Exception {
+        DataSource dataSource = dataSource();
+        Connection conn = dataSource.getConnection();
+        DatabaseMetaData dbmd = conn.getMetaData();
+        return dbmd;
+    }
 
     @Bean
     public DataSourceTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
