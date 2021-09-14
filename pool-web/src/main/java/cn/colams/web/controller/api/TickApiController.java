@@ -26,11 +26,11 @@ public class TickApiController {
     @ResponseBody
     @RequestMapping("/addOrUpdate")
     public Object addOrUpdate(TicksEntity data) throws Exception {
-        if (data == null) {
+        if (data == null || data.getTick() == null) {
             return "parameter error";
         }
 
-        if (data.getId() == 0) {
+        if (data.getId() == null) {
             return ticksBiz.add();
         } else {
             return ticksBiz.update(data);

@@ -6,8 +6,6 @@ import cn.colams.dal.mapper.WeightHistoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,11 +23,19 @@ public class WeightBiz {
         return list;
     }
 
-    public boolean insert() {
-        WeightHistory weightHistory = new WeightHistory();
-        weightHistory.setWeight(50D);
-        weightHistory.setCreateDate(new Date());
+    public boolean insert(WeightHistory weightHistory) {
+        if (weightHistory.getWeight() == null) {
+            return false;
+        }
         boolean result = weightHistoryMapper.insertSelective(weightHistory) > 0;
+        return result;
+    }
+
+    public boolean update(WeightHistory weightHistory) {
+        if (weightHistory.getWeight() == null) {
+            return false;
+        }
+        boolean result = weightHistoryMapper.updateByPrimaryKeySelective(weightHistory) > 0;
         return result;
     }
 }
