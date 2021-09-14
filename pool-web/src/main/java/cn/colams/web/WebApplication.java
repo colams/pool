@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
-@SpringBootApplication(scanBasePackages = {"cn.colams"})
+@SpringBootApplication(scanBasePackages = {"cn.colams",
+        "cn.colams.dal"})
 public class WebApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

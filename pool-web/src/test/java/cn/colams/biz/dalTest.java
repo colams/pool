@@ -1,8 +1,8 @@
 package cn.colams.biz;
 
 import cn.colams.dal.entity.WeightHistoryExample;
-import cn.colams.dal.extension.TicksEntityExtensionDao;
-import cn.colams.dal.extension.WeightHistoryExtensionDao;
+import cn.colams.dal.mapper.TicksEntityMapper;
+import cn.colams.dal.mapper.WeightHistoryMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +14,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 // @RunWith(SpringJUnit4ClassRunner.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = dalTest.class)
-@SpringBootApplication(scanBasePackages = {"cn.colams"})
+@SpringBootApplication(scanBasePackages = {"cn.colams",
+        "cn.colams.dal.dao"})
 public class dalTest {
 
     @Autowired
-    TicksEntityExtensionDao ticksEntityExtensionDao;
+    TicksEntityMapper ticksEntityMapper;
     @Autowired
-    WeightHistoryExtensionDao weightHistoryExtensionDao;
+    WeightHistoryMapper weightHistoryMapper;
 
 //    @Autowired
 //    TicksEntityDao ticksEntityDao;
@@ -33,7 +34,7 @@ public class dalTest {
 //        System.out.println(obj);
 
             WeightHistoryExample example = new WeightHistoryExample();
-            Object obj = weightHistoryExtensionDao.selectByExample(example);
+            Object obj = weightHistoryMapper.selectByExample(example);
             System.out.println(obj);
         } catch (Exception e) {
             System.out.println(e);

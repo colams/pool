@@ -23,12 +23,12 @@ public class DataBaseController {
 
     @GetMapping("database/list")
     public String list(Model model) throws Exception {
-        List<Map<Integer, List<String>>> result = databaseBiz.getTables();
-
-        if (result != null && !CollectionUtils.isEmpty(result)) {
-            model.addAttribute("header", result.get(0));
-            model.addAttribute("list", result.subList(1, result.size()));
-        }
+//        List<Map<Integer, List<String>>> result = databaseBiz.getTables();
+//
+//        if (result != null && !CollectionUtils.isEmpty(result)) {
+//            model.addAttribute("header", result.get(0));
+//            model.addAttribute("list", result.subList(1, result.size()));
+//        }
         return PageNameSetting.DataBase_List;
     }
 

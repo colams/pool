@@ -7,26 +7,36 @@
     <properties resource="jdbc.properties"/>
     <classPathEntry location="src\main\resources\postgresql-42.2.2.jar"/>
     <!-- MySQL-->
-    <context id="MySqlTables" targetRuntime="MyBatis3">
+    <context id="MySqlTables" defaultModelType="flat" targetRuntime="MyBatis3">
+
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖-->
+        <property name="autoDelimitKeywords" value="true"/>
         <property name="javaFileEncoding" value="UTF-8"/>
+
         <!--分页插件-->
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
         <!--大小写不敏感插件-->
         <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <!--build模式生成model-->
+        <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin"/>
+        <!--给mapper 接口增加 @Mapper 注解 用了都说好-->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+
         <commentGenerator>
-            <property name="suppressAllComments" value="false"/>
-            <property name="addRemarkComments" value="true"/>
             <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
         </commentGenerator>
+
         <jdbcConnection driverClass="${jdbc.driver}"
                         connectionURL="${jdbc.url}"
                         userId="${jdbc.username}"
                         password="${jdbc.password}">
         </jdbcConnection>
         <!--<jdbcConnection driverClass="${driver}"-->
-                        <!--connectionURL="${url}"-->
-                        <!--userId="${username}"-->
-                        <!--password="${password}">-->
+        <!--connectionURL="${url}"-->
+        <!--userId="${username}"-->
+        <!--password="${password}">-->
         <!--</jdbcConnection>-->
         <javaTypeResolver>
             <!--
@@ -37,43 +47,33 @@
                 scale=0;length[5,9]：使用Integer；
                 scale=0;length<5：使用Short；
             -->
-            <property name="useJSR310Types" value="true"/>
-            <property name="forceBigDecimals" value="true"/>
+            <property name="useJSR310Types" value="false"/>
+            <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="cn.colams.dal.entity"
                             targetProject="src\main\java">
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="cn.colams.dal.mapper"
                          targetProject="src\main\resources\">
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.colams.dal.dao"
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="cn.colams.dal.dao"-->
+        <!--targetProject="src\main\java">-->
+        <!--<property name="enableSubPackages" value="true"/>-->
+        <!--</javaClientGenerator>-->
+        <!--type:{ANNOTATEDMAPPER(纯注解 Mapper), MIXEDMAPPER(混合), XMLMAPPER(纯xml, myBatis作者亲自说用这个的)}-->
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="cn.colams.dal.mapper"
                              targetProject="src\main\java">
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table tableName="ticks" domainObjectName="TicksEntity"
-               mapperName="TicksEntityDao"
-               enableInsert="true" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true" enableSelectByExample="true" enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-            <property name="useActualColumnNames" value="true"/>
-            <columnRenamingRule searchString="_" replaceString=""/>
-        </table>
-        <table tableName="weight_history" domainObjectName="WeightHistory"
-               mapperName="WeightHistoryDao"
-               enableInsert="true" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true" enableSelectByExample="true" enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-            <property name="useActualColumnNames" value="true"/>
-            <columnRenamingRule searchString="_" replaceString=""/>
-        </table>
+        <table tableName="ticks" domainObjectName="TicksEntity"/>
+        <table tableName="weight_history" domainObjectName="WeightHistory"/>
     </context>
 
 

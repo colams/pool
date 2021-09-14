@@ -1,14 +1,12 @@
 package cn.colams.biz.weight;
 
-import cn.colams.dal.entity.TicksEntity;
-import cn.colams.dal.entity.TicksEntityExample;
 import cn.colams.dal.entity.WeightHistory;
 import cn.colams.dal.entity.WeightHistoryExample;
-import cn.colams.dal.extension.TicksEntityExtensionDao;
-import cn.colams.dal.extension.WeightHistoryExtensionDao;
+import cn.colams.dal.mapper.WeightHistoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,19 +17,19 @@ import java.util.List;
 public class WeightBiz {
 
     @Autowired
-    WeightHistoryExtensionDao weightHistoryExtensionDao;
+    WeightHistoryMapper weightHistoryMapper;
 
     public List<WeightHistory> list() {
         WeightHistoryExample example = new WeightHistoryExample();
-        List<WeightHistory> list = weightHistoryExtensionDao.selectByExample(example);
+        List<WeightHistory> list = weightHistoryMapper.selectByExample(example);
         return list;
     }
 
     public boolean insert() {
         WeightHistory weightHistory = new WeightHistory();
         weightHistory.setWeight(50D);
-        weightHistory.setCreatedate(new Date());
-        boolean result = weightHistoryExtensionDao.insertSelective(weightHistory) > 0;
+        weightHistory.setCreateDate(new Date());
+        boolean result = weightHistoryMapper.insertSelective(weightHistory) > 0;
         return result;
     }
 }

@@ -19,7 +19,7 @@ import java.sql.DatabaseMetaData;
 /**
  * Created by zhangzt on 2018/5/28.
  */
-@MapperScan(basePackages = "cn.colams.dal", sqlSessionFactoryRef = "sqlSessionFactoryBean")
+@MapperScan(basePackages = "cn.colams.dal.mapper", sqlSessionFactoryRef = "sqlSessionFactoryBean")
 @Configuration
 public class DataSourceConfig {
 
@@ -30,27 +30,27 @@ public class DataSourceConfig {
         return dataSource;
     }
 
-    public DatabaseMetaData getDataBaseMetaData() throws Exception {
-        DataSource dataSource = dataSource();
-        Connection conn = dataSource.getConnection();
-        DatabaseMetaData dbmd = conn.getMetaData();
-        return dbmd;
-    }
+//    public DatabaseMetaData getDataBaseMetaData() throws Exception {
+//        DataSource dataSource = dataSource();
+//        Connection conn = dataSource.getConnection();
+//        DatabaseMetaData dbmd = conn.getMetaData();
+//        return dbmd;
+//    }
 
     @Bean
     public DataSourceTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dataSource") DataSource dataSource, ResourceLoader resourceLoader) {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setConfigLocation(resourceLoader.getResource("classpath:mybatis-config.xml"));
-        return sqlSessionFactoryBean;
-    }
+//    @Bean
+//    public SqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dataSource") DataSource dataSource, ResourceLoader resourceLoader) {
+//        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+//        sqlSessionFactoryBean.setDataSource(dataSource);
+//        sqlSessionFactoryBean.setConfigLocation(resourceLoader.getResource("classpath:mybatis-config.xml"));
+//        return sqlSessionFactoryBean;
+//    }
 
-    @Bean
+    @Bean(name="sqlSessionFactoryBean")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);

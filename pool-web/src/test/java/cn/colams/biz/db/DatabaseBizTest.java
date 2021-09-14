@@ -23,45 +23,45 @@ public class DatabaseBizTest {
     @Autowired
     DatabaseBiz databaseBiz;
 
-    @Test
-    public void getDatabaseList() throws Exception {
-        List<Map<Integer, List<String>>> list = databaseBiz.getTableTypes();
-
-        for (int i = 0; i < list.size(); i++) {
-            String line = String.format("[%s]:", i);
-            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
-        }
-
-    }
-
-    @Test
-    public void getCatalogs() throws Exception {
-        List<Map<Integer, List<String>>> list = databaseBiz.getCatalogs();
-
-        for (int i = 0; i < list.size(); i++) {
-            String line = String.format("[%s]:", i);
-            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
-        }
-    }
-
-    @Test
-    public void getTables() throws Exception {
-        List<Map<Integer, List<String>>> list = databaseBiz.getTables();
-
-        for (int i = 0; i < list.size(); i++) {
-            String line = String.format("[%s]:", i);
-            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
-        }
-    }
-
-    @Test
-    public void getColumns() throws Exception {
-        List<Map<Integer, List<String>>> list = databaseBiz.getColumns();
-
-        for (int i = 0; i < list.size(); i++) {
-            String line = String.format("[%s]:", i);
-            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
-        }
-    }
+//    @Test
+//    public void getDatabaseList() throws Exception {
+//        List<Map<Integer, List<String>>> list = databaseBiz.getTableTypes();
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            String line = String.format("[%s]:", i);
+//            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
+//        }
+//
+//    }
+//
+//    @Test
+//    public void getCatalogs() throws Exception {
+//        List<Map<Integer, List<String>>> list = databaseBiz.getCatalogs();
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            String line = String.format("[%s]:", i);
+//            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
+//        }
+//    }
+//
+//    @Test
+//    public void getTables() throws Exception {
+//        List<Map<Integer, List<String>>> list = databaseBiz.getTables();
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            String line = String.format("[%s]:", i);
+//            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
+//        }
+//    }
+//
+//    @Test
+//    public void getColumns() throws Exception {
+//        List<Map<Integer, List<String>>> list = databaseBiz.getColumns();
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            String line = String.format("[%s]:", i);
+//            System.out.println(line + Arrays.toString(list.get(i).get(i).toArray()));
+//        }
+//    }
 
 }
