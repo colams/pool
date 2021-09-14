@@ -26,7 +26,7 @@ public class WeightController {
 
     @ResponseBody
     @PostMapping("addOrUpdate")
-    public Object addOrUpdate(WeightHistory data) throws Exception {
+    public Object addOrUpdate(@RequestBody WeightHistory data) throws Exception {
         if (data == null || data.getWeight() == null) {
             return "parameter error";
         }
