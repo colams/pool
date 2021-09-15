@@ -2,7 +2,7 @@ package cn.colams.web.controller.api;
 
 
 import cn.colams.biz.ticks.TicksBiz;
-import cn.colams.dal.entity.TicksEntity;
+import cn.colams.dal.entity.Ticks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +22,7 @@ public class TickApiController {
 
     @ResponseBody
     @RequestMapping("/addOrUpdate")
-    public Object addOrUpdate(@RequestBody TicksEntity data) throws Exception {
+    public Object addOrUpdate(@RequestBody Ticks data) throws Exception {
         if (data == null || data.getTick() == null) {
             return "parameter error";
         }

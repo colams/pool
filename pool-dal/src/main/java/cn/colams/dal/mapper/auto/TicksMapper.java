@@ -1,7 +1,7 @@
-package cn.colams.dal.mapper;
+package cn.colams.dal.mapper.auto;
 
-import cn.colams.dal.entity.TicksEntity;
-import cn.colams.dal.entity.TicksEntityExample;
+import cn.colams.dal.entity.Ticks;
+import cn.colams.dal.entity.TicksExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -19,12 +19,12 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
 
 @Mapper
-public interface TicksEntityMapper {
-    @SelectProvider(type=TicksEntitySqlProvider.class, method="countByExample")
-    long countByExample(TicksEntityExample example);
+public interface TicksMapper {
+    @SelectProvider(type=TicksSqlProvider.class, method="countByExample")
+    long countByExample(TicksExample example);
 
-    @DeleteProvider(type=TicksEntitySqlProvider.class, method="deleteByExample")
-    int deleteByExample(TicksEntityExample example);
+    @DeleteProvider(type=TicksSqlProvider.class, method="deleteByExample")
+    int deleteByExample(TicksExample example);
 
     @Delete({
         "delete from ticks",
@@ -36,24 +36,24 @@ public interface TicksEntityMapper {
         "insert into ticks (id, tick)",
         "values (#{id,jdbcType=INTEGER}, #{tick,jdbcType=TIMESTAMP})"
     })
-    int insert(TicksEntity record);
+    int insert(Ticks record);
 
-    @InsertProvider(type=TicksEntitySqlProvider.class, method="insertSelective")
-    int insertSelective(TicksEntity record);
+    @InsertProvider(type=TicksSqlProvider.class, method="insertSelective")
+    int insertSelective(Ticks record);
 
-    @SelectProvider(type=TicksEntitySqlProvider.class, method="selectByExample")
+    @SelectProvider(type=TicksSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<TicksEntity> selectByExampleWithRowbounds(TicksEntityExample example, RowBounds rowBounds);
+    List<Ticks> selectByExampleWithRowbounds(TicksExample example, RowBounds rowBounds);
 
-    @SelectProvider(type=TicksEntitySqlProvider.class, method="selectByExample")
+    @SelectProvider(type=TicksSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<TicksEntity> selectByExample(TicksEntityExample example);
+    List<Ticks> selectByExample(TicksExample example);
 
     @Select({
         "select",
@@ -65,21 +65,21 @@ public interface TicksEntityMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP)
     })
-    TicksEntity selectByPrimaryKey(Integer id);
+    Ticks selectByPrimaryKey(Integer id);
 
-    @UpdateProvider(type=TicksEntitySqlProvider.class, method="updateByExampleSelective")
-    int updateByExampleSelective(@Param("record") TicksEntity record, @Param("example") TicksEntityExample example);
+    @UpdateProvider(type=TicksSqlProvider.class, method="updateByExampleSelective")
+    int updateByExampleSelective(@Param("record") Ticks record, @Param("example") TicksExample example);
 
-    @UpdateProvider(type=TicksEntitySqlProvider.class, method="updateByExample")
-    int updateByExample(@Param("record") TicksEntity record, @Param("example") TicksEntityExample example);
+    @UpdateProvider(type=TicksSqlProvider.class, method="updateByExample")
+    int updateByExample(@Param("record") Ticks record, @Param("example") TicksExample example);
 
-    @UpdateProvider(type=TicksEntitySqlProvider.class, method="updateByPrimaryKeySelective")
-    int updateByPrimaryKeySelective(TicksEntity record);
+    @UpdateProvider(type=TicksSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(Ticks record);
 
     @Update({
         "update ticks",
         "set tick = #{tick,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=INTEGER}"
     })
-    int updateByPrimaryKey(TicksEntity record);
+    int updateByPrimaryKey(Ticks record);
 }

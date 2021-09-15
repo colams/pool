@@ -1,58 +1,53 @@
-package cn.colams.dal.mapper;
+package cn.colams.dal.mapper.auto;
 
-import cn.colams.dal.entity.WeightHistory;
-import cn.colams.dal.entity.WeightHistoryExample.Criteria;
-import cn.colams.dal.entity.WeightHistoryExample.Criterion;
-import cn.colams.dal.entity.WeightHistoryExample;
+import cn.colams.dal.entity.Ticks;
+import cn.colams.dal.entity.TicksExample.Criteria;
+import cn.colams.dal.entity.TicksExample.Criterion;
+import cn.colams.dal.entity.TicksExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class WeightHistorySqlProvider {
+public class TicksSqlProvider {
 
-    public String countByExample(WeightHistoryExample example) {
+    public String countByExample(TicksExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("weight_history");
+        sql.SELECT("count(*)").FROM("ticks");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(WeightHistoryExample example) {
+    public String deleteByExample(TicksExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("weight_history");
+        sql.DELETE_FROM("ticks");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(WeightHistory record) {
+    public String insertSelective(Ticks record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("weight_history");
+        sql.INSERT_INTO("ticks");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=INTEGER}");
         }
         
-        if (record.getWeight() != null) {
-            sql.VALUES("weight", "#{weight,jdbcType=DOUBLE}");
-        }
-        
-        if (record.getCreateDate() != null) {
-            sql.VALUES("create_date", "#{createDate,jdbcType=TIMESTAMP}");
+        if (record.getTick() != null) {
+            sql.VALUES("tick", "#{tick,jdbcType=TIMESTAMP}");
         }
         
         return sql.toString();
     }
 
-    public String selectByExample(WeightHistoryExample example) {
+    public String selectByExample(TicksExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("weight");
-        sql.SELECT("create_date");
-        sql.FROM("weight_history");
+        sql.SELECT("tick");
+        sql.FROM("ticks");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -63,22 +58,18 @@ public class WeightHistorySqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        WeightHistory record = (WeightHistory) parameter.get("record");
-        WeightHistoryExample example = (WeightHistoryExample) parameter.get("example");
+        Ticks record = (Ticks) parameter.get("record");
+        TicksExample example = (TicksExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("weight_history");
+        sql.UPDATE("ticks");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=INTEGER}");
         }
         
-        if (record.getWeight() != null) {
-            sql.SET("weight = #{record.weight,jdbcType=DOUBLE}");
-        }
-        
-        if (record.getCreateDate() != null) {
-            sql.SET("create_date = #{record.createDate,jdbcType=TIMESTAMP}");
+        if (record.getTick() != null) {
+            sql.SET("tick = #{record.tick,jdbcType=TIMESTAMP}");
         }
         
         applyWhere(sql, example, true);
@@ -87,27 +78,22 @@ public class WeightHistorySqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("weight_history");
+        sql.UPDATE("ticks");
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
-        sql.SET("weight = #{record.weight,jdbcType=DOUBLE}");
-        sql.SET("create_date = #{record.createDate,jdbcType=TIMESTAMP}");
+        sql.SET("tick = #{record.tick,jdbcType=TIMESTAMP}");
         
-        WeightHistoryExample example = (WeightHistoryExample) parameter.get("example");
+        TicksExample example = (TicksExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(WeightHistory record) {
+    public String updateByPrimaryKeySelective(Ticks record) {
         SQL sql = new SQL();
-        sql.UPDATE("weight_history");
+        sql.UPDATE("ticks");
         
-        if (record.getWeight() != null) {
-            sql.SET("weight = #{weight,jdbcType=DOUBLE}");
-        }
-        
-        if (record.getCreateDate() != null) {
-            sql.SET("create_date = #{createDate,jdbcType=TIMESTAMP}");
+        if (record.getTick() != null) {
+            sql.SET("tick = #{tick,jdbcType=TIMESTAMP}");
         }
         
         sql.WHERE("id = #{id,jdbcType=INTEGER}");
@@ -115,7 +101,7 @@ public class WeightHistorySqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, WeightHistoryExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, TicksExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

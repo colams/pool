@@ -1,8 +1,8 @@
 package cn.colams.biz.ticks;
 
-import cn.colams.dal.entity.TicksEntity;
-import cn.colams.dal.entity.TicksEntityExample;
-import cn.colams.dal.mapper.TicksEntityMapper;
+import cn.colams.dal.entity.Ticks;
+import cn.colams.dal.entity.TicksExample;
+import cn.colams.dal.mapper.extension.TicksExtensionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,25 +15,25 @@ import java.util.List;
 @Component
 public class TicksBiz {
     @Autowired
-    TicksEntityMapper ticksEntityMapper;
+    TicksExtensionMapper ticksExtensionMapper;
 
 
-    public List<TicksEntity> list() throws Exception {
+    public List<Ticks> list() throws Exception {
 
-        TicksEntityExample example = new TicksEntityExample();
-        List<TicksEntity> ticksList = ticksEntityMapper.selectByExample(example);
+        TicksExample example = new TicksExample();
+        List<Ticks> ticksList = ticksExtensionMapper.selectByExample(example);
         return ticksList;
     }
 
     public Object add() throws Exception {
-        TicksEntity ticksEntity = new TicksEntity();
+        Ticks ticksEntity = new Ticks();
         ticksEntity.setTick(new Date());
-        boolean result = ticksEntityMapper.insertSelective(ticksEntity) > 0;
+        boolean result = ticksExtensionMapper.insertSelective(ticksEntity) > 0;
         return result;
     }
 
-    public Object update(TicksEntity data) {
-        boolean result = ticksEntityMapper.updateByPrimaryKeySelective(data) > 0;
+    public Object update(Ticks data) {
+        boolean result = ticksExtensionMapper.updateByPrimaryKeySelective(data) > 0;
         return result;
     }
 }

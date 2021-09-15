@@ -1,4 +1,4 @@
-package cn.colams.dal.mapper;
+package cn.colams.dal.mapper.auto;
 
 import cn.colams.dal.entity.WeightHistory;
 import cn.colams.dal.entity.WeightHistoryExample;

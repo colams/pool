@@ -2,7 +2,7 @@ package cn.colams.biz.weight;
 
 import cn.colams.dal.entity.WeightHistory;
 import cn.colams.dal.entity.WeightHistoryExample;
-import cn.colams.dal.mapper.WeightHistoryMapper;
+import cn.colams.dal.mapper.extension.WeightHistoryExtensionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +15,11 @@ import java.util.List;
 public class WeightBiz {
 
     @Autowired
-    WeightHistoryMapper weightHistoryMapper;
+    WeightHistoryExtensionMapper weightHistoryExtensionMapper;
 
     public List<WeightHistory> list() {
         WeightHistoryExample example = new WeightHistoryExample();
-        List<WeightHistory> list = weightHistoryMapper.selectByExample(example);
+        List<WeightHistory> list = weightHistoryExtensionMapper.selectByExample(example);
         return list;
     }
 
@@ -27,7 +27,7 @@ public class WeightBiz {
         if (weightHistory.getWeight() == null) {
             return false;
         }
-        boolean result = weightHistoryMapper.insertSelective(weightHistory) > 0;
+        boolean result = weightHistoryExtensionMapper.insertSelective(weightHistory) > 0;
         return result;
     }
 
@@ -35,7 +35,7 @@ public class WeightBiz {
         if (weightHistory.getWeight() == null) {
             return false;
         }
-        boolean result = weightHistoryMapper.updateByPrimaryKeySelective(weightHistory) > 0;
+        boolean result = weightHistoryExtensionMapper.updateByPrimaryKeySelective(weightHistory) > 0;
         return result;
     }
 }

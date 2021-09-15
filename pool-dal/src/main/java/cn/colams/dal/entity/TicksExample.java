@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TicksEntityExample {
+public class TicksExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TicksEntityExample() {
+    public TicksExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

@@ -2,7 +2,7 @@ package cn.colams.dal.entity;
 
 import java.util.Date;
 
-public class TicksEntity {
+public class Ticks {
     private Integer id;
 
     private Date tick;
@@ -11,7 +11,7 @@ public class TicksEntity {
         return id;
     }
 
-    public TicksEntity withId(Integer id) {
+    public Ticks withId(Integer id) {
         this.setId(id);
         return this;
     }
@@ -24,7 +24,7 @@ public class TicksEntity {
         return tick;
     }
 
-    public TicksEntity withTick(Date tick) {
+    public Ticks withTick(Date tick) {
         this.setTick(tick);
         return this;
     }
