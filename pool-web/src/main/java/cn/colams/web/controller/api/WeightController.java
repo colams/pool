@@ -36,4 +36,13 @@ public class WeightController {
             return weightBiz.update(data);
         }
     }
+
+    @ResponseBody
+    @PostMapping("delete")
+    public Object delete(@RequestBody WeightHistory data) throws Exception {
+        if (data == null || data.getId() == null) {
+            return "parameter error";
+        }
+        return weightBiz.delete(data.getId());
+    }
 }

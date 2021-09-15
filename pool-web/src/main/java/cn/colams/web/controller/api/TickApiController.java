@@ -34,4 +34,14 @@ public class TickApiController {
         }
     }
 
+    @ResponseBody
+    @PostMapping("delete")
+    public Object delete(@RequestBody Ticks data) throws Exception {
+        if (data == null || data.getId() == null) {
+            return "parameter error";
+        }
+
+        return ticksBiz.delete(data.getId());
+    }
+
 }
