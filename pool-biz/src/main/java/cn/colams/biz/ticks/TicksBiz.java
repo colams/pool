@@ -19,8 +19,8 @@ public class TicksBiz {
 
 
     public List<Ticks> list() throws Exception {
-
         TicksExample example = new TicksExample();
+        example.setOrderByClause("id");
         List<Ticks> ticksList = ticksExtensionMapper.selectByExample(example);
         return ticksList;
     }

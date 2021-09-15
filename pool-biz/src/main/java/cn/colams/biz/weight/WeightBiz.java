@@ -19,6 +19,7 @@ public class WeightBiz {
 
     public List<WeightHistory> list() {
         WeightHistoryExample example = new WeightHistoryExample();
+        example.setOrderByClause("id");
         List<WeightHistory> list = weightHistoryExtensionMapper.selectByExample(example);
         return list;
     }
