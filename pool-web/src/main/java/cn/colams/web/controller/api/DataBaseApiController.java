@@ -25,23 +25,23 @@ public class DataBaseApiController {
     }
 
 
-    @RequestMapping("/tables")
+    @GetMapping("/tables")
     public Object getTableTypes() throws Exception {
         return databaseBiz.getTableTypes();
     }
 
 
-    @RequestMapping("/catalogs")
+    @GetMapping("/catalogs")
     public Object getCatalogs() throws Exception {
         return databaseBiz.getCatalogs();
     }
 
-    @RequestMapping("/table")
+    @GetMapping("/table")
     public Object getTables() throws Exception {
         return databaseBiz.getTables();
     }
 
-    @RequestMapping("/columns")
+    @GetMapping("/columns")
     public Object getColumns() throws Exception {
         return databaseBiz.getColumns();
     }

@@ -15,7 +15,7 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping(value = "/")
     public String root() {
         String page = PageNameSetting.DefaultPage;
         System.out.println(page);

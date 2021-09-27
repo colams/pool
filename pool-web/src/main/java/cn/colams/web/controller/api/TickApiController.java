@@ -21,7 +21,7 @@ public class TickApiController {
     }
 
     @ResponseBody
-    @RequestMapping("/addOrUpdate")
+    @PostMapping("/addOrUpdate")
     public Object addOrUpdate(@RequestBody Ticks data) throws Exception {
         if (data == null || data.getTick() == null) {
             return "parameter error";
