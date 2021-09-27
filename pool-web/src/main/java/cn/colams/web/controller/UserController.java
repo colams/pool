@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -18,14 +19,14 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @GetMapping("/uuid")
-    public BaseDTO<Account> getUUID(HttpSession session) {
+    public BaseDTO<Account> getUUID(HttpServletRequest request) {
         String uuid = UUIDUtils.getUuid();
 
         Account account = new Account();
         account.setUuid(uuid);
         account.setLevel(0);
         account.setUserName("测试");
-
+        HttpSession session = request.getSession();
         session.setAttribute(uuid, account);
 
         return ResultUtils.createResult(account, RetCode.SUCCESS);

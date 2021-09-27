@@ -9,6 +9,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Configuration
 @EnableSwagger2
 public class Swagger2 {
@@ -20,7 +24,9 @@ public class Swagger2 {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.colams.web.controller"))
                 .paths(PathSelectors.any())
-                .build().apiInfo(new ApiInfoBuilder()
+                .build()
+                .ignoredParameterTypes(HttpSession.class, HttpServletRequest.class, HttpServletResponse.class)
+                .apiInfo(new ApiInfoBuilder()
                         .title("Spring Boot中使用Swagger2构建RESTful APIs")
                         .description("更多Spring Boot相关文章请关注：http://blog.didispace.com/")
                         .termsOfServiceUrl("http://blog.didispace.com/")
