@@ -19,6 +19,7 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
 //        registry.addResourceHandler("/*.html").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
 //        registry.addResourceHandler("/assets/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/assets/");
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
+        registry.addResourceHandler("/v1/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
