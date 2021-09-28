@@ -29,7 +29,7 @@ public class DataSourceConfig {
         return dataSource;
     }
 
-    public DatabaseMetaData getDataBaseMetaData() throws Exception {
+    public DatabaseMetaData getMetaData() throws Exception {
         DataSource dataSource = dataSource();
         Connection conn = dataSource.getConnection();
         DatabaseMetaData dbmd = conn.getMetaData();

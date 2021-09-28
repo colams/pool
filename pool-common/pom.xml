@@ -21,5 +21,9 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>cn.colams</groupId>
+            <artifactId>pool-model</artifactId>
+        </dependency>
     </dependencies>
 </project>
