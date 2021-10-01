@@ -14,6 +14,8 @@ public class DatabaseBiz {
     @Autowired
     DataSourceConfig dataSourceConfig;
 
+    private static String databaseName = "d2mc9geiuafi3r";
+
     public DataBaseEntity getTableTypes() throws Exception {
         DatabaseMetaData dbmd = dataSourceConfig.getMetaData();
         ResultSet ts = dbmd.getTableTypes();
@@ -28,13 +30,14 @@ public class DatabaseBiz {
 
     public DataBaseEntity getTables() throws Exception {
         DatabaseMetaData dbmd = dataSourceConfig.getMetaData();
-        ResultSet ts = dbmd.getTables("d2mc9geiuafi3r", null, null, new String[]{"TABLE"});
+//        new String[]{"TABLE"}
+        ResultSet ts = dbmd.getTables(databaseName, null, null,null);
         return ResultSetUtils.getResultSet(ts);
     }
 
-    public DataBaseEntity getColumns() throws Exception {
+    public DataBaseEntity getColumns(String tableName) throws Exception {
         DatabaseMetaData dbmd = dataSourceConfig.getMetaData();
-        ResultSet ts = dbmd.getColumns("d2mc9geiuafi3r", null, "weight_history", null);
+        ResultSet ts = dbmd.getColumns(databaseName, null, tableName, null);
         return ResultSetUtils.getResultSet(ts);
     }
 
