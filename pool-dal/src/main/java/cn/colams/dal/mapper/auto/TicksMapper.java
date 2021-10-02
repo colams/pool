@@ -33,8 +33,10 @@ public interface TicksMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into ticks (id, tick)",
-        "values (#{id,jdbcType=INTEGER}, #{tick,jdbcType=TIMESTAMP})"
+        "insert into ticks (id, tick, ",
+        "create_date)",
+        "values (#{id,jdbcType=INTEGER}, #{tick,jdbcType=TIMESTAMP}, ",
+        "#{createDate,jdbcType=TIMESTAMP})"
     })
     int insert(Ticks record);
 
@@ -44,26 +46,29 @@ public interface TicksMapper {
     @SelectProvider(type=TicksSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
     List<Ticks> selectByExampleWithRowbounds(TicksExample example, RowBounds rowBounds);
 
     @SelectProvider(type=TicksSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
     List<Ticks> selectByExample(TicksExample example);
 
     @Select({
         "select",
-        "id, tick",
+        "id, tick, create_date",
         "from ticks",
         "where id = #{id,jdbcType=INTEGER}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
     Ticks selectByPrimaryKey(Integer id);
 
@@ -78,7 +83,8 @@ public interface TicksMapper {
 
     @Update({
         "update ticks",
-        "set tick = #{tick,jdbcType=TIMESTAMP}",
+        "set tick = #{tick,jdbcType=TIMESTAMP},",
+          "create_date = #{createDate,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Ticks record);

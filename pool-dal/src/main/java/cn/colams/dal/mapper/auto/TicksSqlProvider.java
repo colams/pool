@@ -36,6 +36,10 @@ public class TicksSqlProvider {
             sql.VALUES("tick", "#{tick,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getCreateDate() != null) {
+            sql.VALUES("create_date", "#{createDate,jdbcType=TIMESTAMP}");
+        }
+        
         return sql.toString();
     }
 
@@ -47,6 +51,7 @@ public class TicksSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("tick");
+        sql.SELECT("create_date");
         sql.FROM("ticks");
         applyWhere(sql, example, false);
         
@@ -72,6 +77,10 @@ public class TicksSqlProvider {
             sql.SET("tick = #{record.tick,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getCreateDate() != null) {
+            sql.SET("create_date = #{record.createDate,jdbcType=TIMESTAMP}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -82,6 +91,7 @@ public class TicksSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
         sql.SET("tick = #{record.tick,jdbcType=TIMESTAMP}");
+        sql.SET("create_date = #{record.createDate,jdbcType=TIMESTAMP}");
         
         TicksExample example = (TicksExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -94,6 +104,10 @@ public class TicksSqlProvider {
         
         if (record.getTick() != null) {
             sql.SET("tick = #{tick,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCreateDate() != null) {
+            sql.SET("create_date = #{createDate,jdbcType=TIMESTAMP}");
         }
         
         sql.WHERE("id = #{id,jdbcType=INTEGER}");

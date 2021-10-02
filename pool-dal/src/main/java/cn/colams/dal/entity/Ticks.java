@@ -7,6 +7,8 @@ public class Ticks {
 
     private Date tick;
 
+    private Date createDate;
+
     public Integer getId() {
         return id;
     }
@@ -31,5 +33,18 @@ public class Ticks {
 
     public void setTick(Date tick) {
         this.tick = tick;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public Ticks withCreateDate(Date createDate) {
+        this.setCreateDate(createDate);
+        return this;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

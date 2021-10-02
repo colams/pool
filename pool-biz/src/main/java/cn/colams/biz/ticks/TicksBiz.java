@@ -25,9 +25,10 @@ public class TicksBiz {
         return ticksList;
     }
 
-    public Object add() throws Exception {
+    public boolean add() throws Exception {
         Ticks ticksEntity = new Ticks();
         ticksEntity.setTick(new Date());
+        ticksEntity.setCreateDate(new Date());
         boolean result = ticksExtensionMapper.insertSelective(ticksEntity) > 0;
         return result;
     }
