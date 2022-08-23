@@ -13,13 +13,16 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-@EnableScheduling
+//@EnableScheduling
 public class TicksTask implements SchedulingConfigurer {
 
     @Autowired
     TicksBiz ticksBiz;
 
     //    @Scheduled(cron = "0/10 * * * * ?")
+    // {"tishi":"查看成功！","flag":"1","qq":"113279736","lxr":"云总","wx":"","dh":"","dz":"上海市区上门"}
+    // {"tishi":"查看成功！","flag":"1","qq":"2632108095","lxr":"顺其自然","wx":"","dh":"","dz":"兼职上门，松江九亭附近"}
+    // {"tishi":"查看成功！","flag":"1","qq":"","lxr":"千寻","wx":"hkyzfc1519","dh":"","dz":"上海市徐汇区"}
     public void cron() {
         try {
             ticksBiz.add();
