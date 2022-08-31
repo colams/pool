@@ -45,6 +45,7 @@ public class WebApplication extends SpringBootServletInitializer {
         };
     }
 
+    @Bean
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 
