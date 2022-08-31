@@ -4,8 +4,6 @@ import cn.colams.biz.ticks.TicksBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.TriggerContext;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,8 @@ import java.util.Date;
 
 @Component
 //@EnableScheduling
-public class TicksTask implements SchedulingConfigurer {
+//public class TicksTask implements SchedulingConfigurer {
+public class TicksTask {
 
     @Autowired
     TicksBiz ticksBiz;
@@ -32,7 +31,7 @@ public class TicksTask implements SchedulingConfigurer {
         }
     }
 
-    @Override
+//    @Override
     public void configureTasks(ScheduledTaskRegistrar registrar) {
         registrar.addTriggerTask(new Runnable() {
             @Override

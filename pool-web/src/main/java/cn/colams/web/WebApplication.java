@@ -7,7 +7,9 @@ import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletCont
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
@@ -15,6 +17,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication(scanBasePackages = {"cn.colams",
         "cn.colams.dal"})
 public class WebApplication extends SpringBootServletInitializer {
+
+    private static final int AVAILABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
 
     public static void main(String[] args) {
         SpringApplication.run(WebApplication.class, args);
@@ -37,4 +41,18 @@ public class WebApplication extends SpringBootServletInitializer {
             }
         };
     }
+
+    @Bean
+    public AsyncTaskExecutor taskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+
+        executor.setCorePoolSize(AVAILABLE_PROCESSORS * 40);
+        executor.setMaxPoolSize(AVAILABLE_PROCESSORS * 80);
+        executor.setQueueCapacity(60);
+        executor.setKeepAliveSeconds(60);
+        executor.setThreadNamePrefix("pool-");
+        executor.initialize();
+        return executor;
+    }
+
 }
