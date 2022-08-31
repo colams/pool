@@ -6,12 +6,13 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
 @Component
 public class ThreadPoolTaskLab {
 
     @Resource
-    private AsyncTaskExecutor poolExecutor;
+    private Executor poolExecutor;
 
     private static final int ONE_SECOND = 1000;
 

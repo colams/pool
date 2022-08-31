@@ -10,6 +10,8 @@ public class AsyncService {
 
     @Async
     public String getResult() {
+        Thread thread = Thread.currentThread();
+        System.out.println(thread.getName());
         stopSuspend(3, "sleep async");
         System.out.println("async result");
         return "async result";
