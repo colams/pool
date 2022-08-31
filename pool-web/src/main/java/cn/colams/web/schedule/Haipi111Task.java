@@ -10,7 +10,7 @@ public class Haipi111Task extends BaseScheduling {
 
     @Autowired
     Haipi111Biz haipi111Biz;
-    
+
     @Scheduled(cron = "0/10 * * * * ?")
     public void cron() {
         try {
