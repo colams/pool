@@ -18,15 +18,10 @@ public class HttpUtils {
 
     private static String url = "http://haipi111.com/lib/info.php";
 
-    public static String postForm() throws IOException {
+    public static String postForm(List<NameValuePair> formParams) throws IOException {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
-        List<NameValuePair> formParams = new ArrayList<>();
-        formParams.add(new BasicNameValuePair("uid", "100"));
-        formParams.add(new BasicNameValuePair("infoid", "501836"));
-        formParams.add(new BasicNameValuePair("action", "ckinfo"));
-        formParams.add(new BasicNameValuePair("t", "0.013940201448949585"));
         UrlEncodedFormEntity ef = new UrlEncodedFormEntity(formParams);
         httpPost.setEntity(ef);
 
