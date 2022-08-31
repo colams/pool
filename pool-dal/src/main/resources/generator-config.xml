@@ -72,6 +72,7 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
+        <table tableName="haipi111_log"/>
         <table tableName="ticks"/>
         <table tableName="weight_history"/>
     </context>
