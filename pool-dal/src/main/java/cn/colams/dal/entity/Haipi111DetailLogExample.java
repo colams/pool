@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Haipi111LogExample {
+public class Haipi111DetailLogExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public Haipi111LogExample() {
+    public Haipi111DetailLogExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -162,6 +162,216 @@ public class Haipi111LogExample {
 
         public Criteria andIdNotBetween(Integer value1, Integer value2) {
             addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidIsNull() {
+            addCriterion("\"uid\" is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidIsNotNull() {
+            addCriterion("\"uid\" is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidEqualTo(String value) {
+            addCriterion("\"uid\" =", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidNotEqualTo(String value) {
+            addCriterion("\"uid\" <>", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidGreaterThan(String value) {
+            addCriterion("\"uid\" >", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidGreaterThanOrEqualTo(String value) {
+            addCriterion("\"uid\" >=", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidLessThan(String value) {
+            addCriterion("\"uid\" <", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidLessThanOrEqualTo(String value) {
+            addCriterion("\"uid\" <=", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidLike(String value) {
+            addCriterion("\"uid\" like", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidNotLike(String value) {
+            addCriterion("\"uid\" not like", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidIn(List<String> values) {
+            addCriterion("\"uid\" in", values, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidNotIn(List<String> values) {
+            addCriterion("\"uid\" not in", values, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidBetween(String value1, String value2) {
+            addCriterion("\"uid\" between", value1, value2, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidNotBetween(String value1, String value2) {
+            addCriterion("\"uid\" not between", value1, value2, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidIsNull() {
+            addCriterion("infoid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidIsNotNull() {
+            addCriterion("infoid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidEqualTo(String value) {
+            addCriterion("infoid =", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidNotEqualTo(String value) {
+            addCriterion("infoid <>", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidGreaterThan(String value) {
+            addCriterion("infoid >", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidGreaterThanOrEqualTo(String value) {
+            addCriterion("infoid >=", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidLessThan(String value) {
+            addCriterion("infoid <", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidLessThanOrEqualTo(String value) {
+            addCriterion("infoid <=", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidLike(String value) {
+            addCriterion("infoid like", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidNotLike(String value) {
+            addCriterion("infoid not like", value, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidIn(List<String> values) {
+            addCriterion("infoid in", values, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidNotIn(List<String> values) {
+            addCriterion("infoid not in", values, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidBetween(String value1, String value2) {
+            addCriterion("infoid between", value1, value2, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidNotBetween(String value1, String value2) {
+            addCriterion("infoid not between", value1, value2, "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionIsNull() {
+            addCriterion("\"action\" is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionIsNotNull() {
+            addCriterion("\"action\" is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionEqualTo(String value) {
+            addCriterion("\"action\" =", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionNotEqualTo(String value) {
+            addCriterion("\"action\" <>", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionGreaterThan(String value) {
+            addCriterion("\"action\" >", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionGreaterThanOrEqualTo(String value) {
+            addCriterion("\"action\" >=", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionLessThan(String value) {
+            addCriterion("\"action\" <", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionLessThanOrEqualTo(String value) {
+            addCriterion("\"action\" <=", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionLike(String value) {
+            addCriterion("\"action\" like", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionNotLike(String value) {
+            addCriterion("\"action\" not like", value, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionIn(List<String> values) {
+            addCriterion("\"action\" in", values, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionNotIn(List<String> values) {
+            addCriterion("\"action\" not in", values, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionBetween(String value1, String value2) {
+            addCriterion("\"action\" between", value1, value2, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionNotBetween(String value1, String value2) {
+            addCriterion("\"action\" not between", value1, value2, "action");
             return (Criteria) this;
         }
 
@@ -362,6 +572,21 @@ public class Haipi111LogExample {
 
         public Criteria andCreateDateNotBetween(Date value1, Date value2) {
             addCriterion("create_date not between", value1, value2, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidLikeInsensitive(String value) {
+            addCriterion("upper(\"uid\") like", value.toUpperCase(), "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoidLikeInsensitive(String value) {
+            addCriterion("upper(infoid) like", value.toUpperCase(), "infoid");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionLikeInsensitive(String value) {
+            addCriterion("upper(\"action\") like", value.toUpperCase(), "action");
             return (Criteria) this;
         }
 

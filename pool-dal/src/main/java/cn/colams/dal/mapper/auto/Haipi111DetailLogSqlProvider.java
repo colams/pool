@@ -1,35 +1,47 @@
 package cn.colams.dal.mapper.auto;
 
-import cn.colams.dal.entity.Haipi111Log;
-import cn.colams.dal.entity.Haipi111LogExample.Criteria;
-import cn.colams.dal.entity.Haipi111LogExample.Criterion;
-import cn.colams.dal.entity.Haipi111LogExample;
+import cn.colams.dal.entity.Haipi111DetailLog;
+import cn.colams.dal.entity.Haipi111DetailLogExample.Criteria;
+import cn.colams.dal.entity.Haipi111DetailLogExample.Criterion;
+import cn.colams.dal.entity.Haipi111DetailLogExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class Haipi111LogSqlProvider {
+public class Haipi111DetailLogSqlProvider {
 
-    public String countByExample(Haipi111LogExample example) {
+    public String countByExample(Haipi111DetailLogExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("haipi111_log");
+        sql.SELECT("count(*)").FROM("haipi111_detail_log");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(Haipi111LogExample example) {
+    public String deleteByExample(Haipi111DetailLogExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("haipi111_log");
+        sql.DELETE_FROM("haipi111_detail_log");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(Haipi111Log record) {
+    public String insertSelective(Haipi111DetailLog record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("haipi111_log");
+        sql.INSERT_INTO("haipi111_detail_log");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUid() != null) {
+            sql.VALUES("\"uid\"", "#{uid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getInfoid() != null) {
+            sql.VALUES("infoid", "#{infoid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAction() != null) {
+            sql.VALUES("\"action\"", "#{action,jdbcType=VARCHAR}");
         }
         
         if (record.getRequestdata() != null) {
@@ -47,17 +59,20 @@ public class Haipi111LogSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(Haipi111LogExample example) {
+    public String selectByExample(Haipi111DetailLogExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
+        sql.SELECT("\"uid\"");
+        sql.SELECT("infoid");
+        sql.SELECT("\"action\"");
         sql.SELECT("requestdata");
         sql.SELECT("responsedata");
         sql.SELECT("create_date");
-        sql.FROM("haipi111_log");
+        sql.FROM("haipi111_detail_log");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -68,14 +83,26 @@ public class Haipi111LogSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        Haipi111Log record = (Haipi111Log) parameter.get("record");
-        Haipi111LogExample example = (Haipi111LogExample) parameter.get("example");
+        Haipi111DetailLog record = (Haipi111DetailLog) parameter.get("record");
+        Haipi111DetailLogExample example = (Haipi111DetailLogExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("haipi111_log");
+        sql.UPDATE("haipi111_detail_log");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUid() != null) {
+            sql.SET("\"uid\" = #{record.uid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getInfoid() != null) {
+            sql.SET("infoid = #{record.infoid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAction() != null) {
+            sql.SET("\"action\" = #{record.action,jdbcType=VARCHAR}");
         }
         
         if (record.getRequestdata() != null) {
@@ -96,21 +123,36 @@ public class Haipi111LogSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("haipi111_log");
+        sql.UPDATE("haipi111_detail_log");
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("\"uid\" = #{record.uid,jdbcType=VARCHAR}");
+        sql.SET("infoid = #{record.infoid,jdbcType=VARCHAR}");
+        sql.SET("\"action\" = #{record.action,jdbcType=VARCHAR}");
         sql.SET("requestdata = #{record.requestdata,jdbcType=VARCHAR}");
         sql.SET("responsedata = #{record.responsedata,jdbcType=VARCHAR}");
         sql.SET("create_date = #{record.createDate,jdbcType=TIMESTAMP}");
         
-        Haipi111LogExample example = (Haipi111LogExample) parameter.get("example");
+        Haipi111DetailLogExample example = (Haipi111DetailLogExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(Haipi111Log record) {
+    public String updateByPrimaryKeySelective(Haipi111DetailLog record) {
         SQL sql = new SQL();
-        sql.UPDATE("haipi111_log");
+        sql.UPDATE("haipi111_detail_log");
+        
+        if (record.getUid() != null) {
+            sql.SET("\"uid\" = #{uid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getInfoid() != null) {
+            sql.SET("infoid = #{infoid,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAction() != null) {
+            sql.SET("\"action\" = #{action,jdbcType=VARCHAR}");
+        }
         
         if (record.getRequestdata() != null) {
             sql.SET("requestdata = #{requestdata,jdbcType=VARCHAR}");
@@ -129,7 +171,7 @@ public class Haipi111LogSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, Haipi111LogExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, Haipi111DetailLogExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }
