@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Component
 public class ThreadPoolTaskLab {
@@ -20,17 +22,18 @@ public class ThreadPoolTaskLab {
         String result = "test:";
         stopSuspend(10, "sleep 1");
         CompletableFuture<String> future = getAsyncResult();
-        stopSuspend(7, "sleep 2");
+        stopSuspend(2, "sleep 2");
         String append = null;
         long cost2 = 0;
         try {
             long startTime2 = System.currentTimeMillis();
-            append = future.get();
-            Thread.sleep(1 * ONE_SECOND);
+            append = future.get(1, TimeUnit.SECONDS);
             cost2 = System.currentTimeMillis() - startTime2;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
             e.printStackTrace();
         }
         result = String.format("%s%s**********%s**********%s", result, append, System.currentTimeMillis() - startTime, cost2);
