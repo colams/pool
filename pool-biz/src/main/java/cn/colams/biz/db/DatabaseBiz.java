@@ -14,7 +14,7 @@ public class DatabaseBiz {
     @Autowired
     DataSourceConfig dataSourceConfig;
 
-    private static String databaseName = "d2mc9geiuafi3r";
+    private static String databaseName = "d44uhfasaj4vt4";
 
     public DataBaseEntity getTableTypes() throws Exception {
         DatabaseMetaData dbmd = dataSourceConfig.getMetaData();
