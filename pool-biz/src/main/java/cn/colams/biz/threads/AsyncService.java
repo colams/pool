@@ -10,7 +10,8 @@ public class AsyncService {
 
     @Async
     public String getResult() {
-        stopSuspend(5, "sleep async");
+        stopSuspend(3, "sleep async");
+        System.out.println("async result");
         return "async result";
     }
 

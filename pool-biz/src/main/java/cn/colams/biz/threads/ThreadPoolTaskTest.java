@@ -22,23 +22,10 @@ public class ThreadPoolTaskTest {
     public String getTestResult() {
         long startTime = System.currentTimeMillis();
         String result = "test:";
-        stopSuspend(10, "sleep 1");
-        //        CompletableFuture<String> future = getAsyncResult();
+        stopSuspend(2, "sleep 1");
+        String res = asyncService.getResult();
         stopSuspend(2, "sleep 2");
-        String append = null;
-        long cost2 = 0;
-        //        try {
-        //            long startTime2 = System.currentTimeMillis();
-        //            //            append = future.get(1, TimeUnit.SECONDS);
-        //            append = future.get();
-        //            cost2 = System.currentTimeMillis() - startTime2;
-        //        } catch (InterruptedException e) {
-        //            e.printStackTrace();
-        //        } catch (ExecutionException e) {
-        //            e.printStackTrace();
-        //        }
-        getResult();
-        result = String.format("%s%s**********%s**********%s", result, append, System.currentTimeMillis() - startTime, cost2);
+        result = String.format("%s%s*********%s", result, System.currentTimeMillis() - startTime, res);
         System.out.println(result);
         return result;
     }
@@ -51,12 +38,6 @@ public class ThreadPoolTaskTest {
         }
         System.out.println(String.format("sleep %s seconds...%s", seconds, sleepMsg));
     }
-
-    private CompletableFuture<String> getAsyncResult() {
-        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> getResult(), poolExecutor);
-        return future;
-    }
-
 
     @Async
     public String getResult() {
