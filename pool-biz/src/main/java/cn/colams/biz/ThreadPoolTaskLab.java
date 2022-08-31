@@ -27,13 +27,12 @@ public class ThreadPoolTaskLab {
         long cost2 = 0;
         try {
             long startTime2 = System.currentTimeMillis();
-            append = future.get(1, TimeUnit.SECONDS);
+//            append = future.get(1, TimeUnit.SECONDS);
+            append = future.get();
             cost2 = System.currentTimeMillis() - startTime2;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
             e.printStackTrace();
         }
         result = String.format("%s%s**********%s**********%s", result, append, System.currentTimeMillis() - startTime, cost2);
