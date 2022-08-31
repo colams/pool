@@ -2,7 +2,7 @@ package cn.colams.dal.entity;
 
 import java.util.Date;
 
-public class Haipi111Log {
+public class  Haipi111Log {
     private Integer id;
 
     private String requestdata;

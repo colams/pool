@@ -9,8 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = dalTest.class)
@@ -20,6 +18,6 @@ public class HttpUtilsTest {
 
     @Test
     public void HttpUtilsTest() throws IOException {
-        HttpUtils.postForm();
+//        HttpUtils.postForm(formParams);
     }
 }
