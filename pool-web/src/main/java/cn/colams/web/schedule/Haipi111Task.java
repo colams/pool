@@ -13,12 +13,12 @@ public class Haipi111Task extends BaseScheduling {
 
     @Scheduled(cron = "0/10 * * * * ?")
     public void cron() {
-        try {
-            String result = haipi111Biz.getHaipi111("100", "501836");
-            System.out.println("执行了一次：" + result);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            String result = haipi111Biz.getHaipi111("100", "501836");
+//            System.out.println("执行了一次：" + result);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
     }
 
     @Override

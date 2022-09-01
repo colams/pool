@@ -11,9 +11,6 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class ThreadPoolTaskTest {
 
-    @Resource
-    private AsyncTaskExecutor poolExecutor;
-
     @Autowired
     AsyncService asyncService;
 

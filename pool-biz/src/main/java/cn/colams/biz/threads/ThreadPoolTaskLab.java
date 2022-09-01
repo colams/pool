@@ -1,12 +1,12 @@
 package cn.colams.biz.threads;
 
-import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class ThreadPoolTaskLab {
@@ -26,12 +26,10 @@ public class ThreadPoolTaskLab {
         long cost2 = 0;
         try {
             long startTime2 = System.currentTimeMillis();
-//            append = future.get(1, TimeUnit.SECONDS);
+            append = future.get(1, TimeUnit.SECONDS);
             append = future.get();
             cost2 = System.currentTimeMillis() - startTime2;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         result = String.format("%s%s**********%s**********%s", result, append, System.currentTimeMillis() - startTime, cost2);
@@ -45,17 +43,25 @@ public class ThreadPoolTaskLab {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(String.format("sleep %s seconds...%s", seconds, sleepMsg));
+        System.out.println(String.format("%s:sleep %s seconds...%s", Thread.currentThread().getName(), seconds, sleepMsg));
     }
 
     private CompletableFuture<String> getAsyncResult() {
-        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> getResult(), poolExecutor);
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> getResult(), poolExecutor).whenComplete((res, exp) -> {
+            if (Objects.nonNull(exp)) {
+                System.out.println(String.format("%s:%s,%s", Thread.currentThread().getName(), res, exp.getMessage()));
+            } else {
+                System.out.println(String.format("%s:%s", Thread.currentThread().getName(), res));
+            }
+
+        });
         return future;
     }
 
-    private String getResult() {
+    private String getResult() throws RuntimeException {
         stopSuspend(5, "sleep async");
-        return "async result";
+        throw new RuntimeException("ssadfasd");
+        // return "async result";
     }
 
 
