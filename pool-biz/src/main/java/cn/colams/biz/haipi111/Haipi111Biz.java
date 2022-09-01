@@ -4,6 +4,7 @@ import cn.colams.common.haipi111.HaipiAction;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
 import cn.colams.dal.entity.Haipi111DetailLog;
+import cn.colams.dal.entity.Haipi111DetailLogExample;
 import cn.colams.dal.mapper.extension.Haipi111DetailLogExtensionMapper;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -49,4 +50,10 @@ public class Haipi111Biz {
         return insert(haipi111Log);
     }
 
+    public List<Haipi111DetailLog> list() throws Exception {
+        Haipi111DetailLogExample example = new Haipi111DetailLogExample();
+        example.setOrderByClause("id");
+        List<Haipi111DetailLog> ticksList = haipi111DetailLogExtensionMapper.selectByExample(example);
+        return ticksList;
+    }
 }
