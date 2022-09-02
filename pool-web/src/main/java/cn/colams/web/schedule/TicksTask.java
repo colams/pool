@@ -23,12 +23,12 @@ public class TicksTask {
     // {"tishi":"查看成功！","flag":"1","qq":"2632108095","lxr":"顺其自然","wx":"","dh":"","dz":"兼职上门，松江九亭附近"}
     // {"tishi":"查看成功！","flag":"1","qq":"","lxr":"千寻","wx":"hkyzfc1519","dh":"","dz":"上海市徐汇区"}
     public void cron() {
-        try {
-            ticksBiz.add();
-            System.out.println("执行了一次");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            ticksBiz.add();
+//            System.out.println("执行了一次");
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
     }
 
 //    @Override

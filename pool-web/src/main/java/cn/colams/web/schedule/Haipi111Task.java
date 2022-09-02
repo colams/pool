@@ -21,6 +21,7 @@ public class Haipi111Task extends BaseScheduling {
 //        }
     }
 
+
     @Override
     public String getCronTrigger() {
         return "0/5 * * * * ?";

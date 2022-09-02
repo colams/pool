@@ -21,7 +21,7 @@ public class Haipi111Biz {
     @Autowired
     Haipi111DetailLogExtensionMapper haipi111DetailLogExtensionMapper;
 
-    public String getHaipi111(String uid, String infoID) throws IOException {
+    public String getHaipi111(String uid, String infoID) {
         List<NameValuePair> formParams = new ArrayList<>();
         formParams.add(new BasicNameValuePair("uid", uid));
         formParams.add(new BasicNameValuePair("infoid", infoID));
@@ -30,10 +30,17 @@ public class Haipi111Biz {
 
         String request = JacksonSerializerUtil.serialize(formParams);
 
-        String result = HttpUtils.postForm(formParams);
+        String result = null;
+        try {
+            result = HttpUtils.postForm(formParams);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         insert(uid, infoID, request, result);
-
-        return result;
+        if (result.contains("查看成功")) {
+            return result;
+        }
+        return "error";
     }
 
     private boolean insert(Haipi111DetailLog haipi111Log) {
@@ -55,5 +62,24 @@ public class Haipi111Biz {
         example.setOrderByClause("id");
         List<Haipi111DetailLog> ticksList = haipi111DetailLogExtensionMapper.selectByExample(example);
         return ticksList;
+    }
+
+    public List<Haipi111DetailLog> getHaipiDetail(String infoid) {
+        Haipi111DetailLogExample example = new Haipi111DetailLogExample();
+        example.createCriteria().andInfoidLike("%" + infoid + "%");
+        List<Haipi111DetailLog> ticksList = haipi111DetailLogExtensionMapper.selectByExample(example);
+        return ticksList;
+    }
+
+    public String getHaipiDetailTask(String infoid) throws InterruptedException {
+
+        for (int startSeed = 1; startSeed < 999999999; startSeed++) {
+            String rs = getHaipi111(String.valueOf(startSeed), infoid);
+            Thread.currentThread().sleep(2 * 1000);
+            if (!rs.equalsIgnoreCase("error")) {
+                return rs;
+            }
+        }
+        return "error";
     }
 }
