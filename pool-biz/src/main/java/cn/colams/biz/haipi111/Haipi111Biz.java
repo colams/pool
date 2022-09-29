@@ -1,5 +1,7 @@
 package cn.colams.biz.haipi111;
 
+import cn.colams.common.aspects.LogParam;
+import cn.colams.common.aspects.Metric;
 import cn.colams.common.haipi111.HaipiAction;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
@@ -21,7 +23,9 @@ public class Haipi111Biz {
     @Autowired
     Haipi111DetailLogExtensionMapper haipi111DetailLogExtensionMapper;
 
-    public String getHaipi111(String uid, String infoID) {
+    @Metric
+    @LogParam
+    public String getHaipi111(String uid, String infoID) throws IOException {
         List<NameValuePair> formParams = new ArrayList<>();
         formParams.add(new BasicNameValuePair("uid", uid));
         formParams.add(new BasicNameValuePair("infoid", infoID));
@@ -30,19 +34,13 @@ public class Haipi111Biz {
 
         String request = JacksonSerializerUtil.serialize(formParams);
 
-        String result = null;
-        try {
-            result = HttpUtils.postForm(formParams);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String result = HttpUtils.postForm(formParams);
         insert(uid, infoID, request, result);
-        if (result.contains("查看成功")) {
-            return result;
-        }
-        return "error";
+
+        return result;
     }
 
+    @Metric
     private boolean insert(Haipi111DetailLog haipi111Log) {
         return haipi111DetailLogExtensionMapper.insertSelective(haipi111Log) > 0;
     }

@@ -17,8 +17,7 @@ import java.util.concurrent.Executor;
 @EnableSwagger2
 @EnableScheduling
 @EnableAsync
-@SpringBootApplication(scanBasePackages = {"cn.colams",
-        "cn.colams.dal"})
+@SpringBootApplication(scanBasePackages = {"cn.colams"})
 public class WebApplication extends SpringBootServletInitializer {
 
     private static final int AVAILABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
