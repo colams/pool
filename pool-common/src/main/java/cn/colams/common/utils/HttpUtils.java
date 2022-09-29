@@ -9,12 +9,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
 public class HttpUtils {
 
+    private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
 
     private static String url = "http://haipi111.com/lib/info.php";
 
@@ -29,7 +32,7 @@ public class HttpUtils {
 
         CloseableHttpResponse httpResponse = httpclient.execute(httpPost);
         String result = EntityUtils.toString(httpResponse.getEntity());
-        System.out.println(result);
+        logger.info(result);
         return result;
     }
 }
