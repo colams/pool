@@ -1,7 +1,6 @@
 package cn.colams.biz.haipi111;
 
 import cn.colams.biz.dalTest;
-import cn.colams.common.aspects.MetricAspect;
 import cn.colams.common.utils.JacksonSerializerUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.io.IOException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = dalTest.class)
@@ -26,7 +23,7 @@ public class Haipi111BizTest {
     Haipi111Biz haipi111Biz;
 
     @Test
-    public void testGetHaipi111() throws IOException {
+    public void testGetHaipi111() {
         //        String result = haipi111Biz.getHaipi111("1", "501836");
         String result = "test";
 
@@ -39,6 +36,8 @@ public class Haipi111BizTest {
         logger.error("error level");
 
         System.out.println(result);
+    }
+
     @Test
     public void getHaipiDetailTask() throws InterruptedException {
         Object obj = haipi111Biz.getHaipiDetailTask("510123");

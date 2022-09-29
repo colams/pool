@@ -25,7 +25,7 @@ public class Haipi111Biz {
 
     @Metric
     @LogParam
-    public String getHaipi111(String uid, String infoID) throws IOException {
+    public String getHaipi111(String uid, String infoID) {
         List<NameValuePair> formParams = new ArrayList<>();
         formParams.add(new BasicNameValuePair("uid", uid));
         formParams.add(new BasicNameValuePair("infoid", infoID));
@@ -33,11 +33,18 @@ public class Haipi111Biz {
         formParams.add(new BasicNameValuePair("t", "0.013940201448949585"));
 
         String request = JacksonSerializerUtil.serialize(formParams);
-
-        String result = HttpUtils.postForm(formParams);
+        String result = null;
+        try {
+            result = HttpUtils.postForm(formParams);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         insert(uid, infoID, request, result);
 
-        return result;
+        if (result.contains("查看成功")) {
+            return result;
+        }
+        return "error";
     }
 
     @Metric
