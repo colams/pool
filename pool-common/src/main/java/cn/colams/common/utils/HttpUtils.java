@@ -19,11 +19,9 @@ public class HttpUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
 
-    private static String url = "http://haipi111.com/lib/info.php";
-
     @Metric
     @LogParam
-    public static String postForm(List<NameValuePair> formParams) throws IOException {
+    public static String postForm(String url, List<NameValuePair> formParams) throws IOException {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);

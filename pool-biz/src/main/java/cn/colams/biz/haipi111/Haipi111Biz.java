@@ -10,6 +10,8 @@ import cn.colams.dal.entity.Haipi111DetailLogExample;
 import cn.colams.dal.mapper.extension.Haipi111DetailLogExtensionMapper;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,8 @@ import java.util.List;
 
 @Component
 public class Haipi111Biz {
+
+    private static String url = "http://haipi111.com/lib/info.php";
 
     @Autowired
     Haipi111DetailLogExtensionMapper haipi111DetailLogExtensionMapper;
@@ -35,7 +39,7 @@ public class Haipi111Biz {
         String request = JacksonSerializerUtil.serialize(formParams);
         String result = null;
         try {
-            result = HttpUtils.postForm(formParams);
+            result = HttpUtils.postForm(url, formParams);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
+import org.apache.logging.log4j.core.appender.FileAppender;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
@@ -14,7 +15,7 @@ import org.apache.logging.log4j.core.layout.PatternLayout;
 
 import java.io.Serializable;
 
-@Plugin(name = "SelfAppender", elementType = Appender.ELEMENT_TYPE, category = "core")
+@Plugin(name = "SelfAppender", elementType = Appender.ELEMENT_TYPE, category = "core", printObject = true)
 public class SelfAppender extends AbstractAppender {
     private String fileName;
 
@@ -26,7 +27,7 @@ public class SelfAppender extends AbstractAppender {
 
     @Override
     public void append(LogEvent logEvent) {
-        System.out.println("selfAppender:");
+
     }
 
     /*  接收配置文件中的参数 */
