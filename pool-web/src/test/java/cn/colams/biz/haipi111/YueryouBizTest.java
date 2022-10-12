@@ -51,7 +51,6 @@ public class YueryouBizTest {
         List<String> stepList = Arrays.asList(
                 "0-100000",
                 "100001-200000",
-                "100001-200000",
                 "200001-300000",
                 "300001-400000",
                 "400001-500000",
@@ -65,14 +64,18 @@ public class YueryouBizTest {
                                 loopHackLogin(e),
                         taskExecutor))
                 .collect(Collectors.toList());
-        for (int i = 0; i < futures.size(); i++) {
-            String res = futures.get(i).get();
-            if (StringUtils.isNotEmpty(res)) {
-                result.append(res);
-                break;
-            }
-        }
-        return result.toString();
+
+        CompletableFuture<Object> completableFuture = CompletableFuture.anyOf(futures.toArray(new CompletableFuture[futures.size()]));
+        Object obj = completableFuture.get();
+        return String.valueOf(obj);
+        //        for (int i = 0; i < futures.size(); i++) {
+        //            String res = futures.get(i).get();
+        //            if (StringUtils.isNotEmpty(res)) {
+        //                result.append(res);
+        //                break;
+        //            }
+        //        }
+        //        return result.toString();
     }
 
     private String loopHackLogin(String step) {
