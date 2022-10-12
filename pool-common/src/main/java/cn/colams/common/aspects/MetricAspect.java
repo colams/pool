@@ -23,12 +23,12 @@ public class MetricAspect {
     @Around("log() && @annotation(metric)")
     public Object aroundAdvice(ProceedingJoinPoint joinPoint, Metric metric) throws Throwable {
         Object retValue;
-        String result = "fail";
+        String result = "block";
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         try {
             retValue = joinPoint.proceed();
-            result = "success";
+            result = "finish";
         } catch (Throwable throwable) {
             LOGGER.warn("call service throwable", throwable);
             throw throwable;
