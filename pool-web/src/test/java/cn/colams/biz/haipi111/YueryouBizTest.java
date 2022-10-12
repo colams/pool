@@ -71,7 +71,6 @@ public class YueryouBizTest {
                 result.append(res);
                 break;
             }
-
         }
         return result.toString();
     }
