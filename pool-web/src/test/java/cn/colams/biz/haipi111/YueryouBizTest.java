@@ -46,8 +46,6 @@ public class YueryouBizTest {
     }
 
     private String hackLogin() throws ExecutionException, InterruptedException {
-
-        StringBuilder result = new StringBuilder();
         List<String> stepList = Arrays.asList(
                 "0-100000",
                 "100001-200000",
