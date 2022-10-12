@@ -2,6 +2,7 @@ package cn.colams.biz.haipi111;
 
 
 import cn.colams.biz.dalTest;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -66,7 +67,11 @@ public class YueryouBizTest {
                 .collect(Collectors.toList());
         for (int i = 0; i < futures.size(); i++) {
             String res = futures.get(i).get();
-            result.append(res);
+            if (StringUtils.isNotEmpty(res)) {
+                result.append(res);
+                break;
+            }
+
         }
         return result.toString();
     }
