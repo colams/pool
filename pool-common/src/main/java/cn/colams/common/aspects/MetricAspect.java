@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class MetricAspect {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MetricAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(MetricAspect.class);
 
     @Pointcut("@annotation(cn.colams.common.aspects.Metric)")
     private void log() {
@@ -30,7 +30,7 @@ public class MetricAspect {
             retValue = joinPoint.proceed();
             result = "finish";
         } catch (Throwable throwable) {
-            LOGGER.warn("call service throwable", throwable);
+            logger.warn("call service throwable", throwable);
             throw throwable;
         } finally {
             stopWatch.stop();
@@ -43,9 +43,9 @@ public class MetricAspect {
         try {
             String message = String.format("doMetric ============ class:%s;method:%s;cost:%s;result:%s",
                     joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getSignature().getName(), intervals, result);
-            System.out.println(message);
+            logger.info(message);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         }
     }
 

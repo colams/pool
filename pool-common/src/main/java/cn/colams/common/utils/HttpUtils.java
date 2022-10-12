@@ -30,7 +30,6 @@ public class HttpUtils {
 
         CloseableHttpResponse httpResponse = httpclient.execute(httpPost);
         String result = EntityUtils.toString(httpResponse.getEntity());
-        logger.info(result);
         return result;
     }
 }

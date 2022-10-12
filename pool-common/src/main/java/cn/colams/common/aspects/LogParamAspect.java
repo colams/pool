@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class LogParamAspect {
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogParamAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(LogParamAspect.class);
 
     @Pointcut("@annotation(cn.colams.common.aspects.LogParam)")
     private void log() {
@@ -29,7 +29,7 @@ public class LogParamAspect {
             retValue = joinPoint.proceed();
             result = "success";
         } catch (Throwable throwable) {
-            LOGGER.warn("call service throwable", throwable);
+            logger.warn("call service throwable", throwable);
             throw throwable;
         } finally {
             logParam(result, joinPoint, retValue);
@@ -42,9 +42,9 @@ public class LogParamAspect {
             String message = String.format("logParam ============ class:%s;method:%s;result:%s;param:%s;retValue:%s",
                     joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getSignature().getName(), result,
                     JacksonSerializerUtil.serialize(joinPoint.getArgs()), JacksonSerializerUtil.serialize(retValue));
-            System.out.println(message);
+            logger.info(message);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         }
     }
 
