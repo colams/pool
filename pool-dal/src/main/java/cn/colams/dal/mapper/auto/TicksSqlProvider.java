@@ -29,7 +29,7 @@ public class TicksSqlProvider {
         sql.INSERT_INTO("ticks");
         
         if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=INTEGER}");
+            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
         if (record.getTick() != null) {
@@ -70,7 +70,7 @@ public class TicksSqlProvider {
         sql.UPDATE("ticks");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=INTEGER}");
+            sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
         if (record.getTick() != null) {
@@ -89,7 +89,7 @@ public class TicksSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("ticks");
         
-        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("tick = #{record.tick,jdbcType=TIMESTAMP}");
         sql.SET("create_date = #{record.createDate,jdbcType=TIMESTAMP}");
         
@@ -110,7 +110,7 @@ public class TicksSqlProvider {
             sql.SET("create_date = #{createDate,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }

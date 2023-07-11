@@ -3,22 +3,22 @@ package cn.colams.dal.entity;
 import java.util.Date;
 
 public class Ticks {
-    private Integer id;
+    private Long id;
 
     private Date tick;
 
     private Date createDate;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public Ticks withId(Integer id) {
+    public Ticks withId(Long id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

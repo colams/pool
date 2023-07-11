@@ -28,14 +28,14 @@ public interface TicksMapper {
 
     @Delete({
         "delete from ticks",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into ticks (id, tick, ",
         "create_date)",
-        "values (#{id,jdbcType=INTEGER}, #{tick,jdbcType=TIMESTAMP}, ",
+        "values (#{id,jdbcType=BIGINT}, #{tick,jdbcType=TIMESTAMP}, ",
         "#{createDate,jdbcType=TIMESTAMP})"
     })
     int insert(Ticks record);
@@ -45,7 +45,7 @@ public interface TicksMapper {
 
     @SelectProvider(type=TicksSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -53,7 +53,7 @@ public interface TicksMapper {
 
     @SelectProvider(type=TicksSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -63,14 +63,14 @@ public interface TicksMapper {
         "select",
         "id, tick, create_date",
         "from ticks",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="tick", property="tick", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
-    Ticks selectByPrimaryKey(Integer id);
+    Ticks selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=TicksSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") Ticks record, @Param("example") TicksExample example);
@@ -85,7 +85,7 @@ public interface TicksMapper {
         "update ticks",
         "set tick = #{tick,jdbcType=TIMESTAMP},",
           "create_date = #{createDate,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(Ticks record);
 }
