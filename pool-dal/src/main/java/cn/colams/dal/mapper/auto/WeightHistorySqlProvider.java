@@ -29,7 +29,7 @@ public class WeightHistorySqlProvider {
         sql.INSERT_INTO("weight_history");
         
         if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=INTEGER}");
+            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
         if (record.getWeight() != null) {
@@ -70,7 +70,7 @@ public class WeightHistorySqlProvider {
         sql.UPDATE("weight_history");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=INTEGER}");
+            sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
         if (record.getWeight() != null) {
@@ -89,7 +89,7 @@ public class WeightHistorySqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("weight_history");
         
-        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("weight = #{record.weight,jdbcType=DOUBLE}");
         sql.SET("create_date = #{record.createDate,jdbcType=TIMESTAMP}");
         
@@ -110,7 +110,7 @@ public class WeightHistorySqlProvider {
             sql.SET("create_date = #{createDate,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }

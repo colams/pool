@@ -28,14 +28,14 @@ public interface WeightHistoryMapper {
 
     @Delete({
         "delete from weight_history",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into weight_history (id, weight, ",
         "create_date)",
-        "values (#{id,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, ",
+        "values (#{id,jdbcType=BIGINT}, #{weight,jdbcType=DOUBLE}, ",
         "#{createDate,jdbcType=TIMESTAMP})"
     })
     int insert(WeightHistory record);
@@ -45,7 +45,7 @@ public interface WeightHistoryMapper {
 
     @SelectProvider(type=WeightHistorySqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="weight", property="weight", jdbcType=JdbcType.DOUBLE),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -53,7 +53,7 @@ public interface WeightHistoryMapper {
 
     @SelectProvider(type=WeightHistorySqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="weight", property="weight", jdbcType=JdbcType.DOUBLE),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -63,14 +63,14 @@ public interface WeightHistoryMapper {
         "select",
         "id, weight, create_date",
         "from weight_history",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="weight", property="weight", jdbcType=JdbcType.DOUBLE),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
-    WeightHistory selectByPrimaryKey(Integer id);
+    WeightHistory selectByPrimaryKey(Long id);
 
     @UpdateProvider(type=WeightHistorySqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") WeightHistory record, @Param("example") WeightHistoryExample example);
@@ -85,7 +85,7 @@ public interface WeightHistoryMapper {
         "update weight_history",
         "set weight = #{weight,jdbcType=DOUBLE},",
           "create_date = #{createDate,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(WeightHistory record);
 }
