@@ -40,7 +40,7 @@ public class WeightBiz {
         return result;
     }
 
-    public boolean delete(int id) {
+    public boolean delete(long id) {
         boolean result = weightHistoryExtensionMapper.deleteByPrimaryKey(id) > 0;
         return result;
     }

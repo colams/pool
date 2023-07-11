@@ -38,7 +38,7 @@ public class TicksBiz {
         return result;
     }
 
-    public boolean delete(int id) {
+    public boolean delete(long id) {
         boolean result = ticksExtensionMapper.deleteByPrimaryKey(id) > 0;
         return result;
     }
