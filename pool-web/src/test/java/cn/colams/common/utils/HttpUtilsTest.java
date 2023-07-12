@@ -30,6 +30,7 @@ public class HttpUtilsTest {
         Object value = redisService.get("test");
         System.out.println(value);
         if (Objects.isNull(value)) {
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             redisService.set("test", "jojo");
             value = redisService.get("test");
             System.out.println(value);
