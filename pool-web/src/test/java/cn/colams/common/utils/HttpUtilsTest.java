@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = dalTest.class)
@@ -28,9 +29,11 @@ public class HttpUtilsTest {
     public void redisTest() {
         Object value = redisService.get("test");
         System.out.println(value);
-        redisService.set("test", "jojo");
-        value = redisService.get("test");
-        System.out.println(value);
+        if (Objects.isNull(value)) {
+            redisService.set("test", "jojo");
+            value = redisService.get("test");
+            System.out.println(value);
+        }
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 }
