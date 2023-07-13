@@ -39,15 +39,15 @@ public class HttpUtilsTest {
             System.out.println(value);
         }
 
-        value = redisService.ttl("test");
-        System.out.println("expire time: " + value);
+        long ttl = redisService.ttl("test");
+        System.out.println("expire time: " + ttl);
 
 
-        Boolean res = redisService.setIfAbsent("test", "jojo");
-        System.out.println("setIfAbsent time test : " + res);
+        Boolean res1 = redisService.setIfAbsent("test", "jojo");
+        System.out.println("setIfAbsent time test : " + res1);
 
-        res = redisService.setIfAbsent("zhangzt", "jojo");
-        System.out.println("setIfAbsent time zhangzt : " + res);
+        Boolean res2 = redisService.setIfAbsent("zhangzt", "jojo");
+        System.out.println("setIfAbsent time zhangzt : " + res2);
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
