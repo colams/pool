@@ -42,6 +42,13 @@ public class HttpUtilsTest {
         value = redisService.ttl("test");
         System.out.println("expire time: " + value);
 
+
+        Boolean res = redisService.setIfAbsent("test", "jojo");
+        System.out.println("setIfAbsent time test : " + res);
+
+        res = redisService.setIfAbsent("zhangzt", "jojo");
+        System.out.println("setIfAbsent time zhangzt : " + res);
+
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 

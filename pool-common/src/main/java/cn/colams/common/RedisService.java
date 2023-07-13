@@ -16,6 +16,11 @@ public class RedisService {
         vo.set(key, value);
     }
 
+    public Boolean setIfAbsent(String key, Object value) {
+        ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+        return vo.setIfAbsent(key, value);
+    }
+
     public Object get(String key) {
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         return vo.get(key);
