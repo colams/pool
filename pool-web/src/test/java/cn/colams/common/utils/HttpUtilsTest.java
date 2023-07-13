@@ -38,6 +38,10 @@ public class HttpUtilsTest {
             value = redisService.get("test");
             System.out.println(value);
         }
+
+        value = redisService.ttl("test");
+        System.out.println("expire time: " + value);
+
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 

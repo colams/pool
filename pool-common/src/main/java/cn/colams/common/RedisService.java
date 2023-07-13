@@ -21,4 +21,8 @@ public class RedisService {
         return vo.get(key);
     }
 
+    public Long ttl(String key) {
+        ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+        return vo.getOperations().getExpire(key);
+    }
 }
