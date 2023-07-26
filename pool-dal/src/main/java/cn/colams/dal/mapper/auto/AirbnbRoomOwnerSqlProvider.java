@@ -36,8 +36,8 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.VALUES("\"name\"", "#{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getLandlordId() != null) {
-            sql.VALUES("landlord_id", "#{landlordId,jdbcType=VARCHAR}");
+        if (record.getLordPage() != null) {
+            sql.VALUES("lord_page", "#{lordPage,jdbcType=VARCHAR}");
         }
         
         if (record.getRooms() != null) {
@@ -59,7 +59,7 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("\"name\"");
-        sql.SELECT("landlord_id");
+        sql.SELECT("lord_page");
         sql.SELECT("rooms");
         sql.SELECT("create_time");
         sql.FROM("airbnb_room_owner");
@@ -87,8 +87,8 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.SET("\"name\" = #{record.name,jdbcType=VARCHAR}");
         }
         
-        if (record.getLandlordId() != null) {
-            sql.SET("landlord_id = #{record.landlordId,jdbcType=VARCHAR}");
+        if (record.getLordPage() != null) {
+            sql.SET("lord_page = #{record.lordPage,jdbcType=VARCHAR}");
         }
         
         if (record.getRooms() != null) {
@@ -109,7 +109,7 @@ public class AirbnbRoomOwnerSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("\"name\" = #{record.name,jdbcType=VARCHAR}");
-        sql.SET("landlord_id = #{record.landlordId,jdbcType=VARCHAR}");
+        sql.SET("lord_page = #{record.lordPage,jdbcType=VARCHAR}");
         sql.SET("rooms = #{record.rooms,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
@@ -126,8 +126,8 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.SET("\"name\" = #{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getLandlordId() != null) {
-            sql.SET("landlord_id = #{landlordId,jdbcType=VARCHAR}");
+        if (record.getLordPage() != null) {
+            sql.SET("lord_page = #{lordPage,jdbcType=VARCHAR}");
         }
         
         if (record.getRooms() != null) {

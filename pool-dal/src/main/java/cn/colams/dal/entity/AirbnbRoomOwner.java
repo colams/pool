@@ -7,7 +7,7 @@ public class AirbnbRoomOwner {
 
     private String name;
 
-    private String landlordId;
+    private String lordPage;
 
     private Integer rooms;
 
@@ -39,17 +39,17 @@ public class AirbnbRoomOwner {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getLandlordId() {
-        return landlordId;
+    public String getLordPage() {
+        return lordPage;
     }
 
-    public AirbnbRoomOwner withLandlordId(String landlordId) {
-        this.setLandlordId(landlordId);
+    public AirbnbRoomOwner withLordPage(String lordPage) {
+        this.setLordPage(lordPage);
         return this;
     }
 
-    public void setLandlordId(String landlordId) {
-        this.landlordId = landlordId == null ? null : landlordId.trim();
+    public void setLordPage(String lordPage) {
+        this.lordPage = lordPage == null ? null : lordPage.trim();
     }
 
     public Integer getRooms() {

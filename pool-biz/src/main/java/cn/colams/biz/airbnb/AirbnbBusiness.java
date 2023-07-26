@@ -4,7 +4,9 @@ import cn.colams.common.SeleniumUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
+import cn.colams.dal.entity.AirbnbRoomOwner;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
+import cn.colams.dal.mapper.extension.AirbnbRoomOwnerExtensionMapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +26,8 @@ public class AirbnbBusiness {
 
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
+    @Autowired
+    AirbnbRoomOwnerExtensionMapper airbnbRoomOwnerExtensionMapper;
 
     public boolean scrapyList(String targetUrl, Integer pageIndex, Boolean showBrowser) {
         ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
@@ -106,11 +110,29 @@ public class AirbnbBusiness {
     public void scrapyLord(Boolean showBrowser) {
         AirbnbExample airbnbExample = new AirbnbExample();
         AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
-        criteria.andRoomIdEqualTo("816452009133603855");
+        criteria.andStateEqualTo(0);
         List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
 
         for (Airbnb airbnb : airbnbs) {
-            System.out.println(airbnb.getRoomUrl());
+            ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
+            WebDriver driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
+            analysisDetail(driver);
         }
+    }
+
+    private Airbnb analysisDetail(WebDriver driver) {
+        WebElement lordElement = driver.findElement(By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
+        String lord_name = lordElement.findElement(By.cssSelector("h2[elementtiming='LCP-target']")).getText();
+        String lord_page = lordElement.findElement(By.cssSelector("a[target=_blank']")).getAttribute("href");
+        String lord_id = lord_page.substring(lord_page.lastIndexOf("\\"));
+
+        Airbnb airbnb = new Airbnb()
+                .withLandlordId(lord_id);
+        AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
+        airbnbRoomOwner.setRooms(0);
+        airbnbRoomOwner.setCreateTime(new Date());
+        airbnbRoomOwner.setLandlordPage(lord_page);
+        airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
+        return airbnb;
     }
 }
