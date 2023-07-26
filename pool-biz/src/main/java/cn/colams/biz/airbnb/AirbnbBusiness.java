@@ -110,7 +110,7 @@ public class AirbnbBusiness {
     public void scrapyLord(Boolean showBrowser) {
         AirbnbExample airbnbExample = new AirbnbExample();
         AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
-        criteria.andStateEqualTo(0);
+        criteria.andDealStatusEqualTo(0);
         List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
 
         for (Airbnb airbnb : airbnbs) {
@@ -123,15 +123,16 @@ public class AirbnbBusiness {
     private Airbnb analysisDetail(WebDriver driver) {
         WebElement lordElement = driver.findElement(By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
         String lord_name = lordElement.findElement(By.cssSelector("h2[elementtiming='LCP-target']")).getText();
-        String lord_page = lordElement.findElement(By.cssSelector("a[target=_blank']")).getAttribute("href");
-        String lord_id = lord_page.substring(lord_page.lastIndexOf("\\"));
+        String lord_page = lordElement.findElement(By.cssSelector("a[target='_blank']")).getAttribute("href");
+        String lord_id = lord_page.substring(lord_page.lastIndexOf("/")) + 1;
 
         Airbnb airbnb = new Airbnb()
                 .withLandlordId(lord_id);
         AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
         airbnbRoomOwner.setRooms(0);
         airbnbRoomOwner.setCreateTime(new Date());
-        airbnbRoomOwner.setLandlordPage(lord_page);
+        airbnbRoomOwner.setName(lord_name);
+        airbnbRoomOwner.setLordPage(lord_page);
         airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
         return airbnb;
     }

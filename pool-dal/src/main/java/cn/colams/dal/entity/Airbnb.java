@@ -15,7 +15,7 @@ public class Airbnb {
 
     private String price;
 
-    private Integer state;
+    private Integer dealStatus;
 
     private Integer pictureCount;
 
@@ -107,17 +107,17 @@ public class Airbnb {
         this.price = price == null ? null : price.trim();
     }
 
-    public Integer getState() {
-        return state;
+    public Integer getDealStatus() {
+        return dealStatus;
     }
 
-    public Airbnb withState(Integer state) {
-        this.setState(state);
+    public Airbnb withDealStatus(Integer dealStatus) {
+        this.setDealStatus(dealStatus);
         return this;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setDealStatus(Integer dealStatus) {
+        this.dealStatus = dealStatus;
     }
 
     public Integer getPictureCount() {
