@@ -19,9 +19,7 @@ public class SeleniumUtils {
         WebDriver webDriver = new ChromeDriver(chromeOptions);
 
         webDriver.get(targetUrl);
-        webDriver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
+        webDriver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         return webDriver;
     }
-
-
 }

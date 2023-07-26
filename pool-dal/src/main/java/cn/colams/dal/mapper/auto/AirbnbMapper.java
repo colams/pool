@@ -36,10 +36,16 @@ public interface AirbnbMapper {
         "insert into airbnb (id, room_id, ",
         "room_url, \"status\", ",
         "page, create_time, ",
+        "landlord_id, picture_count, ",
+        "area, evaluate, ",
+        "price, room_name, ",
         "extra)",
         "values (#{id,jdbcType=BIGINT}, #{roomId,jdbcType=VARCHAR}, ",
         "#{roomUrl,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, ",
         "#{page,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{landlordId,jdbcType=VARCHAR}, #{pictureCount,jdbcType=INTEGER}, ",
+        "#{area,jdbcType=VARCHAR}, #{evaluate,jdbcType=VARCHAR}, ",
+        "#{price,jdbcType=VARCHAR}, #{roomName,jdbcType=VARCHAR}, ",
         "#{extra,jdbcType=LONGVARCHAR})"
     })
     int insert(Airbnb record);
@@ -55,6 +61,12 @@ public interface AirbnbMapper {
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="page", property="page", jdbcType=JdbcType.INTEGER),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
+        @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
+        @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_name", property="roomName", jdbcType=JdbcType.VARCHAR),
         @Result(column="extra", property="extra", jdbcType=JdbcType.LONGVARCHAR)
     })
     List<Airbnb> selectByExampleWithBLOBsWithRowbounds(AirbnbExample example, RowBounds rowBounds);
@@ -67,6 +79,12 @@ public interface AirbnbMapper {
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="page", property="page", jdbcType=JdbcType.INTEGER),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
+        @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
+        @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_name", property="roomName", jdbcType=JdbcType.VARCHAR),
         @Result(column="extra", property="extra", jdbcType=JdbcType.LONGVARCHAR)
     })
     List<Airbnb> selectByExampleWithBLOBs(AirbnbExample example);
@@ -78,7 +96,13 @@ public interface AirbnbMapper {
         @Result(column="room_url", property="roomUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="page", property="page", jdbcType=JdbcType.INTEGER),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
+        @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
+        @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_name", property="roomName", jdbcType=JdbcType.VARCHAR)
     })
     List<Airbnb> selectByExampleWithRowbounds(AirbnbExample example, RowBounds rowBounds);
 
@@ -89,13 +113,20 @@ public interface AirbnbMapper {
         @Result(column="room_url", property="roomUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="page", property="page", jdbcType=JdbcType.INTEGER),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
+        @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
+        @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_name", property="roomName", jdbcType=JdbcType.VARCHAR)
     })
     List<Airbnb> selectByExample(AirbnbExample example);
 
     @Select({
         "select",
-        "id, room_id, room_url, \"status\", page, create_time, extra",
+        "id, room_id, room_url, \"status\", page, create_time, landlord_id, picture_count, ",
+        "area, evaluate, price, room_name, extra",
         "from airbnb",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -106,6 +137,12 @@ public interface AirbnbMapper {
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="page", property="page", jdbcType=JdbcType.INTEGER),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
+        @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
+        @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_name", property="roomName", jdbcType=JdbcType.VARCHAR),
         @Result(column="extra", property="extra", jdbcType=JdbcType.LONGVARCHAR)
     })
     Airbnb selectByPrimaryKey(Long id);
@@ -129,6 +166,12 @@ public interface AirbnbMapper {
           "\"status\" = #{status,jdbcType=VARCHAR},",
           "page = #{page,jdbcType=INTEGER},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
+          "landlord_id = #{landlordId,jdbcType=VARCHAR},",
+          "picture_count = #{pictureCount,jdbcType=INTEGER},",
+          "area = #{area,jdbcType=VARCHAR},",
+          "evaluate = #{evaluate,jdbcType=VARCHAR},",
+          "price = #{price,jdbcType=VARCHAR},",
+          "room_name = #{roomName,jdbcType=VARCHAR},",
           "extra = #{extra,jdbcType=LONGVARCHAR}",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -140,7 +183,13 @@ public interface AirbnbMapper {
           "room_url = #{roomUrl,jdbcType=VARCHAR},",
           "\"status\" = #{status,jdbcType=VARCHAR},",
           "page = #{page,jdbcType=INTEGER},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP}",
+          "create_time = #{createTime,jdbcType=TIMESTAMP},",
+          "landlord_id = #{landlordId,jdbcType=VARCHAR},",
+          "picture_count = #{pictureCount,jdbcType=INTEGER},",
+          "area = #{area,jdbcType=VARCHAR},",
+          "evaluate = #{evaluate,jdbcType=VARCHAR},",
+          "price = #{price,jdbcType=VARCHAR},",
+          "room_name = #{roomName,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(Airbnb record);

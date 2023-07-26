@@ -15,6 +15,18 @@ public class Airbnb {
 
     private Date createTime;
 
+    private String landlordId;
+
+    private Integer pictureCount;
+
+    private String area;
+
+    private String evaluate;
+
+    private String price;
+
+    private String roomName;
+
     private String extra;
 
     public Long getId() {
@@ -93,6 +105,84 @@ public class Airbnb {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getLandlordId() {
+        return landlordId;
+    }
+
+    public Airbnb withLandlordId(String landlordId) {
+        this.setLandlordId(landlordId);
+        return this;
+    }
+
+    public void setLandlordId(String landlordId) {
+        this.landlordId = landlordId == null ? null : landlordId.trim();
+    }
+
+    public Integer getPictureCount() {
+        return pictureCount;
+    }
+
+    public Airbnb withPictureCount(Integer pictureCount) {
+        this.setPictureCount(pictureCount);
+        return this;
+    }
+
+    public void setPictureCount(Integer pictureCount) {
+        this.pictureCount = pictureCount;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public Airbnb withArea(String area) {
+        this.setArea(area);
+        return this;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
+    }
+
+    public String getEvaluate() {
+        return evaluate;
+    }
+
+    public Airbnb withEvaluate(String evaluate) {
+        this.setEvaluate(evaluate);
+        return this;
+    }
+
+    public void setEvaluate(String evaluate) {
+        this.evaluate = evaluate == null ? null : evaluate.trim();
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public Airbnb withPrice(String price) {
+        this.setPrice(price);
+        return this;
+    }
+
+    public void setPrice(String price) {
+        this.price = price == null ? null : price.trim();
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public Airbnb withRoomName(String roomName) {
+        this.setRoomName(roomName);
+        return this;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName == null ? null : roomName.trim();
     }
 
     public String getExtra() {
