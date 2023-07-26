@@ -116,7 +116,10 @@ public class AirbnbBusiness {
         for (Airbnb airbnb : airbnbs) {
             ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
             WebDriver driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
-            analysisDetail(driver);
+            Airbnb temp = analysisDetail(driver);
+            airbnb.setLandlordId(temp.getLandlordId());
+            airbnb.setDealStatus(1);
+            airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
         }
     }
 
