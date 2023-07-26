@@ -17,9 +17,15 @@ public class AirbnbController {
     @Autowired
     private AirbnbBusiness airbnbBusiness;
 
-    @GetMapping("/scrapy")
-    public String scrapy(@RequestParam String targetUrl, @RequestParam Boolean showBrowser) {
-        airbnbBusiness.scrapy(targetUrl, null, showBrowser);
+    @GetMapping("/scrapy/list")
+    public String scrapyList(@RequestParam String targetUrl, @RequestParam Boolean showBrowser) {
+        airbnbBusiness.scrapyList(targetUrl, null, showBrowser);
+        return "success";
+    }
+
+    @GetMapping("/scrapy/lord")
+    public String scrapyLord(@RequestParam Boolean showBrowser) {
+        airbnbBusiness.scrapyLord(showBrowser);
         return "success";
     }
 

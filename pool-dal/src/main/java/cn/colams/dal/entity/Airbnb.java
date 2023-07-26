@@ -7,15 +7,15 @@ public class Airbnb {
 
     private String roomId;
 
+    private String roomName;
+
     private String roomUrl;
 
-    private String status;
-
-    private Integer page;
-
-    private Date createTime;
-
     private String landlordId;
+
+    private String price;
+
+    private Integer status;
 
     private Integer pictureCount;
 
@@ -23,9 +23,9 @@ public class Airbnb {
 
     private String evaluate;
 
-    private String price;
+    private Integer page;
 
-    private String roomName;
+    private Date createTime;
 
     private String extra;
 
@@ -55,6 +55,19 @@ public class Airbnb {
         this.roomId = roomId == null ? null : roomId.trim();
     }
 
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public Airbnb withRoomName(String roomName) {
+        this.setRoomName(roomName);
+        return this;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName == null ? null : roomName.trim();
+    }
+
     public String getRoomUrl() {
         return roomUrl;
     }
@@ -68,45 +81,6 @@ public class Airbnb {
         this.roomUrl = roomUrl == null ? null : roomUrl.trim();
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public Airbnb withStatus(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
-
-    public Integer getPage() {
-        return page;
-    }
-
-    public Airbnb withPage(Integer page) {
-        this.setPage(page);
-        return this;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public Airbnb withCreateTime(Date createTime) {
-        this.setCreateTime(createTime);
-        return this;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
     public String getLandlordId() {
         return landlordId;
     }
@@ -118,6 +92,32 @@ public class Airbnb {
 
     public void setLandlordId(String landlordId) {
         this.landlordId = landlordId == null ? null : landlordId.trim();
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public Airbnb withPrice(String price) {
+        this.setPrice(price);
+        return this;
+    }
+
+    public void setPrice(String price) {
+        this.price = price == null ? null : price.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public Airbnb withStatus(Integer status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getPictureCount() {
@@ -159,30 +159,30 @@ public class Airbnb {
         this.evaluate = evaluate == null ? null : evaluate.trim();
     }
 
-    public String getPrice() {
-        return price;
+    public Integer getPage() {
+        return page;
     }
 
-    public Airbnb withPrice(String price) {
-        this.setPrice(price);
+    public Airbnb withPage(Integer page) {
+        this.setPage(page);
         return this;
     }
 
-    public void setPrice(String price) {
-        this.price = price == null ? null : price.trim();
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public Airbnb withRoomName(String roomName) {
-        this.setRoomName(roomName);
+    public Airbnb withCreateTime(Date createTime) {
+        this.setCreateTime(createTime);
         return this;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName == null ? null : roomName.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getExtra() {

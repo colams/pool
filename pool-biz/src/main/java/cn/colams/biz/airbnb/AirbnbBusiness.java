@@ -3,6 +3,7 @@ package cn.colams.biz.airbnb;
 import cn.colams.common.SeleniumUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
 import cn.colams.dal.entity.Airbnb;
+import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +25,7 @@ public class AirbnbBusiness {
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
 
-    public boolean scrapy(String targetUrl, Integer pageIndex, Boolean showBrowser) {
+    public boolean scrapyList(String targetUrl, Integer pageIndex, Boolean showBrowser) {
         ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
         WebDriver driver = SeleniumUtils.getWebDriverImpl(targetUrl, optionEnum);
         if (Objects.isNull(pageIndex)) {
@@ -35,12 +36,13 @@ public class AirbnbBusiness {
         return false;
     }
 
+
     private void analysisNavPage(WebDriver driver, Integer pageIndex) {
         WebElement element = driver.findElement(By.cssSelector("nav[aria-label='搜索结果分页']"));
         WebElement nextElement = findElement(element, By.cssSelector("a[aria-label='下一个']"));
         if (Objects.nonNull(nextElement)) {
             String nextUrl = nextElement.getAttribute("href");
-            scrapy(nextUrl, pageIndex + 1, false);
+            scrapyList(nextUrl, pageIndex + 1, false);
         }
     }
 
@@ -101,4 +103,14 @@ public class AirbnbBusiness {
         return webElement;
     }
 
+    public void scrapyLord(Boolean showBrowser) {
+        AirbnbExample airbnbExample = new AirbnbExample();
+        AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
+        criteria.andRoomIdEqualTo("816452009133603855");
+        List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
+
+        for (Airbnb airbnb : airbnbs) {
+            System.out.println(airbnb.getRoomUrl());
+        }
+    }
 }
