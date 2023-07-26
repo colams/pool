@@ -165,73 +165,273 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlIsNull() {
-            addCriterion("detail_url is null");
+        public Criteria andRoomIdIsNull() {
+            addCriterion("room_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlIsNotNull() {
-            addCriterion("detail_url is not null");
+        public Criteria andRoomIdIsNotNull() {
+            addCriterion("room_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlEqualTo(String value) {
-            addCriterion("detail_url =", value, "detailUrl");
+        public Criteria andRoomIdEqualTo(String value) {
+            addCriterion("room_id =", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlNotEqualTo(String value) {
-            addCriterion("detail_url <>", value, "detailUrl");
+        public Criteria andRoomIdNotEqualTo(String value) {
+            addCriterion("room_id <>", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlGreaterThan(String value) {
-            addCriterion("detail_url >", value, "detailUrl");
+        public Criteria andRoomIdGreaterThan(String value) {
+            addCriterion("room_id >", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("detail_url >=", value, "detailUrl");
+        public Criteria andRoomIdGreaterThanOrEqualTo(String value) {
+            addCriterion("room_id >=", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlLessThan(String value) {
-            addCriterion("detail_url <", value, "detailUrl");
+        public Criteria andRoomIdLessThan(String value) {
+            addCriterion("room_id <", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlLessThanOrEqualTo(String value) {
-            addCriterion("detail_url <=", value, "detailUrl");
+        public Criteria andRoomIdLessThanOrEqualTo(String value) {
+            addCriterion("room_id <=", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlLike(String value) {
-            addCriterion("detail_url like", value, "detailUrl");
+        public Criteria andRoomIdLike(String value) {
+            addCriterion("room_id like", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlNotLike(String value) {
-            addCriterion("detail_url not like", value, "detailUrl");
+        public Criteria andRoomIdNotLike(String value) {
+            addCriterion("room_id not like", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlIn(List<String> values) {
-            addCriterion("detail_url in", values, "detailUrl");
+        public Criteria andRoomIdIn(List<String> values) {
+            addCriterion("room_id in", values, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlNotIn(List<String> values) {
-            addCriterion("detail_url not in", values, "detailUrl");
+        public Criteria andRoomIdNotIn(List<String> values) {
+            addCriterion("room_id not in", values, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlBetween(String value1, String value2) {
-            addCriterion("detail_url between", value1, value2, "detailUrl");
+        public Criteria andRoomIdBetween(String value1, String value2) {
+            addCriterion("room_id between", value1, value2, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlNotBetween(String value1, String value2) {
-            addCriterion("detail_url not between", value1, value2, "detailUrl");
+        public Criteria andRoomIdNotBetween(String value1, String value2) {
+            addCriterion("room_id not between", value1, value2, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlIsNull() {
+            addCriterion("room_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlIsNotNull() {
+            addCriterion("room_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlEqualTo(String value) {
+            addCriterion("room_url =", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlNotEqualTo(String value) {
+            addCriterion("room_url <>", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlGreaterThan(String value) {
+            addCriterion("room_url >", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("room_url >=", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlLessThan(String value) {
+            addCriterion("room_url <", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlLessThanOrEqualTo(String value) {
+            addCriterion("room_url <=", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlLike(String value) {
+            addCriterion("room_url like", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlNotLike(String value) {
+            addCriterion("room_url not like", value, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlIn(List<String> values) {
+            addCriterion("room_url in", values, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlNotIn(List<String> values) {
+            addCriterion("room_url not in", values, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlBetween(String value1, String value2) {
+            addCriterion("room_url between", value1, value2, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlNotBetween(String value1, String value2) {
+            addCriterion("room_url not between", value1, value2, "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("\"status\" is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("\"status\" is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(String value) {
+            addCriterion("\"status\" =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(String value) {
+            addCriterion("\"status\" <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(String value) {
+            addCriterion("\"status\" >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("\"status\" >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(String value) {
+            addCriterion("\"status\" <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(String value) {
+            addCriterion("\"status\" <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLike(String value) {
+            addCriterion("\"status\" like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotLike(String value) {
+            addCriterion("\"status\" not like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<String> values) {
+            addCriterion("\"status\" in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<String> values) {
+            addCriterion("\"status\" not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(String value1, String value2) {
+            addCriterion("\"status\" between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(String value1, String value2) {
+            addCriterion("\"status\" not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageIsNull() {
+            addCriterion("page is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageIsNotNull() {
+            addCriterion("page is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageEqualTo(Integer value) {
+            addCriterion("page =", value, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageNotEqualTo(Integer value) {
+            addCriterion("page <>", value, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageGreaterThan(Integer value) {
+            addCriterion("page >", value, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageGreaterThanOrEqualTo(Integer value) {
+            addCriterion("page >=", value, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageLessThan(Integer value) {
+            addCriterion("page <", value, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageLessThanOrEqualTo(Integer value) {
+            addCriterion("page <=", value, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageIn(List<Integer> values) {
+            addCriterion("page in", values, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageNotIn(List<Integer> values) {
+            addCriterion("page not in", values, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageBetween(Integer value1, Integer value2) {
+            addCriterion("page between", value1, value2, "page");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageNotBetween(Integer value1, Integer value2) {
+            addCriterion("page not between", value1, value2, "page");
             return (Criteria) this;
         }
 
@@ -295,8 +495,18 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andDetailUrlLikeInsensitive(String value) {
-            addCriterion("upper(detail_url) like", value.toUpperCase(), "detailUrl");
+        public Criteria andRoomIdLikeInsensitive(String value) {
+            addCriterion("upper(room_id) like", value.toUpperCase(), "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomUrlLikeInsensitive(String value) {
+            addCriterion("upper(room_url) like", value.toUpperCase(), "roomUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLikeInsensitive(String value) {
+            addCriterion("upper(\"status\") like", value.toUpperCase(), "status");
             return (Criteria) this;
         }
     }

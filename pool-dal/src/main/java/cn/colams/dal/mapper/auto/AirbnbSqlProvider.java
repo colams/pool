@@ -32,12 +32,51 @@ public class AirbnbSqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getDetailUrl() != null) {
-            sql.VALUES("detail_url", "#{detailUrl,jdbcType=VARCHAR}");
+        if (record.getRoomId() != null) {
+            sql.VALUES("room_id", "#{roomId,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRoomUrl() != null) {
+            sql.VALUES("room_url", "#{roomUrl,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.VALUES("\"status\"", "#{status,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPage() != null) {
+            sql.VALUES("page", "#{page,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getExtra() != null) {
+            sql.VALUES("extra", "#{extra,jdbcType=LONGVARCHAR}");
+        }
+        
+        return sql.toString();
+    }
+
+    public String selectByExampleWithBLOBs(AirbnbExample example) {
+        SQL sql = new SQL();
+        if (example != null && example.isDistinct()) {
+            sql.SELECT_DISTINCT("id");
+        } else {
+            sql.SELECT("id");
+        }
+        sql.SELECT("room_id");
+        sql.SELECT("room_url");
+        sql.SELECT("\"status\"");
+        sql.SELECT("page");
+        sql.SELECT("create_time");
+        sql.SELECT("extra");
+        sql.FROM("airbnb");
+        applyWhere(sql, example, false);
+        
+        if (example != null && example.getOrderByClause() != null) {
+            sql.ORDER_BY(example.getOrderByClause());
         }
         
         return sql.toString();
@@ -50,7 +89,10 @@ public class AirbnbSqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("detail_url");
+        sql.SELECT("room_id");
+        sql.SELECT("room_url");
+        sql.SELECT("\"status\"");
+        sql.SELECT("page");
         sql.SELECT("create_time");
         sql.FROM("airbnb");
         applyWhere(sql, example, false);
@@ -73,14 +115,47 @@ public class AirbnbSqlProvider {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getDetailUrl() != null) {
-            sql.SET("detail_url = #{record.detailUrl,jdbcType=VARCHAR}");
+        if (record.getRoomId() != null) {
+            sql.SET("room_id = #{record.roomId,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRoomUrl() != null) {
+            sql.SET("room_url = #{record.roomUrl,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.SET("\"status\" = #{record.status,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPage() != null) {
+            sql.SET("page = #{record.page,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getExtra() != null) {
+            sql.SET("extra = #{record.extra,jdbcType=LONGVARCHAR}");
+        }
+        
+        applyWhere(sql, example, true);
+        return sql.toString();
+    }
+
+    public String updateByExampleWithBLOBs(Map<String, Object> parameter) {
+        SQL sql = new SQL();
+        sql.UPDATE("airbnb");
+        
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("room_id = #{record.roomId,jdbcType=VARCHAR}");
+        sql.SET("room_url = #{record.roomUrl,jdbcType=VARCHAR}");
+        sql.SET("\"status\" = #{record.status,jdbcType=VARCHAR}");
+        sql.SET("page = #{record.page,jdbcType=INTEGER}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("extra = #{record.extra,jdbcType=LONGVARCHAR}");
+        
+        AirbnbExample example = (AirbnbExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -90,7 +165,10 @@ public class AirbnbSqlProvider {
         sql.UPDATE("airbnb");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("detail_url = #{record.detailUrl,jdbcType=VARCHAR}");
+        sql.SET("room_id = #{record.roomId,jdbcType=VARCHAR}");
+        sql.SET("room_url = #{record.roomUrl,jdbcType=VARCHAR}");
+        sql.SET("\"status\" = #{record.status,jdbcType=VARCHAR}");
+        sql.SET("page = #{record.page,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
         AirbnbExample example = (AirbnbExample) parameter.get("example");
@@ -102,12 +180,28 @@ public class AirbnbSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("airbnb");
         
-        if (record.getDetailUrl() != null) {
-            sql.SET("detail_url = #{detailUrl,jdbcType=VARCHAR}");
+        if (record.getRoomId() != null) {
+            sql.SET("room_id = #{roomId,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRoomUrl() != null) {
+            sql.SET("room_url = #{roomUrl,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.SET("\"status\" = #{status,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPage() != null) {
+            sql.SET("page = #{page,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getExtra() != null) {
+            sql.SET("extra = #{extra,jdbcType=LONGVARCHAR}");
         }
         
         sql.WHERE("id = #{id,jdbcType=BIGINT}");
