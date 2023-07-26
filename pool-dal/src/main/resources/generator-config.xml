@@ -75,6 +75,7 @@
         <table tableName="haipi111_detail_log"/>
         <table tableName="ticks"/>
         <table tableName="weight_history"/>
+        <table tableName="airbnb"/>
     </context>
 
 
