@@ -112,7 +112,7 @@ public class AirbnbBusiness {
     public void scrapyLord(Boolean showBrowser) {
         AirbnbExample airbnbExample = new AirbnbExample();
         AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
-        criteria.andDealStatusEqualTo(0);
+        criteria.andDealStatusNotEqualTo(1);
         List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
 
         for (Airbnb airbnb : airbnbs) {
@@ -122,10 +122,11 @@ public class AirbnbBusiness {
                 Airbnb temp = analysisDetail(driver);
                 airbnb.setLandlordId(temp.getLandlordId());
                 airbnb.setDealStatus(1);
-                airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
             } catch (Exception e) {
                 LOGGER.error("scrapyLord", e);
+                airbnb.setDealStatus(2);
             }
+            airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
         }
     }
 
