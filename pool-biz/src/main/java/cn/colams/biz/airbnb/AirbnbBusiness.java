@@ -5,6 +5,7 @@ import cn.colams.common.constant.ChromeOptionEnum;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.entity.AirbnbRoomOwner;
+import cn.colams.dal.entity.AirbnbRoomOwnerExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.dal.mapper.extension.AirbnbRoomOwnerExtensionMapper;
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -133,14 +135,21 @@ public class AirbnbBusiness {
         String lord_page = lordElement.findElement(By.cssSelector("a[target='_blank']")).getAttribute("href");
         String lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
 
+
         Airbnb airbnb = new Airbnb()
                 .withLandlordId(lord_id);
-        AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
-        airbnbRoomOwner.setRooms(0);
-        airbnbRoomOwner.setCreateTime(new Date());
-        airbnbRoomOwner.setLordName(lord_name);
-        airbnbRoomOwner.setLordPage(lord_page);
-        airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
+        AirbnbRoomOwnerExample example = new AirbnbRoomOwnerExample();
+        AirbnbRoomOwnerExample.Criteria criteria = example.createCriteria();
+        criteria.andLoardIdEqualTo(lord_id);
+        List<AirbnbRoomOwner> airbnbRoomOwners = airbnbRoomOwnerExtensionMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
+            AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
+            airbnbRoomOwner.setRooms(0);
+            airbnbRoomOwner.setLoardId(lord_id);
+            airbnbRoomOwner.setLordName(lord_name);
+            airbnbRoomOwner.setLordPage(lord_page);
+            airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
+        }
         return airbnb;
     }
 }

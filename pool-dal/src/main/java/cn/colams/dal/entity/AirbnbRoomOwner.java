@@ -5,6 +5,8 @@ import java.util.Date;
 public class AirbnbRoomOwner {
     private Long id;
 
+    private String loardId;
+
     private String lordName;
 
     private String lordPage;
@@ -24,6 +26,19 @@ public class AirbnbRoomOwner {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLoardId() {
+        return loardId;
+    }
+
+    public AirbnbRoomOwner withLoardId(String loardId) {
+        this.setLoardId(loardId);
+        return this;
+    }
+
+    public void setLoardId(String loardId) {
+        this.loardId = loardId == null ? null : loardId.trim();
     }
 
     public String getLordName() {

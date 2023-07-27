@@ -32,6 +32,10 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
+        if (record.getLoardId() != null) {
+            sql.VALUES("loard_id", "#{loardId,jdbcType=VARCHAR}");
+        }
+        
         if (record.getLordName() != null) {
             sql.VALUES("lord_name", "#{lordName,jdbcType=VARCHAR}");
         }
@@ -58,6 +62,7 @@ public class AirbnbRoomOwnerSqlProvider {
         } else {
             sql.SELECT("id");
         }
+        sql.SELECT("loard_id");
         sql.SELECT("lord_name");
         sql.SELECT("lord_page");
         sql.SELECT("rooms");
@@ -81,6 +86,10 @@ public class AirbnbRoomOwnerSqlProvider {
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        }
+        
+        if (record.getLoardId() != null) {
+            sql.SET("loard_id = #{record.loardId,jdbcType=VARCHAR}");
         }
         
         if (record.getLordName() != null) {
@@ -108,6 +117,7 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.UPDATE("airbnb_room_owner");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("loard_id = #{record.loardId,jdbcType=VARCHAR}");
         sql.SET("lord_name = #{record.lordName,jdbcType=VARCHAR}");
         sql.SET("lord_page = #{record.lordPage,jdbcType=VARCHAR}");
         sql.SET("rooms = #{record.rooms,jdbcType=INTEGER}");
@@ -121,6 +131,10 @@ public class AirbnbRoomOwnerSqlProvider {
     public String updateByPrimaryKeySelective(AirbnbRoomOwner record) {
         SQL sql = new SQL();
         sql.UPDATE("airbnb_room_owner");
+        
+        if (record.getLoardId() != null) {
+            sql.SET("loard_id = #{loardId,jdbcType=VARCHAR}");
+        }
         
         if (record.getLordName() != null) {
             sql.SET("lord_name = #{lordName,jdbcType=VARCHAR}");
