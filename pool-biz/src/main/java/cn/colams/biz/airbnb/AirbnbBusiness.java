@@ -1,6 +1,7 @@
 package cn.colams.biz.airbnb;
 
 import cn.colams.common.SeleniumUtils;
+import cn.colams.common.utils.OptionalUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
@@ -8,6 +9,7 @@ import cn.colams.dal.entity.AirbnbRoomOwner;
 import cn.colams.dal.entity.AirbnbRoomOwnerExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.dal.mapper.extension.AirbnbRoomOwnerExtensionMapper;
+import com.google.common.collect.Lists;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +21,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class AirbnbBusiness {
@@ -43,19 +46,22 @@ public class AirbnbBusiness {
 
 
     private void analysisNavPage(WebDriver driver, Integer pageIndex) {
-        WebElement element = SeleniumUtils.findElement(driver, By.cssSelector("nav[aria-label='搜索结果分页']"));
-        WebElement nextElement = SeleniumUtils.findElement(element, By.cssSelector("a[aria-label='下一个']"));
-        if (Objects.nonNull(nextElement)) {
-            String nextUrl = nextElement.getAttribute("href");
+        Optional<WebElement> element = SeleniumUtils.findElement(driver, By.cssSelector("nav[aria-label='搜索结果分页']"));
+        Optional<WebElement> nextElement = Optional.empty();
+        if (element.isPresent()) {
+            nextElement = SeleniumUtils.findElement(element.get(), By.cssSelector("a[aria-label='下一个']"));
+        }
+        if (nextElement.isPresent()) {
+            String nextUrl = nextElement.get().getAttribute("href");
             scrapyList(nextUrl, pageIndex + 1, false);
         }
     }
 
 
     private void analysisCardContainer(WebDriver driver, int pageIndex) {
-        List<WebElement> webElements = SeleniumUtils.findElements(driver, By.cssSelector("a[aria-label='下一个']"));
+        Optional<List<WebElement>> optionalList = SeleniumUtils.findElements(driver, By.cssSelector("a[aria-label='下一个']"));
 
-        for (WebElement element : webElements) {
+        for (WebElement element : optionalList.orElse(Lists.newArrayList())) {
             try {
                 Airbnb airbnb = analysisElement(element, pageIndex);
                 AirbnbExample example = new AirbnbExample();
@@ -75,14 +81,12 @@ public class AirbnbBusiness {
     private Airbnb analysisElement(WebElement element, Integer pageIndex) {
         String strElement = element.getText();
         String roomId = element.getAttribute("aria-labelledby").split("_")[1];
-        String url = SeleniumUtils.findElement(element, By.tagName("a")).getAttribute("href");
-        String roomName = SeleniumUtils.findElement(element, By.cssSelector("div[data-testid='listing-card-title']")).getText();
+        String url = SeleniumUtils.findElement(element, By.tagName("a")).map(e -> e.getAttribute("href")).orElse("");
+        String roomName = SeleniumUtils.findElement(element, By.cssSelector("div[data-testid='listing-card-title']")).map(e -> e.getText()).orElse("");
         int picture_count = element.findElements(By.tagName("picture")).size();
-        String evaluate = "";
-        WebElement evaluateElement = SeleniumUtils.findElement(element, By.cssSelector("span[aria-hidden='true']"));
-        if (Objects.nonNull(evaluateElement)) {
-            evaluate = evaluateElement.getText();
-        }
+        Optional<WebElement> optional = SeleniumUtils.findElement(element, By.cssSelector("span[aria-hidden='true']"));
+        // String evaluate = optional.map(e -> e.getText()).orElse("");
+        String evaluate = OptionalUtils.stringVal(optional, e -> e.getText());
         return getAirbnb(pageIndex, strElement, roomId, url, roomName, picture_count, evaluate);
     }
 
@@ -110,9 +114,10 @@ public class AirbnbBusiness {
         List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
 
         for (Airbnb airbnb : airbnbs) {
+            WebDriver driver = null;
             try {
                 ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
-                WebDriver driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
+                driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
                 Airbnb temp = analysisDetail(driver);
                 airbnb.setLandlordId(temp.getLandlordId());
                 airbnb.setDealStatus(1);
@@ -120,15 +125,27 @@ public class AirbnbBusiness {
                 LOGGER.error("scrapyLord", e);
                 airbnb.setDealStatus(2);
             }
+            if (Objects.nonNull(driver)) {
+                driver.quit();
+            }
             airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
         }
     }
 
     private Airbnb analysisDetail(WebDriver driver) {
-        WebElement lordElement = SeleniumUtils.findElement(driver, By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
-        String lord_page = SeleniumUtils.findElement(lordElement, By.cssSelector("a[target='_blank']")).getAttribute("href");
-        String lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
-        String location = SeleniumUtils.findElement(driver, By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']")).getAttribute("href");
+        Optional<WebElement> lordElement = SeleniumUtils.findElement(driver, By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
+
+        String lord_page = "";
+        String lord_id = "";
+
+        if (lordElement.isPresent()) {
+            Optional<WebElement> pageEl = SeleniumUtils.findElement(lordElement.get(), By.cssSelector("a[target='_blank']"));
+            lord_page = OptionalUtils.stringVal(pageEl, e -> e.getAttribute("href"));
+            lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
+        }
+
+        Optional<WebElement> googleElement = SeleniumUtils.findElement(driver, By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']"));
+        String location = OptionalUtils.stringVal(googleElement, e -> e.getAttribute("href"));
 
         Airbnb airbnb = new Airbnb()
                 .withLandlordId(lord_id)
@@ -148,9 +165,10 @@ public class AirbnbBusiness {
         String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
 
         WebDriver driver = SeleniumUtils.getWebDriverImpl(url, ChromeOptionEnum.HEADLESS);
-
-        String lord_name = SeleniumUtils.findElement(driver, By.cssSelector("a[href='/users/show/" + lord_id + "']")).getText();
-        int lord_rooms = Integer.valueOf(SeleniumUtils.findElement(driver, By.cssSelector("div[class='_h6avcp2']")).getText().split("个")[0]);
+        Optional<WebElement> userEl = SeleniumUtils.findElement(driver, By.cssSelector("a[href='/users/show/" + lord_id + "']"));
+        Optional<WebElement> roomsEl = SeleniumUtils.findElement(driver, By.cssSelector("div[class='_h6avcp2']"));
+        String lord_name = OptionalUtils.stringVal(userEl, e -> e.getText());
+        int lord_rooms = Integer.valueOf(OptionalUtils.stringVal(roomsEl, e -> e.getText()).split("个")[0]);
 
         AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
         airbnbRoomOwner.setRooms(lord_rooms);
@@ -159,4 +177,6 @@ public class AirbnbBusiness {
         airbnbRoomOwner.setLordPage(lordPage);
         return airbnbRoomOwner;
     }
+
+
 }
