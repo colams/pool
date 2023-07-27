@@ -59,7 +59,13 @@ public class AirbnbBusiness {
         for (WebElement element : webElements) {
             try {
                 Airbnb airbnb = analysisElement(element, pageIndex);
-                airbnbExtensionMapper.insertSelective(airbnb);
+                AirbnbExample example = new AirbnbExample();
+                AirbnbExample.Criteria criteria = example.createCriteria();
+                criteria.andRoomIdEqualTo(airbnb.getRoomId());
+                List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExample(example);
+                if (CollectionUtils.isEmpty(airbnbs)) {
+                    airbnbExtensionMapper.insertSelective(airbnb);
+                }
             } catch (Exception e) {
                 LOGGER.error("scrapy_for", e);
             }
@@ -79,9 +85,11 @@ public class AirbnbBusiness {
         if (Objects.nonNull(evaluateElement)) {
             evaluate = evaluateElement.getText();
         }
+        return getAirbnb(pageIndex, strElement, roomId, url, roomName, picture_count, evaluate);
+    }
 
+    private static Airbnb getAirbnb(Integer pageIndex, String strElement, String roomId, String url, String roomName, int picture_count, String evaluate) {
         Airbnb airbnb = new Airbnb();
-
         airbnb.setExtra(strElement);
         airbnb.setRoomUrl(url);
         airbnb.setRoomId(roomId);
