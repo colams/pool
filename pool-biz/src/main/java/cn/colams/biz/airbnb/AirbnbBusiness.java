@@ -43,8 +43,8 @@ public class AirbnbBusiness {
 
 
     private void analysisNavPage(WebDriver driver, Integer pageIndex) {
-        WebElement element = driver.findElement(By.cssSelector("nav[aria-label='搜索结果分页']"));
-        WebElement nextElement = findElement(element, By.cssSelector("a[aria-label='下一个']"));
+        WebElement element = SeleniumUtils.findElement(driver, By.cssSelector("nav[aria-label='搜索结果分页']"));
+        WebElement nextElement = SeleniumUtils.findElement(element, By.cssSelector("a[aria-label='下一个']"));
         if (Objects.nonNull(nextElement)) {
             String nextUrl = nextElement.getAttribute("href");
             scrapyList(nextUrl, pageIndex + 1, false);
@@ -53,7 +53,7 @@ public class AirbnbBusiness {
 
 
     private void analysisCardContainer(WebDriver driver, int pageIndex) {
-        List<WebElement> webElements = driver.findElements(By.cssSelector("div[data-testid='card-container']"));
+        List<WebElement> webElements = SeleniumUtils.findElements(driver, By.cssSelector("a[aria-label='下一个']"));
 
         for (WebElement element : webElements) {
             try {
@@ -73,14 +73,13 @@ public class AirbnbBusiness {
 
 
     private Airbnb analysisElement(WebElement element, Integer pageIndex) {
-
         String strElement = element.getText();
         String roomId = element.getAttribute("aria-labelledby").split("_")[1];
-        String url = element.findElement(By.tagName("a")).getAttribute("href");
-        String roomName = element.findElement(By.cssSelector("div[data-testid='listing-card-title']")).getText();
+        String url = SeleniumUtils.findElement(element, By.tagName("a")).getAttribute("href");
+        String roomName = SeleniumUtils.findElement(element, By.cssSelector("div[data-testid='listing-card-title']")).getText();
         int picture_count = element.findElements(By.tagName("picture")).size();
         String evaluate = "";
-        WebElement evaluateElement = findElement(element, By.cssSelector("span[aria-hidden='true']"));
+        WebElement evaluateElement = SeleniumUtils.findElement(element, By.cssSelector("span[aria-hidden='true']"));
         if (Objects.nonNull(evaluateElement)) {
             evaluate = evaluateElement.getText();
         }
@@ -102,16 +101,6 @@ public class AirbnbBusiness {
                 .withRoomName(roomName)
                 .withPage(pageIndex);
         return airbnb;
-    }
-
-    private WebElement findElement(WebElement element, By by) {
-        WebElement webElement = null;
-        try {
-            webElement = element.findElement(by);
-        } catch (Exception e) {
-            LOGGER.error("findElement", e);
-        }
-        return webElement;
     }
 
     public void scrapyLord(Boolean showBrowser) {
@@ -136,11 +125,10 @@ public class AirbnbBusiness {
     }
 
     private Airbnb analysisDetail(WebDriver driver) {
-        WebElement lordElement = driver.findElement(By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
-        String lord_page = lordElement.findElement(By.cssSelector("a[target='_blank']")).getAttribute("href");
+        WebElement lordElement = SeleniumUtils.findElement(driver, By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
+        String lord_page = SeleniumUtils.findElement(lordElement, By.cssSelector("a[target='_blank']")).getAttribute("href");
         String lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
-        String location = driver.findElement(By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']")).getAttribute("href");
-
+        String location = SeleniumUtils.findElement(driver, By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']")).getAttribute("href");
 
         Airbnb airbnb = new Airbnb()
                 .withLandlordId(lord_id)
@@ -161,8 +149,8 @@ public class AirbnbBusiness {
 
         WebDriver driver = SeleniumUtils.getWebDriverImpl(url, ChromeOptionEnum.HEADLESS);
 
-        String lord_name = driver.findElement(By.cssSelector("a[href='/users/show/" + lord_id + "']")).getText();
-        int lord_rooms = Integer.valueOf(driver.findElement(By.cssSelector("div[class='_h6avcp2']")).getText().split("个")[0]);
+        String lord_name = SeleniumUtils.findElement(driver, By.cssSelector("a[href='/users/show/" + lord_id + "']")).getText();
+        int lord_rooms = Integer.valueOf(SeleniumUtils.findElement(driver, By.cssSelector("div[class='_h6avcp2']")).getText().split("个")[0]);
 
         AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
         airbnbRoomOwner.setRooms(lord_rooms);
