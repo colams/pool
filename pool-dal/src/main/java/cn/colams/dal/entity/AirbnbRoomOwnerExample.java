@@ -165,73 +165,73 @@ public class AirbnbRoomOwnerExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNull() {
-            addCriterion("\"name\" is null");
+        public Criteria andLordNameIsNull() {
+            addCriterion("lord_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNotNull() {
-            addCriterion("\"name\" is not null");
+        public Criteria andLordNameIsNotNull() {
+            addCriterion("lord_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNameEqualTo(String value) {
-            addCriterion("\"name\" =", value, "name");
+        public Criteria andLordNameEqualTo(String value) {
+            addCriterion("lord_name =", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotEqualTo(String value) {
-            addCriterion("\"name\" <>", value, "name");
+        public Criteria andLordNameNotEqualTo(String value) {
+            addCriterion("lord_name <>", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThan(String value) {
-            addCriterion("\"name\" >", value, "name");
+        public Criteria andLordNameGreaterThan(String value) {
+            addCriterion("lord_name >", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("\"name\" >=", value, "name");
+        public Criteria andLordNameGreaterThanOrEqualTo(String value) {
+            addCriterion("lord_name >=", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThan(String value) {
-            addCriterion("\"name\" <", value, "name");
+        public Criteria andLordNameLessThan(String value) {
+            addCriterion("lord_name <", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("\"name\" <=", value, "name");
+        public Criteria andLordNameLessThanOrEqualTo(String value) {
+            addCriterion("lord_name <=", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameLike(String value) {
-            addCriterion("\"name\" like", value, "name");
+        public Criteria andLordNameLike(String value) {
+            addCriterion("lord_name like", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotLike(String value) {
-            addCriterion("\"name\" not like", value, "name");
+        public Criteria andLordNameNotLike(String value) {
+            addCriterion("lord_name not like", value, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameIn(List<String> values) {
-            addCriterion("\"name\" in", values, "name");
+        public Criteria andLordNameIn(List<String> values) {
+            addCriterion("lord_name in", values, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotIn(List<String> values) {
-            addCriterion("\"name\" not in", values, "name");
+        public Criteria andLordNameNotIn(List<String> values) {
+            addCriterion("lord_name not in", values, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("\"name\" between", value1, value2, "name");
+        public Criteria andLordNameBetween(String value1, String value2) {
+            addCriterion("lord_name between", value1, value2, "lordName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("\"name\" not between", value1, value2, "name");
+        public Criteria andLordNameNotBetween(String value1, String value2) {
+            addCriterion("lord_name not between", value1, value2, "lordName");
             return (Criteria) this;
         }
 
@@ -425,8 +425,8 @@ public class AirbnbRoomOwnerExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameLikeInsensitive(String value) {
-            addCriterion("upper(\"name\") like", value.toUpperCase(), "name");
+        public Criteria andLordNameLikeInsensitive(String value) {
+            addCriterion("upper(lord_name) like", value.toUpperCase(), "lordName");
             return (Criteria) this;
         }
 

@@ -33,10 +33,10 @@ public interface AirbnbRoomOwnerMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into airbnb_room_owner (id, \"name\", ",
+        "insert into airbnb_room_owner (id, lord_name, ",
         "lord_page, rooms, ",
         "create_time)",
-        "values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, ",
+        "values (#{id,jdbcType=BIGINT}, #{lordName,jdbcType=VARCHAR}, ",
         "#{lordPage,jdbcType=VARCHAR}, #{rooms,jdbcType=INTEGER}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
     })
@@ -48,7 +48,7 @@ public interface AirbnbRoomOwnerMapper {
     @SelectProvider(type=AirbnbRoomOwnerSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="lord_name", property="lordName", jdbcType=JdbcType.VARCHAR),
         @Result(column="lord_page", property="lordPage", jdbcType=JdbcType.VARCHAR),
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -58,7 +58,7 @@ public interface AirbnbRoomOwnerMapper {
     @SelectProvider(type=AirbnbRoomOwnerSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="lord_name", property="lordName", jdbcType=JdbcType.VARCHAR),
         @Result(column="lord_page", property="lordPage", jdbcType=JdbcType.VARCHAR),
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -67,13 +67,13 @@ public interface AirbnbRoomOwnerMapper {
 
     @Select({
         "select",
-        "id, \"name\", lord_page, rooms, create_time",
+        "id, lord_name, lord_page, rooms, create_time",
         "from airbnb_room_owner",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="lord_name", property="lordName", jdbcType=JdbcType.VARCHAR),
         @Result(column="lord_page", property="lordPage", jdbcType=JdbcType.VARCHAR),
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -91,7 +91,7 @@ public interface AirbnbRoomOwnerMapper {
 
     @Update({
         "update airbnb_room_owner",
-        "set \"name\" = #{name,jdbcType=VARCHAR},",
+        "set lord_name = #{lordName,jdbcType=VARCHAR},",
           "lord_page = #{lordPage,jdbcType=VARCHAR},",
           "rooms = #{rooms,jdbcType=INTEGER},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",

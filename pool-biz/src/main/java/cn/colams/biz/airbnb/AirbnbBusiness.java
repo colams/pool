@@ -114,12 +114,16 @@ public class AirbnbBusiness {
         List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
 
         for (Airbnb airbnb : airbnbs) {
-            ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
-            WebDriver driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
-            Airbnb temp = analysisDetail(driver);
-            airbnb.setLandlordId(temp.getLandlordId());
-            airbnb.setDealStatus(1);
-            airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
+            try {
+                ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
+                WebDriver driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
+                Airbnb temp = analysisDetail(driver);
+                airbnb.setLandlordId(temp.getLandlordId());
+                airbnb.setDealStatus(1);
+                airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
+            } catch (Exception e) {
+                LOGGER.error("scrapyLord", e);
+            }
         }
     }
 
@@ -127,14 +131,14 @@ public class AirbnbBusiness {
         WebElement lordElement = driver.findElement(By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
         String lord_name = lordElement.findElement(By.cssSelector("h2[elementtiming='LCP-target']")).getText();
         String lord_page = lordElement.findElement(By.cssSelector("a[target='_blank']")).getAttribute("href");
-        String lord_id = lord_page.substring(lord_page.lastIndexOf("/")) + 1;
+        String lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
 
         Airbnb airbnb = new Airbnb()
                 .withLandlordId(lord_id);
         AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
         airbnbRoomOwner.setRooms(0);
         airbnbRoomOwner.setCreateTime(new Date());
-        airbnbRoomOwner.setName(lord_name);
+        airbnbRoomOwner.setLordName(lord_name);
         airbnbRoomOwner.setLordPage(lord_page);
         airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
         return airbnb;

@@ -32,8 +32,8 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getName() != null) {
-            sql.VALUES("\"name\"", "#{name,jdbcType=VARCHAR}");
+        if (record.getLordName() != null) {
+            sql.VALUES("lord_name", "#{lordName,jdbcType=VARCHAR}");
         }
         
         if (record.getLordPage() != null) {
@@ -58,7 +58,7 @@ public class AirbnbRoomOwnerSqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("\"name\"");
+        sql.SELECT("lord_name");
         sql.SELECT("lord_page");
         sql.SELECT("rooms");
         sql.SELECT("create_time");
@@ -83,8 +83,8 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getName() != null) {
-            sql.SET("\"name\" = #{record.name,jdbcType=VARCHAR}");
+        if (record.getLordName() != null) {
+            sql.SET("lord_name = #{record.lordName,jdbcType=VARCHAR}");
         }
         
         if (record.getLordPage() != null) {
@@ -108,7 +108,7 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.UPDATE("airbnb_room_owner");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("\"name\" = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("lord_name = #{record.lordName,jdbcType=VARCHAR}");
         sql.SET("lord_page = #{record.lordPage,jdbcType=VARCHAR}");
         sql.SET("rooms = #{record.rooms,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -122,8 +122,8 @@ public class AirbnbRoomOwnerSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("airbnb_room_owner");
         
-        if (record.getName() != null) {
-            sql.SET("\"name\" = #{name,jdbcType=VARCHAR}");
+        if (record.getLordName() != null) {
+            sql.SET("lord_name = #{lordName,jdbcType=VARCHAR}");
         }
         
         if (record.getLordPage() != null) {
