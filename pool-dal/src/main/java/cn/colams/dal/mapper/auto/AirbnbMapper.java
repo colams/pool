@@ -36,17 +36,17 @@ public interface AirbnbMapper {
         "insert into airbnb (id, room_id, ",
         "room_name, room_url, ",
         "landlord_id, price, ",
-        "deal_status, picture_count, ",
-        "area, evaluate, ",
-        "page, create_time, ",
-        "extra)",
+        "room_location, deal_status, ",
+        "picture_count, area, ",
+        "evaluate, page, ",
+        "create_time, extra)",
         "values (#{id,jdbcType=BIGINT}, #{roomId,jdbcType=VARCHAR}, ",
         "#{roomName,jdbcType=VARCHAR}, #{roomUrl,jdbcType=VARCHAR}, ",
         "#{landlordId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, ",
-        "#{dealStatus,jdbcType=INTEGER}, #{pictureCount,jdbcType=INTEGER}, ",
-        "#{area,jdbcType=VARCHAR}, #{evaluate,jdbcType=VARCHAR}, ",
-        "#{page,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{extra,jdbcType=LONGVARCHAR})"
+        "#{roomLocation,jdbcType=VARCHAR}, #{dealStatus,jdbcType=INTEGER}, ",
+        "#{pictureCount,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, ",
+        "#{evaluate,jdbcType=VARCHAR}, #{page,jdbcType=INTEGER}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{extra,jdbcType=LONGVARCHAR})"
     })
     int insert(Airbnb record);
 
@@ -61,6 +61,7 @@ public interface AirbnbMapper {
         @Result(column="room_url", property="roomUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
         @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_location", property="roomLocation", jdbcType=JdbcType.VARCHAR),
         @Result(column="deal_status", property="dealStatus", jdbcType=JdbcType.INTEGER),
         @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
         @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
@@ -79,6 +80,7 @@ public interface AirbnbMapper {
         @Result(column="room_url", property="roomUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
         @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_location", property="roomLocation", jdbcType=JdbcType.VARCHAR),
         @Result(column="deal_status", property="dealStatus", jdbcType=JdbcType.INTEGER),
         @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
         @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
@@ -97,6 +99,7 @@ public interface AirbnbMapper {
         @Result(column="room_url", property="roomUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
         @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_location", property="roomLocation", jdbcType=JdbcType.VARCHAR),
         @Result(column="deal_status", property="dealStatus", jdbcType=JdbcType.INTEGER),
         @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
         @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
@@ -114,6 +117,7 @@ public interface AirbnbMapper {
         @Result(column="room_url", property="roomUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
         @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_location", property="roomLocation", jdbcType=JdbcType.VARCHAR),
         @Result(column="deal_status", property="dealStatus", jdbcType=JdbcType.INTEGER),
         @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
         @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
@@ -125,8 +129,8 @@ public interface AirbnbMapper {
 
     @Select({
         "select",
-        "id, room_id, room_name, room_url, landlord_id, price, deal_status, picture_count, ",
-        "area, evaluate, page, create_time, extra",
+        "id, room_id, room_name, room_url, landlord_id, price, room_location, deal_status, ",
+        "picture_count, area, evaluate, page, create_time, extra",
         "from airbnb",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -137,6 +141,7 @@ public interface AirbnbMapper {
         @Result(column="room_url", property="roomUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="landlord_id", property="landlordId", jdbcType=JdbcType.VARCHAR),
         @Result(column="price", property="price", jdbcType=JdbcType.VARCHAR),
+        @Result(column="room_location", property="roomLocation", jdbcType=JdbcType.VARCHAR),
         @Result(column="deal_status", property="dealStatus", jdbcType=JdbcType.INTEGER),
         @Result(column="picture_count", property="pictureCount", jdbcType=JdbcType.INTEGER),
         @Result(column="area", property="area", jdbcType=JdbcType.VARCHAR),
@@ -166,6 +171,7 @@ public interface AirbnbMapper {
           "room_url = #{roomUrl,jdbcType=VARCHAR},",
           "landlord_id = #{landlordId,jdbcType=VARCHAR},",
           "price = #{price,jdbcType=VARCHAR},",
+          "room_location = #{roomLocation,jdbcType=VARCHAR},",
           "deal_status = #{dealStatus,jdbcType=INTEGER},",
           "picture_count = #{pictureCount,jdbcType=INTEGER},",
           "area = #{area,jdbcType=VARCHAR},",
@@ -184,6 +190,7 @@ public interface AirbnbMapper {
           "room_url = #{roomUrl,jdbcType=VARCHAR},",
           "landlord_id = #{landlordId,jdbcType=VARCHAR},",
           "price = #{price,jdbcType=VARCHAR},",
+          "room_location = #{roomLocation,jdbcType=VARCHAR},",
           "deal_status = #{dealStatus,jdbcType=INTEGER},",
           "picture_count = #{pictureCount,jdbcType=INTEGER},",
           "area = #{area,jdbcType=VARCHAR},",

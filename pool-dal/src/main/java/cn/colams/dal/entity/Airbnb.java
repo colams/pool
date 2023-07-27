@@ -15,6 +15,8 @@ public class Airbnb {
 
     private String price;
 
+    private String roomLocation;
+
     private Integer dealStatus;
 
     private Integer pictureCount;
@@ -105,6 +107,19 @@ public class Airbnb {
 
     public void setPrice(String price) {
         this.price = price == null ? null : price.trim();
+    }
+
+    public String getRoomLocation() {
+        return roomLocation;
+    }
+
+    public Airbnb withRoomLocation(String roomLocation) {
+        this.setRoomLocation(roomLocation);
+        return this;
+    }
+
+    public void setRoomLocation(String roomLocation) {
+        this.roomLocation = roomLocation == null ? null : roomLocation.trim();
     }
 
     public Integer getDealStatus() {

@@ -52,6 +52,10 @@ public class AirbnbSqlProvider {
             sql.VALUES("price", "#{price,jdbcType=VARCHAR}");
         }
         
+        if (record.getRoomLocation() != null) {
+            sql.VALUES("room_location", "#{roomLocation,jdbcType=VARCHAR}");
+        }
+        
         if (record.getDealStatus() != null) {
             sql.VALUES("deal_status", "#{dealStatus,jdbcType=INTEGER}");
         }
@@ -95,6 +99,7 @@ public class AirbnbSqlProvider {
         sql.SELECT("room_url");
         sql.SELECT("landlord_id");
         sql.SELECT("price");
+        sql.SELECT("room_location");
         sql.SELECT("deal_status");
         sql.SELECT("picture_count");
         sql.SELECT("area");
@@ -124,6 +129,7 @@ public class AirbnbSqlProvider {
         sql.SELECT("room_url");
         sql.SELECT("landlord_id");
         sql.SELECT("price");
+        sql.SELECT("room_location");
         sql.SELECT("deal_status");
         sql.SELECT("picture_count");
         sql.SELECT("area");
@@ -171,6 +177,10 @@ public class AirbnbSqlProvider {
             sql.SET("price = #{record.price,jdbcType=VARCHAR}");
         }
         
+        if (record.getRoomLocation() != null) {
+            sql.SET("room_location = #{record.roomLocation,jdbcType=VARCHAR}");
+        }
+        
         if (record.getDealStatus() != null) {
             sql.SET("deal_status = #{record.dealStatus,jdbcType=INTEGER}");
         }
@@ -213,6 +223,7 @@ public class AirbnbSqlProvider {
         sql.SET("room_url = #{record.roomUrl,jdbcType=VARCHAR}");
         sql.SET("landlord_id = #{record.landlordId,jdbcType=VARCHAR}");
         sql.SET("price = #{record.price,jdbcType=VARCHAR}");
+        sql.SET("room_location = #{record.roomLocation,jdbcType=VARCHAR}");
         sql.SET("deal_status = #{record.dealStatus,jdbcType=INTEGER}");
         sql.SET("picture_count = #{record.pictureCount,jdbcType=INTEGER}");
         sql.SET("area = #{record.area,jdbcType=VARCHAR}");
@@ -236,6 +247,7 @@ public class AirbnbSqlProvider {
         sql.SET("room_url = #{record.roomUrl,jdbcType=VARCHAR}");
         sql.SET("landlord_id = #{record.landlordId,jdbcType=VARCHAR}");
         sql.SET("price = #{record.price,jdbcType=VARCHAR}");
+        sql.SET("room_location = #{record.roomLocation,jdbcType=VARCHAR}");
         sql.SET("deal_status = #{record.dealStatus,jdbcType=INTEGER}");
         sql.SET("picture_count = #{record.pictureCount,jdbcType=INTEGER}");
         sql.SET("area = #{record.area,jdbcType=VARCHAR}");
@@ -270,6 +282,10 @@ public class AirbnbSqlProvider {
         
         if (record.getPrice() != null) {
             sql.SET("price = #{price,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRoomLocation() != null) {
+            sql.SET("room_location = #{roomLocation,jdbcType=VARCHAR}");
         }
         
         if (record.getDealStatus() != null) {

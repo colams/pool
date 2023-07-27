@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -90,20 +89,18 @@ public class AirbnbBusiness {
 
     private static Airbnb getAirbnb(Integer pageIndex, String strElement, String roomId, String url, String roomName, int picture_count, String evaluate) {
         Airbnb airbnb = new Airbnb();
-        airbnb.setExtra(strElement);
-        airbnb.setRoomUrl(url);
-        airbnb.setRoomId(roomId);
+        airbnb.withExtra(strElement)
+                .withRoomUrl(url)
+                .withRoomId(roomId);
 
-        airbnb.setArea("");
-        airbnb.setLandlordId("");
-        airbnb.setPrice("");
+        airbnb.withArea("")
+                .withLandlordId("")
+                .withPrice("");
 
-        airbnb.setEvaluate(evaluate);
-        airbnb.setPictureCount(picture_count);
-        airbnb.setRoomName(roomName);
-
-        airbnb.setPage(pageIndex);
-        airbnb.setCreateTime(new Date());
+        airbnb.withEvaluate(evaluate)
+                .withPictureCount(picture_count)
+                .withRoomName(roomName)
+                .withPage(pageIndex);
         return airbnb;
     }
 
@@ -142,10 +139,12 @@ public class AirbnbBusiness {
         WebElement lordElement = driver.findElement(By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
         String lord_page = lordElement.findElement(By.cssSelector("a[target='_blank']")).getAttribute("href");
         String lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
+        String location = driver.findElement(By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']")).getAttribute("href");
 
 
         Airbnb airbnb = new Airbnb()
-                .withLandlordId(lord_id);
+                .withLandlordId(lord_id)
+                .withRoomLocation(location);
         AirbnbRoomOwnerExample example = new AirbnbRoomOwnerExample();
         AirbnbRoomOwnerExample.Criteria criteria = example.createCriteria();
         criteria.andLoardIdEqualTo(lord_id);

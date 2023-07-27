@@ -515,6 +515,76 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
+        public Criteria andRoomLocationIsNull() {
+            addCriterion("room_location is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationIsNotNull() {
+            addCriterion("room_location is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationEqualTo(String value) {
+            addCriterion("room_location =", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationNotEqualTo(String value) {
+            addCriterion("room_location <>", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationGreaterThan(String value) {
+            addCriterion("room_location >", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationGreaterThanOrEqualTo(String value) {
+            addCriterion("room_location >=", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationLessThan(String value) {
+            addCriterion("room_location <", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationLessThanOrEqualTo(String value) {
+            addCriterion("room_location <=", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationLike(String value) {
+            addCriterion("room_location like", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationNotLike(String value) {
+            addCriterion("room_location not like", value, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationIn(List<String> values) {
+            addCriterion("room_location in", values, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationNotIn(List<String> values) {
+            addCriterion("room_location not in", values, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationBetween(String value1, String value2) {
+            addCriterion("room_location between", value1, value2, "roomLocation");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationNotBetween(String value1, String value2) {
+            addCriterion("room_location not between", value1, value2, "roomLocation");
+            return (Criteria) this;
+        }
+
         public Criteria andDealStatusIsNull() {
             addCriterion("deal_status is null");
             return (Criteria) this;
@@ -917,6 +987,11 @@ public class AirbnbExample {
 
         public Criteria andPriceLikeInsensitive(String value) {
             addCriterion("upper(price) like", value.toUpperCase(), "price");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomLocationLikeInsensitive(String value) {
+            addCriterion("upper(room_location) like", value.toUpperCase(), "roomLocation");
             return (Criteria) this;
         }
 
