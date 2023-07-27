@@ -131,7 +131,6 @@ public class AirbnbBusiness {
 
     private Airbnb analysisDetail(WebDriver driver) {
         WebElement lordElement = driver.findElement(By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
-        String lord_name = lordElement.findElement(By.cssSelector("h2[elementtiming='LCP-target']")).getText();
         String lord_page = lordElement.findElement(By.cssSelector("a[target='_blank']")).getAttribute("href");
         String lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
 
@@ -143,13 +142,25 @@ public class AirbnbBusiness {
         criteria.andLoardIdEqualTo(lord_id);
         List<AirbnbRoomOwner> airbnbRoomOwners = airbnbRoomOwnerExtensionMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
-            AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
-            airbnbRoomOwner.setRooms(0);
-            airbnbRoomOwner.setLoardId(lord_id);
-            airbnbRoomOwner.setLordName(lord_name);
-            airbnbRoomOwner.setLordPage(lord_page);
+            AirbnbRoomOwner airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id);
             airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
         }
         return airbnb;
+    }
+
+    private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id) {
+        String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
+
+        WebDriver driver = SeleniumUtils.getWebDriverImpl(url, ChromeOptionEnum.HEADLESS);
+
+        String lord_name = driver.findElement(By.cssSelector("a[href='/users/show/" + lord_id + "']")).getText();
+        int lord_rooms = Integer.valueOf(driver.findElement(By.cssSelector("div[class='_h6avcp2']")).getText().split("个")[0]);
+
+        AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
+        airbnbRoomOwner.setRooms(lord_rooms);
+        airbnbRoomOwner.setLoardId(lord_id);
+        airbnbRoomOwner.setLordName(lord_name);
+        airbnbRoomOwner.setLordPage(lordPage);
+        return airbnbRoomOwner;
     }
 }
