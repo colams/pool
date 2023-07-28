@@ -48,6 +48,10 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.VALUES("rooms", "#{rooms,jdbcType=INTEGER}");
         }
         
+        if (record.getAirbnbId() != null) {
+            sql.VALUES("airbnb_id", "#{airbnbId,jdbcType=BIGINT}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -66,6 +70,7 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.SELECT("lord_name");
         sql.SELECT("lord_page");
         sql.SELECT("rooms");
+        sql.SELECT("airbnb_id");
         sql.SELECT("create_time");
         sql.FROM("airbnb_room_owner");
         applyWhere(sql, example, false);
@@ -104,6 +109,10 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.SET("rooms = #{record.rooms,jdbcType=INTEGER}");
         }
         
+        if (record.getAirbnbId() != null) {
+            sql.SET("airbnb_id = #{record.airbnbId,jdbcType=BIGINT}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
@@ -121,6 +130,7 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.SET("lord_name = #{record.lordName,jdbcType=VARCHAR}");
         sql.SET("lord_page = #{record.lordPage,jdbcType=VARCHAR}");
         sql.SET("rooms = #{record.rooms,jdbcType=INTEGER}");
+        sql.SET("airbnb_id = #{record.airbnbId,jdbcType=BIGINT}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
         AirbnbRoomOwnerExample example = (AirbnbRoomOwnerExample) parameter.get("example");
@@ -146,6 +156,10 @@ public class AirbnbRoomOwnerSqlProvider {
         
         if (record.getRooms() != null) {
             sql.SET("rooms = #{rooms,jdbcType=INTEGER}");
+        }
+        
+        if (record.getAirbnbId() != null) {
+            sql.SET("airbnb_id = #{airbnbId,jdbcType=BIGINT}");
         }
         
         if (record.getCreateTime() != null) {

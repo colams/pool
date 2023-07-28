@@ -13,6 +13,8 @@ public class AirbnbRoomOwner {
 
     private Integer rooms;
 
+    private Long airbnbId;
+
     private Date createTime;
 
     public Long getId() {
@@ -78,6 +80,19 @@ public class AirbnbRoomOwner {
 
     public void setRooms(Integer rooms) {
         this.rooms = rooms;
+    }
+
+    public Long getAirbnbId() {
+        return airbnbId;
+    }
+
+    public AirbnbRoomOwner withAirbnbId(Long airbnbId) {
+        this.setAirbnbId(airbnbId);
+        return this;
+    }
+
+    public void setAirbnbId(Long airbnbId) {
+        this.airbnbId = airbnbId;
     }
 
     public Date getCreateTime() {

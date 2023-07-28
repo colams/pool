@@ -845,6 +845,66 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
+        public Criteria andRSrouceIsNull() {
+            addCriterion("r_srouce is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceIsNotNull() {
+            addCriterion("r_srouce is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceEqualTo(Integer value) {
+            addCriterion("r_srouce =", value, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceNotEqualTo(Integer value) {
+            addCriterion("r_srouce <>", value, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceGreaterThan(Integer value) {
+            addCriterion("r_srouce >", value, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("r_srouce >=", value, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceLessThan(Integer value) {
+            addCriterion("r_srouce <", value, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceLessThanOrEqualTo(Integer value) {
+            addCriterion("r_srouce <=", value, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceIn(List<Integer> values) {
+            addCriterion("r_srouce in", values, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceNotIn(List<Integer> values) {
+            addCriterion("r_srouce not in", values, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceBetween(Integer value1, Integer value2) {
+            addCriterion("r_srouce between", value1, value2, "rSrouce");
+            return (Criteria) this;
+        }
+
+        public Criteria andRSrouceNotBetween(Integer value1, Integer value2) {
+            addCriterion("r_srouce not between", value1, value2, "rSrouce");
+            return (Criteria) this;
+        }
+
         public Criteria andPageIsNull() {
             addCriterion("page is null");
             return (Criteria) this;

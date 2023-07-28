@@ -435,6 +435,66 @@ public class AirbnbRoomOwnerExample {
             return (Criteria) this;
         }
 
+        public Criteria andAirbnbIdIsNull() {
+            addCriterion("airbnb_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdIsNotNull() {
+            addCriterion("airbnb_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdEqualTo(Long value) {
+            addCriterion("airbnb_id =", value, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdNotEqualTo(Long value) {
+            addCriterion("airbnb_id <>", value, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdGreaterThan(Long value) {
+            addCriterion("airbnb_id >", value, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("airbnb_id >=", value, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdLessThan(Long value) {
+            addCriterion("airbnb_id <", value, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdLessThanOrEqualTo(Long value) {
+            addCriterion("airbnb_id <=", value, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdIn(List<Long> values) {
+            addCriterion("airbnb_id in", values, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdNotIn(List<Long> values) {
+            addCriterion("airbnb_id not in", values, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdBetween(Long value1, Long value2) {
+            addCriterion("airbnb_id between", value1, value2, "airbnbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAirbnbIdNotBetween(Long value1, Long value2) {
+            addCriterion("airbnb_id not between", value1, value2, "airbnbId");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

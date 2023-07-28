@@ -25,6 +25,8 @@ public class Airbnb {
 
     private String evaluate;
 
+    private Integer rSrouce;
+
     private Integer page;
 
     private Date createTime;
@@ -172,6 +174,19 @@ public class Airbnb {
 
     public void setEvaluate(String evaluate) {
         this.evaluate = evaluate == null ? null : evaluate.trim();
+    }
+
+    public Integer getrSrouce() {
+        return rSrouce;
+    }
+
+    public Airbnb withrSrouce(Integer rSrouce) {
+        this.setrSrouce(rSrouce);
+        return this;
+    }
+
+    public void setrSrouce(Integer rSrouce) {
+        this.rSrouce = rSrouce;
     }
 
     public Integer getPage() {

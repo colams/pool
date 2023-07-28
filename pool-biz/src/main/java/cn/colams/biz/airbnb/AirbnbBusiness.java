@@ -94,7 +94,8 @@ public class AirbnbBusiness {
         Airbnb airbnb = new Airbnb();
         airbnb.withExtra(strElement)
                 .withRoomUrl(url)
-                .withRoomId(roomId);
+                .withRoomId(roomId)
+                .withrSrouce(0);
 
         airbnb.withArea("")
                 .withLandlordId("")
@@ -118,12 +119,12 @@ public class AirbnbBusiness {
             try {
                 ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
                 driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
-                Airbnb temp = analysisDetail(driver);
+                Airbnb temp = analysisDetail(driver, airbnb);
                 airbnb.setLandlordId(temp.getLandlordId());
                 airbnb.setRoomLocation(temp.getRoomLocation());
                 airbnb.setDealStatus(1);
             } catch (Exception e) {
-                LOGGER.error("scrapyLord", e);
+                LOGGER.error("scrapyLord:" + airbnb.getRoomId(), e);
                 airbnb.setDealStatus(2);
             }
             if (Objects.nonNull(driver)) {
@@ -133,7 +134,7 @@ public class AirbnbBusiness {
         }
     }
 
-    private Airbnb analysisDetail(WebDriver driver) {
+    private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) {
         Optional<WebElement> lordElement = SeleniumUtils.findElement(driver, By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
 
         String lord_page = "";
@@ -148,21 +149,19 @@ public class AirbnbBusiness {
         Optional<WebElement> googleElement = SeleniumUtils.findElement(driver, By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']"));
         String location = OptionalUtils.stringVal(googleElement, e -> e.getAttribute("href"));
 
-        Airbnb airbnb = new Airbnb()
-                .withLandlordId(lord_id)
-                .withRoomLocation(location);
+        airbnb.withLandlordId(lord_id).withRoomLocation(location);
         AirbnbRoomOwnerExample example = new AirbnbRoomOwnerExample();
         AirbnbRoomOwnerExample.Criteria criteria = example.createCriteria();
         criteria.andLoardIdEqualTo(lord_id);
         List<AirbnbRoomOwner> airbnbRoomOwners = airbnbRoomOwnerExtensionMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
-            AirbnbRoomOwner airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id);
+            AirbnbRoomOwner airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb);
             airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
         }
         return airbnb;
     }
 
-    private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id) {
+    private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Airbnb airbnb) {
         String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
 
         WebDriver driver = SeleniumUtils.getWebDriverImpl(url, ChromeOptionEnum.HEADLESS);
@@ -176,6 +175,7 @@ public class AirbnbBusiness {
         airbnbRoomOwner.setLoardId(lord_id);
         airbnbRoomOwner.setLordName(lord_name);
         airbnbRoomOwner.setLordPage(lordPage);
+        airbnbRoomOwner.setAirbnbId(airbnb.getId());
         driver.quit();
         return airbnbRoomOwner;
     }
