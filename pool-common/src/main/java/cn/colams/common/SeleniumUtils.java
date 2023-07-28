@@ -2,6 +2,7 @@ package cn.colams.common;
 
 import cn.colams.common.constant.ChromeOptionEnum;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 public class SeleniumUtils {
 
@@ -33,17 +33,22 @@ public class SeleniumUtils {
             chromeOptions.addArguments(options.getValue());
         }
         WebDriver webDriver = new ChromeDriver(chromeOptions);
-
         webDriver.get(targetUrl);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        String js = "window.scrollTo(0, document.body.scrollHeight)";
-//        ((JavascriptExecutor) webDriver).executeScript(js);
-        Optional<WebElement> opFooter = findElement(webDriver, By.cssSelector("footer[aria-labelledby='footerHeading']"));
-        if (opFooter.isPresent()) {
-            Actions actions = new Actions(webDriver);
-            actions.moveToElement(opFooter.get());
+        webDriver.manage().window().fullscreen();
+        try {
+            Thread.sleep(5000);
+            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+            boolean result = (Boolean) executor.executeScript("return document.body.style.overflow!=\"hidden\"");
+            if (!result) {
+                Actions actions = new Actions(webDriver);
+                WebElement element = findElement(webDriver, By.cssSelector("div[data-testid='modal-container'] button")).orElse(null);
+                actions.click(element).perform();
+            }
+            Thread.sleep(2000);
+            executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
+        } catch (InterruptedException e) {
+            LOGGER.error("getWebDriverImpl", e);
         }
-        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         return webDriver;
     }
 

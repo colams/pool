@@ -1,8 +1,8 @@
 package cn.colams.biz.airbnb;
 
 import cn.colams.common.SeleniumUtils;
-import cn.colams.common.utils.OptionalUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
+import cn.colams.common.utils.OptionalUtils;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.entity.AirbnbRoomOwner;
@@ -41,6 +41,7 @@ public class AirbnbBusiness {
         }
         analysisCardContainer(driver, pageIndex);
         analysisNavPage(driver, pageIndex);
+        driver.quit();
         return false;
     }
 
@@ -85,7 +86,6 @@ public class AirbnbBusiness {
         String roomName = SeleniumUtils.findElement(element, By.cssSelector("div[data-testid='listing-card-title']")).map(e -> e.getText()).orElse("");
         int picture_count = element.findElements(By.tagName("picture")).size();
         Optional<WebElement> optional = SeleniumUtils.findElement(element, By.cssSelector("span[aria-hidden='true']"));
-        // String evaluate = optional.map(e -> e.getText()).orElse("");
         String evaluate = OptionalUtils.stringVal(optional, e -> e.getText());
         return getAirbnb(pageIndex, strElement, roomId, url, roomName, picture_count, evaluate);
     }
@@ -120,6 +120,7 @@ public class AirbnbBusiness {
                 driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
                 Airbnb temp = analysisDetail(driver);
                 airbnb.setLandlordId(temp.getLandlordId());
+                airbnb.setRoomLocation(temp.getRoomLocation());
                 airbnb.setDealStatus(1);
             } catch (Exception e) {
                 LOGGER.error("scrapyLord", e);
@@ -175,6 +176,7 @@ public class AirbnbBusiness {
         airbnbRoomOwner.setLoardId(lord_id);
         airbnbRoomOwner.setLordName(lord_name);
         airbnbRoomOwner.setLordPage(lordPage);
+        driver.quit();
         return airbnbRoomOwner;
     }
 
