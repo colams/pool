@@ -15,6 +15,8 @@ public class AirbnbRoomOwner {
 
     private Long airbnbId;
 
+    private Integer processStatus;
+
     private Date createTime;
 
     public Long getId() {
@@ -93,6 +95,19 @@ public class AirbnbRoomOwner {
 
     public void setAirbnbId(Long airbnbId) {
         this.airbnbId = airbnbId;
+    }
+
+    public Integer getProcessStatus() {
+        return processStatus;
+    }
+
+    public AirbnbRoomOwner withProcessStatus(Integer processStatus) {
+        this.setProcessStatus(processStatus);
+        return this;
+    }
+
+    public void setProcessStatus(Integer processStatus) {
+        this.processStatus = processStatus;
     }
 
     public Date getCreateTime() {
