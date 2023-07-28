@@ -149,19 +149,30 @@ public class AirbnbBusiness {
         Optional<WebElement> googleElement = SeleniumUtils.findElement(driver, By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']"));
         String location = OptionalUtils.stringVal(googleElement, e -> e.getAttribute("href"));
 
-        airbnb.withLandlordId(lord_id).withRoomLocation(location);
+        String price = "";
+        Optional<WebElement> priceELement = SeleniumUtils.findElement(driver, By.cssSelector("div[data-section-id='BOOK_IT_SIDEBAR']"));
+        if (priceELement.isPresent()) {
+            Optional<WebElement> op1 = SeleniumUtils.findElement(priceELement.get(), By.className("_1emnh212"));
+            if (!op1.isPresent()) {
+                op1 = SeleniumUtils.findElement(priceELement.get(), By.className("_1y74zjx"));
+            }
+            price = OptionalUtils.stringVal(op1, e -> e.getText());
+        }
+
+        airbnb.withLandlordId(lord_id).withRoomLocation(location).withPrice(price);
+
         AirbnbRoomOwnerExample example = new AirbnbRoomOwnerExample();
         AirbnbRoomOwnerExample.Criteria criteria = example.createCriteria();
         criteria.andLoardIdEqualTo(lord_id);
         List<AirbnbRoomOwner> airbnbRoomOwners = airbnbRoomOwnerExtensionMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
-            AirbnbRoomOwner airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb);
+            AirbnbRoomOwner airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb.getId());
             airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
         }
         return airbnb;
     }
 
-    private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Airbnb airbnb) {
+    private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Long airbnbID) {
         String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
 
         WebDriver driver = SeleniumUtils.getWebDriverImpl(url, ChromeOptionEnum.HEADLESS);
@@ -175,7 +186,7 @@ public class AirbnbBusiness {
         airbnbRoomOwner.setLoardId(lord_id);
         airbnbRoomOwner.setLordName(lord_name);
         airbnbRoomOwner.setLordPage(lordPage);
-        airbnbRoomOwner.setAirbnbId(airbnb.getId());
+        airbnbRoomOwner.setAirbnbId(airbnbID);
         driver.quit();
         return airbnbRoomOwner;
     }

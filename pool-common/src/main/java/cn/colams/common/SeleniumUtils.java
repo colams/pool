@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class SeleniumUtils {
 
@@ -33,10 +34,12 @@ public class SeleniumUtils {
             chromeOptions.addArguments(options.getValue());
         }
         WebDriver webDriver = new ChromeDriver(chromeOptions);
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
         webDriver.get(targetUrl);
-        webDriver.manage().window().fullscreen();
+        webDriver.manage().window().maximize();
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10 * 1000);
             JavascriptExecutor executor = (JavascriptExecutor) webDriver;
             boolean result = (Boolean) executor.executeScript("return document.body.style.overflow!=\"hidden\"");
             if (!result) {
@@ -44,7 +47,7 @@ public class SeleniumUtils {
                 WebElement element = findElement(webDriver, By.cssSelector("div[data-testid='modal-container'] button")).orElse(null);
                 actions.click(element).perform();
             }
-            Thread.sleep(2000);
+            Thread.sleep(3 * 1000);
             executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
         } catch (InterruptedException e) {
             LOGGER.error("getWebDriverImpl", e);
