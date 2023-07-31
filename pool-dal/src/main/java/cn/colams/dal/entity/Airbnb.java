@@ -19,17 +19,17 @@ public class Airbnb {
 
     private Integer dealStatus;
 
-    private Integer pictureCount;
-
-    private String area;
-
-    private String evaluate;
-
     private Integer rSrouce;
 
     private Integer page;
 
     private String orgUrl;
+
+    private String evaluate;
+
+    private Integer pictureCount;
+
+    private String area;
 
     private Date createTime;
 
@@ -139,45 +139,6 @@ public class Airbnb {
         this.dealStatus = dealStatus;
     }
 
-    public Integer getPictureCount() {
-        return pictureCount;
-    }
-
-    public Airbnb withPictureCount(Integer pictureCount) {
-        this.setPictureCount(pictureCount);
-        return this;
-    }
-
-    public void setPictureCount(Integer pictureCount) {
-        this.pictureCount = pictureCount;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public Airbnb withArea(String area) {
-        this.setArea(area);
-        return this;
-    }
-
-    public void setArea(String area) {
-        this.area = area == null ? null : area.trim();
-    }
-
-    public String getEvaluate() {
-        return evaluate;
-    }
-
-    public Airbnb withEvaluate(String evaluate) {
-        this.setEvaluate(evaluate);
-        return this;
-    }
-
-    public void setEvaluate(String evaluate) {
-        this.evaluate = evaluate == null ? null : evaluate.trim();
-    }
-
     public Integer getrSrouce() {
         return rSrouce;
     }
@@ -215,6 +176,45 @@ public class Airbnb {
 
     public void setOrgUrl(String orgUrl) {
         this.orgUrl = orgUrl == null ? null : orgUrl.trim();
+    }
+
+    public String getEvaluate() {
+        return evaluate;
+    }
+
+    public Airbnb withEvaluate(String evaluate) {
+        this.setEvaluate(evaluate);
+        return this;
+    }
+
+    public void setEvaluate(String evaluate) {
+        this.evaluate = evaluate == null ? null : evaluate.trim();
+    }
+
+    public Integer getPictureCount() {
+        return pictureCount;
+    }
+
+    public Airbnb withPictureCount(Integer pictureCount) {
+        this.setPictureCount(pictureCount);
+        return this;
+    }
+
+    public void setPictureCount(Integer pictureCount) {
+        this.pictureCount = pictureCount;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public Airbnb withArea(String area) {
+        this.setArea(area);
+        return this;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 
     public Date getCreateTime() {

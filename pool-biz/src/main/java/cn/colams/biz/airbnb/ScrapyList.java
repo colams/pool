@@ -2,7 +2,6 @@ package cn.colams.biz.airbnb;
 
 import cn.colams.common.SeleniumUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
-import cn.colams.common.utils.OptionalUtils;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
@@ -92,6 +91,8 @@ public class ScrapyList {
                 if (CollectionUtils.isEmpty(airbnbs)) {
                     airbnb.setOrgUrl(URLDecoder.decode(driver.getCurrentUrl(), "UTF-8"));
                     airbnbExtensionMapper.insertSelective(airbnb);
+                } else {
+                    LOGGER.info("exist airbnb room infos :" + airbnb.getRoomId());
                 }
             } catch (Exception e) {
                 LOGGER.error("scrapy_for", e);
@@ -106,8 +107,9 @@ public class ScrapyList {
         String url = SeleniumUtils.findElement(element, By.tagName("a")).map(e -> e.getAttribute("href")).orElse("");
         String roomName = SeleniumUtils.findElement(element, By.cssSelector("div[data-testid='listing-card-title']")).map(e -> e.getText()).orElse("");
         int picture_count = element.findElements(By.tagName("picture")).size();
-        Optional<WebElement> optional = SeleniumUtils.findElement(element, By.cssSelector("span[aria-hidden='true']"));
-        String evaluate = OptionalUtils.stringVal(optional, e -> e.getText());
+//        Optional<WebElement> optional = SeleniumUtils.findElement(element, By.cssSelector("span[aria-hidden='true']"));
+//        String evaluate = OptionalUtils.stringVal(optional, e -> e.getText());
+        String evaluate = "";
         return getAirbnb(pageIndex, strElement, roomId, url, roomName, picture_count, evaluate);
     }
 
