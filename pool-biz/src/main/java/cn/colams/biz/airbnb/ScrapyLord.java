@@ -155,15 +155,21 @@ public class ScrapyLord {
     }
 
     public String getLordBrief(WebDriver driver) {
-        By by = By.cssSelector("div[data-testid='user-profile-content'] .h1ae1mdj");
+        By by = By.cssSelector("div[data-testid='user-profile-content'] section");
         Optional<WebElement> briefEl = SeleniumUtils.findElement(driver, by);
         return OptionalUtils.stringVal(briefEl, e -> e.getText());
     }
 
     public String getEvaluate(WebDriver driver) {
-        By by = By.cssSelector("div[data-testid='user_profile_frame'] section section sxz955h");
-        Optional<WebElement> evaluateEl = SeleniumUtils.findElement(driver, by);
-        return OptionalUtils.stringVal(evaluateEl, e -> e.getText());
+        By by = By.cssSelector("div[data-veloute='user_profile_frame'] section section .sxz955h > div > span");
+        Optional<List<WebElement>> evaluateEls = SeleniumUtils.findElements(driver, by);
+        StringBuffer stringBuffer = new StringBuffer();
+        if (evaluateEls.isPresent()) {
+            for (WebElement el : evaluateEls.get()) {
+                stringBuffer.append(el.getText());
+            }
+        }
+        return stringBuffer.toString();
     }
 
 }
