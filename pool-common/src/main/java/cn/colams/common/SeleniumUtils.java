@@ -1,17 +1,18 @@
 package cn.colams.common;
 
 import cn.colams.common.constant.ChromeOptionEnum;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumUtils {
@@ -26,7 +27,7 @@ public class SeleniumUtils {
      * @param cookies
      * @return
      */
-    public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options, Set<Cookie> cookies) {
+    public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options) {
         System.setProperty("webdriver.chrome.driver", ClassLoader.getSystemResource("driver/chromedriver.exe").getPath());
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
@@ -35,12 +36,6 @@ public class SeleniumUtils {
         }
         WebDriver webDriver = new ChromeDriver(chromeOptions);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        if (!CollectionUtils.isEmpty(cookies)) {
-            for (Cookie cookie : cookies) {
-                // webDriver.manage().addCookie(cookie);
-            }
-        }
-
         webDriver.get(targetUrl);
         try {
             Thread.sleep(10 * 1000);
@@ -56,6 +51,34 @@ public class SeleniumUtils {
             executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
         } catch (InterruptedException e) {
             LOGGER.error("getWebDriverImpl", e);
+        }
+        return webDriver;
+    }
+
+    /**
+     * 获取 webDriver
+     *
+     * @param targetUrl 目标地址
+     * @param options
+     * @return
+     */
+    public static WebDriver getWebDriverV2(String targetUrl, ChromeOptionEnum options) {
+        System.setProperty("webdriver.chrome.driver", ClassLoader.getSystemResource("driver/chromedriver.exe").getPath());
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--start-maximized");
+        if (Objects.nonNull(options)) {
+            chromeOptions.addArguments(options.getValue());
+        }
+        WebDriver webDriver = new ChromeDriver(chromeOptions);
+        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        webDriver.get(targetUrl);
+
+        try {
+            Thread.sleep(5 * 1000);
+            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+            executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
+        } catch (InterruptedException e) {
+            LOGGER.error("getWebDriverV2", e);
         }
         return webDriver;
     }

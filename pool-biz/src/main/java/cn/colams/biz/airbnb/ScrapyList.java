@@ -53,7 +53,7 @@ public class ScrapyList {
      */
     public boolean scrapyListWithCookies(String targetUrl, Integer pageIndex, Boolean showBrowser, Set<Cookie> cookies) {
         ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
-        WebDriver driver = SeleniumUtils.getWebDriverImpl(targetUrl, optionEnum, cookies);
+        WebDriver driver = SeleniumUtils.getWebDriverImpl(targetUrl, optionEnum);
         if (Objects.isNull(pageIndex)) {
             pageIndex = 1;
         }
