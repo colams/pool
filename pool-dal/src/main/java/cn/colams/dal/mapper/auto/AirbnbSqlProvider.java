@@ -80,6 +80,10 @@ public class AirbnbSqlProvider {
             sql.VALUES("page", "#{page,jdbcType=INTEGER}");
         }
         
+        if (record.getOrgUrl() != null) {
+            sql.VALUES("org_url", "#{orgUrl,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -110,6 +114,7 @@ public class AirbnbSqlProvider {
         sql.SELECT("evaluate");
         sql.SELECT("r_srouce");
         sql.SELECT("page");
+        sql.SELECT("org_url");
         sql.SELECT("create_time");
         sql.SELECT("extra");
         sql.FROM("airbnb");
@@ -141,6 +146,7 @@ public class AirbnbSqlProvider {
         sql.SELECT("evaluate");
         sql.SELECT("r_srouce");
         sql.SELECT("page");
+        sql.SELECT("org_url");
         sql.SELECT("create_time");
         sql.FROM("airbnb");
         applyWhere(sql, example, false);
@@ -211,6 +217,10 @@ public class AirbnbSqlProvider {
             sql.SET("page = #{record.page,jdbcType=INTEGER}");
         }
         
+        if (record.getOrgUrl() != null) {
+            sql.SET("org_url = #{record.orgUrl,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
@@ -240,6 +250,7 @@ public class AirbnbSqlProvider {
         sql.SET("evaluate = #{record.evaluate,jdbcType=VARCHAR}");
         sql.SET("r_srouce = #{record.rSrouce,jdbcType=INTEGER}");
         sql.SET("page = #{record.page,jdbcType=INTEGER}");
+        sql.SET("org_url = #{record.orgUrl,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("extra = #{record.extra,jdbcType=LONGVARCHAR}");
         
@@ -265,6 +276,7 @@ public class AirbnbSqlProvider {
         sql.SET("evaluate = #{record.evaluate,jdbcType=VARCHAR}");
         sql.SET("r_srouce = #{record.rSrouce,jdbcType=INTEGER}");
         sql.SET("page = #{record.page,jdbcType=INTEGER}");
+        sql.SET("org_url = #{record.orgUrl,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
         AirbnbExample example = (AirbnbExample) parameter.get("example");
@@ -322,6 +334,10 @@ public class AirbnbSqlProvider {
         
         if (record.getPage() != null) {
             sql.SET("page = #{page,jdbcType=INTEGER}");
+        }
+        
+        if (record.getOrgUrl() != null) {
+            sql.SET("org_url = #{orgUrl,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {

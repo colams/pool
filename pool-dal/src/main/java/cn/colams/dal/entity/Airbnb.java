@@ -29,6 +29,8 @@ public class Airbnb {
 
     private Integer page;
 
+    private String orgUrl;
+
     private Date createTime;
 
     private String extra;
@@ -200,6 +202,19 @@ public class Airbnb {
 
     public void setPage(Integer page) {
         this.page = page;
+    }
+
+    public String getOrgUrl() {
+        return orgUrl;
+    }
+
+    public Airbnb withOrgUrl(String orgUrl) {
+        this.setOrgUrl(orgUrl);
+        return this;
+    }
+
+    public void setOrgUrl(String orgUrl) {
+        this.orgUrl = orgUrl == null ? null : orgUrl.trim();
     }
 
     public Date getCreateTime() {

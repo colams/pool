@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -79,7 +80,7 @@ public class ScrapyList {
      * @param pageIndex
      */
     private void analysisCardContainer(WebDriver driver, int pageIndex) {
-        Optional<List<WebElement>> optionalList = SeleniumUtils.findElements(driver, By.cssSelector("a[aria-label='下一个']"));
+        Optional<List<WebElement>> optionalList = SeleniumUtils.findElements(driver, By.cssSelector("div[data-testid='card-container']"));
 
         for (WebElement element : optionalList.orElse(Lists.newArrayList())) {
             try {
@@ -89,6 +90,7 @@ public class ScrapyList {
                 criteria.andRoomIdEqualTo(airbnb.getRoomId());
                 List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExample(example);
                 if (CollectionUtils.isEmpty(airbnbs)) {
+                    airbnb.setOrgUrl(URLDecoder.decode(driver.getCurrentUrl(), "UTF-8"));
                     airbnbExtensionMapper.insertSelective(airbnb);
                 }
             } catch (Exception e) {

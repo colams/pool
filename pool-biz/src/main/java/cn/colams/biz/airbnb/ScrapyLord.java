@@ -72,14 +72,12 @@ public class ScrapyLord {
      * @return
      */
     private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) {
-        Optional<WebElement> lordElement = SeleniumUtils.findElement(driver, By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT']"));
-
+        Optional<WebElement> loadPageEl = SeleniumUtils.findElement(driver, By.cssSelector("a[href^='/users/show/']"));
         String lord_page = "";
         String lord_id = "";
 
-        if (lordElement.isPresent()) {
-            Optional<WebElement> pageEl = SeleniumUtils.findElement(lordElement.get(), By.cssSelector("a[target='_blank']"));
-            lord_page = OptionalUtils.stringVal(pageEl, e -> e.getAttribute("href"));
+        if (loadPageEl.isPresent()) {
+            lord_page = OptionalUtils.stringVal(loadPageEl, e -> e.getAttribute("href"));
             lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
         }
 

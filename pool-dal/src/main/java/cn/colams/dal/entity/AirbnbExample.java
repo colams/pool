@@ -965,6 +965,76 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrgUrlIsNull() {
+            addCriterion("org_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlIsNotNull() {
+            addCriterion("org_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlEqualTo(String value) {
+            addCriterion("org_url =", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlNotEqualTo(String value) {
+            addCriterion("org_url <>", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlGreaterThan(String value) {
+            addCriterion("org_url >", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("org_url >=", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlLessThan(String value) {
+            addCriterion("org_url <", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlLessThanOrEqualTo(String value) {
+            addCriterion("org_url <=", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlLike(String value) {
+            addCriterion("org_url like", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlNotLike(String value) {
+            addCriterion("org_url not like", value, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlIn(List<String> values) {
+            addCriterion("org_url in", values, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlNotIn(List<String> values) {
+            addCriterion("org_url not in", values, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlBetween(String value1, String value2) {
+            addCriterion("org_url between", value1, value2, "orgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlNotBetween(String value1, String value2) {
+            addCriterion("org_url not between", value1, value2, "orgUrl");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -1062,6 +1132,11 @@ public class AirbnbExample {
 
         public Criteria andEvaluateLikeInsensitive(String value) {
             addCriterion("upper(evaluate) like", value.toUpperCase(), "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgUrlLikeInsensitive(String value) {
+            addCriterion("upper(org_url) like", value.toUpperCase(), "orgUrl");
             return (Criteria) this;
         }
     }

@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +29,7 @@ public class SeleniumUtils {
     public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options) {
         System.setProperty("webdriver.chrome.driver", ClassLoader.getSystemResource("driver/chromedriver.exe").getPath());
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--start-maximized");
         if (Objects.nonNull(options)) {
             chromeOptions.addArguments(options.getValue());
         }
@@ -37,16 +37,16 @@ public class SeleniumUtils {
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         webDriver.get(targetUrl);
-        webDriver.manage().window().maximize();
         try {
             Thread.sleep(10 * 1000);
             JavascriptExecutor executor = (JavascriptExecutor) webDriver;
             boolean result = (Boolean) executor.executeScript("return document.body.style.overflow!=\"hidden\"");
             if (!result) {
-                Actions actions = new Actions(webDriver);
-                WebElement element = findElement(webDriver, By.cssSelector("div[data-testid='modal-container'] button")).orElse(null);
-                actions.click(element).perform();
+                WebElement modalButton = findElement(webDriver, By.cssSelector("div[data-testid='modal-container'] button")).orElse(null);
+                modalButton.click();
             }
+            Thread.sleep(3 * 1000);
+            executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
             Thread.sleep(3 * 1000);
             executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
         } catch (InterruptedException e) {
