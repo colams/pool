@@ -37,7 +37,7 @@ public class SeleniumUtils {
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         if (!CollectionUtils.isEmpty(cookies)) {
             for (Cookie cookie : cookies) {
-                webDriver.manage().addCookie(cookie);
+                // webDriver.manage().addCookie(cookie);
             }
         }
 

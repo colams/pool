@@ -9,6 +9,7 @@ import cn.colams.dal.entity.AirbnbRoomOwner;
 import cn.colams.dal.entity.AirbnbRoomOwnerExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.dal.mapper.extension.AirbnbRoomOwnerExtensionMapper;
+import com.google.common.collect.Lists;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,7 +42,7 @@ public class ScrapyLord {
     public void scrapyLord(Boolean showBrowser) {
         AirbnbExample airbnbExample = new AirbnbExample();
         AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
-        criteria.andDealStatusNotEqualTo(1);
+        criteria.andDealStatusIn(Lists.newArrayList(0, 2));
         List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
 
         for (Airbnb airbnb : airbnbs) {
@@ -49,10 +50,7 @@ public class ScrapyLord {
             try {
                 ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
                 driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum, null);
-                Airbnb temp = analysisDetail(driver, airbnb);
-                airbnb.setLandlordId(temp.getLandlordId());
-                airbnb.setRoomLocation(temp.getRoomLocation());
-                airbnb.setDealStatus(1);
+                analysisDetail(driver, airbnb);
             } catch (Exception e) {
                 LOGGER.error("scrapyLord:" + airbnb.getRoomId(), e);
                 airbnb.setDealStatus(2);
@@ -72,7 +70,8 @@ public class ScrapyLord {
      * @return
      */
     private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) {
-        Optional<WebElement> loadPageEl = SeleniumUtils.findElement(driver, By.cssSelector("a[href^='/users/show/']"));
+        Optional<WebElement> loadPageEl = SeleniumUtils.findElement(driver,
+                By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT'] a[href^='/users/show/']"));
         String lord_page = "";
         String lord_id = "";
 
@@ -103,6 +102,9 @@ public class ScrapyLord {
         if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
             AirbnbRoomOwner airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb.getId());
             airbnbRoomOwnerExtensionMapper.insertSelective(airbnbRoomOwner);
+            airbnb.setDealStatus(1);
+        } else {
+            airbnb.setDealStatus(3);
         }
         return airbnb;
     }
