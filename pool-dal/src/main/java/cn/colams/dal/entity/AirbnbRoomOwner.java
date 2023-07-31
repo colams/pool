@@ -19,6 +19,8 @@ public class AirbnbRoomOwner {
 
     private String evaluate;
 
+    private String brief;
+
     private Date createTime;
 
     public Long getId() {
@@ -123,6 +125,19 @@ public class AirbnbRoomOwner {
 
     public void setEvaluate(String evaluate) {
         this.evaluate = evaluate == null ? null : evaluate.trim();
+    }
+
+    public String getBrief() {
+        return brief;
+    }
+
+    public AirbnbRoomOwner withBrief(String brief) {
+        this.setBrief(brief);
+        return this;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief == null ? null : brief.trim();
     }
 
     public Date getCreateTime() {

@@ -60,6 +60,10 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.VALUES("evaluate", "#{evaluate,jdbcType=VARCHAR}");
         }
         
+        if (record.getBrief() != null) {
+            sql.VALUES("brief", "#{brief,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -81,6 +85,7 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.SELECT("airbnb_id");
         sql.SELECT("process_status");
         sql.SELECT("evaluate");
+        sql.SELECT("brief");
         sql.SELECT("create_time");
         sql.FROM("airbnb_room_owner");
         applyWhere(sql, example, false);
@@ -131,6 +136,10 @@ public class AirbnbRoomOwnerSqlProvider {
             sql.SET("evaluate = #{record.evaluate,jdbcType=VARCHAR}");
         }
         
+        if (record.getBrief() != null) {
+            sql.SET("brief = #{record.brief,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
@@ -151,6 +160,7 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.SET("airbnb_id = #{record.airbnbId,jdbcType=BIGINT}");
         sql.SET("process_status = #{record.processStatus,jdbcType=INTEGER}");
         sql.SET("evaluate = #{record.evaluate,jdbcType=VARCHAR}");
+        sql.SET("brief = #{record.brief,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
         AirbnbRoomOwnerExample example = (AirbnbRoomOwnerExample) parameter.get("example");
@@ -188,6 +198,10 @@ public class AirbnbRoomOwnerSqlProvider {
         
         if (record.getEvaluate() != null) {
             sql.SET("evaluate = #{evaluate,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBrief() != null) {
+            sql.SET("brief = #{brief,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {

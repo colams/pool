@@ -74,9 +74,7 @@ public class SeleniumUtils {
         webDriver.get(targetUrl);
 
         try {
-            Thread.sleep(5 * 1000);
-            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-            executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
+            Thread.sleep(1 * 1000);
         } catch (InterruptedException e) {
             LOGGER.error("getWebDriverV2", e);
         }

@@ -625,6 +625,76 @@ public class AirbnbRoomOwnerExample {
             return (Criteria) this;
         }
 
+        public Criteria andBriefIsNull() {
+            addCriterion("brief is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefIsNotNull() {
+            addCriterion("brief is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefEqualTo(String value) {
+            addCriterion("brief =", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotEqualTo(String value) {
+            addCriterion("brief <>", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefGreaterThan(String value) {
+            addCriterion("brief >", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefGreaterThanOrEqualTo(String value) {
+            addCriterion("brief >=", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefLessThan(String value) {
+            addCriterion("brief <", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefLessThanOrEqualTo(String value) {
+            addCriterion("brief <=", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefLike(String value) {
+            addCriterion("brief like", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotLike(String value) {
+            addCriterion("brief not like", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefIn(List<String> values) {
+            addCriterion("brief in", values, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotIn(List<String> values) {
+            addCriterion("brief not in", values, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefBetween(String value1, String value2) {
+            addCriterion("brief between", value1, value2, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotBetween(String value1, String value2) {
+            addCriterion("brief not between", value1, value2, "brief");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -702,6 +772,11 @@ public class AirbnbRoomOwnerExample {
 
         public Criteria andEvaluateLikeInsensitive(String value) {
             addCriterion("upper(evaluate) like", value.toUpperCase(), "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefLikeInsensitive(String value) {
+            addCriterion("upper(brief) like", value.toUpperCase(), "brief");
             return (Criteria) this;
         }
     }

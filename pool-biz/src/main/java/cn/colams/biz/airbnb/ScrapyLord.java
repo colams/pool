@@ -123,22 +123,47 @@ public class ScrapyLord {
      */
     private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Long airbnbID) {
         String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
+        String url2 = String.format("https://zh.airbnb.com/users/show/%s", lord_id);
 
         WebDriver driver = SeleniumUtils.getWebDriverV2(url, ChromeOptionEnum.HEADLESS);
-        Optional<WebElement> userEl = SeleniumUtils.findElement(driver, By.cssSelector("a[href='/users/show/" + lord_id + "']"));
-        Optional<WebElement> roomsEl = SeleniumUtils.findElement(driver, By.cssSelector("div[class='_h6avcp2']"));
-        String lord_name = OptionalUtils.stringVal(userEl, e -> e.getText());
-        int lord_rooms = Integer.valueOf(OptionalUtils.stringVal(roomsEl, e -> e.getText()).split("个")[0]);
+        WebDriver driver2 = SeleniumUtils.getWebDriverV2(url2, ChromeOptionEnum.HEADLESS);
+
 
         AirbnbRoomOwner airbnbRoomOwner = new AirbnbRoomOwner();
-        airbnbRoomOwner.setRooms(lord_rooms);
+        airbnbRoomOwner.setRooms(getLordRooms(driver));
         airbnbRoomOwner.setLoardId(lord_id);
-        airbnbRoomOwner.setLordName(lord_name);
+        airbnbRoomOwner.setLordName(getLordName(driver, lord_id));
         airbnbRoomOwner.setLordPage(lordPage);
         airbnbRoomOwner.setAirbnbId(airbnbID);
-        airbnbRoomOwner.setEvaluate("");
+        airbnbRoomOwner.setEvaluate(getEvaluate(driver2));
+        airbnbRoomOwner.setBrief(getLordBrief(driver2));
+        driver2.quit();
         driver.quit();
         return airbnbRoomOwner;
+    }
+
+    public String getLordName(WebDriver driver, String lord_id) {
+        By by = By.cssSelector("a[href='/users/show/" + lord_id + "']");
+        Optional<WebElement> userEl = SeleniumUtils.findElement(driver, by);
+        return OptionalUtils.stringVal(userEl, e -> e.getText());
+    }
+
+    public int getLordRooms(WebDriver driver) {
+        By by = By.cssSelector("div[class='_h6avcp2']");
+        Optional<WebElement> roomsEl = SeleniumUtils.findElement(driver, by);
+        return Integer.valueOf(OptionalUtils.stringVal(roomsEl, e -> e.getText()).split("个")[0]);
+    }
+
+    public String getLordBrief(WebDriver driver) {
+        By by = By.cssSelector("div[data-testid='user-profile-content'] .h1ae1mdj");
+        Optional<WebElement> briefEl = SeleniumUtils.findElement(driver, by);
+        return OptionalUtils.stringVal(briefEl, e -> e.getText());
+    }
+
+    public String getEvaluate(WebDriver driver) {
+        By by = By.cssSelector("div[data-testid='user_profile_frame'] section section sxz955h");
+        Optional<WebElement> evaluateEl = SeleniumUtils.findElement(driver, by);
+        return OptionalUtils.stringVal(evaluateEl, e -> e.getText());
     }
 
 }
