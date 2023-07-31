@@ -38,7 +38,7 @@ public class ScrapyLord2List {
             WebDriver driver = null;
             try {
                 ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
-                driver = SeleniumUtils.getWebDriverImpl(airbnbRoomOwner.getLordPage(), optionEnum);
+                driver = SeleniumUtils.getWebDriverImpl(airbnbRoomOwner.getLordPage(), optionEnum, null);
                 analysisListCard(driver);
                 airbnbRoomOwner.setProcessStatus(1);
             } catch (Exception e) {

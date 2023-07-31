@@ -7,6 +7,7 @@ import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import com.google.common.collect.Lists;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import java.net.URLDecoder;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class ScrapyList {
@@ -37,8 +39,21 @@ public class ScrapyList {
      * @return
      */
     public boolean scrapyList(String targetUrl, Integer pageIndex, Boolean showBrowser) {
+        return scrapyListWithCookies(targetUrl, pageIndex, showBrowser, null);
+    }
+
+    /**
+     * 分析airbnb 列表页数据
+     *
+     * @param targetUrl
+     * @param pageIndex
+     * @param showBrowser
+     * @param cookies
+     * @return
+     */
+    public boolean scrapyListWithCookies(String targetUrl, Integer pageIndex, Boolean showBrowser, Set<Cookie> cookies) {
         ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
-        WebDriver driver = SeleniumUtils.getWebDriverImpl(targetUrl, optionEnum);
+        WebDriver driver = SeleniumUtils.getWebDriverImpl(targetUrl, optionEnum, cookies);
         if (Objects.isNull(pageIndex)) {
             pageIndex = 1;
         }
@@ -67,7 +82,7 @@ public class ScrapyList {
         if (nextElement.isPresent()) {
             // 读取 下一页 链接，并将页码+1，循环执行
             String nextUrl = nextElement.get().getAttribute("href");
-            scrapyList(nextUrl, pageIndex + 1, false);
+            scrapyListWithCookies(nextUrl, pageIndex + 1, false, driver.manage().getCookies());
         }
     }
 

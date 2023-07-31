@@ -1,18 +1,17 @@
 package cn.colams.common;
 
 import cn.colams.common.constant.ChromeOptionEnum;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumUtils {
@@ -24,9 +23,10 @@ public class SeleniumUtils {
      *
      * @param targetUrl 目标地址
      * @param options
+     * @param cookies
      * @return
      */
-    public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options) {
+    public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options, Set<Cookie> cookies) {
         System.setProperty("webdriver.chrome.driver", ClassLoader.getSystemResource("driver/chromedriver.exe").getPath());
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
@@ -35,6 +35,11 @@ public class SeleniumUtils {
         }
         WebDriver webDriver = new ChromeDriver(chromeOptions);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        if (!CollectionUtils.isEmpty(cookies)) {
+            for (Cookie cookie : cookies) {
+                webDriver.manage().addCookie(cookie);
+            }
+        }
 
         webDriver.get(targetUrl);
         try {

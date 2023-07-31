@@ -9,7 +9,7 @@ public class SeleniumUtilsTest extends CommonTest {
     @Test
     public void testGetWebDriverImpl() {
 
-        WebDriver driver = SeleniumUtils.getWebDriverImpl("http://www.baidu.com", ChromeOptionEnum.HEADLESS);
+        WebDriver driver = SeleniumUtils.getWebDriverImpl("http://www.baidu.com", ChromeOptionEnum.HEADLESS, null);
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 }

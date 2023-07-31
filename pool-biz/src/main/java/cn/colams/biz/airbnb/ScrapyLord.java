@@ -48,7 +48,7 @@ public class ScrapyLord {
             WebDriver driver = null;
             try {
                 ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
-                driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
+                driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum, null);
                 Airbnb temp = analysisDetail(driver, airbnb);
                 airbnb.setLandlordId(temp.getLandlordId());
                 airbnb.setRoomLocation(temp.getRoomLocation());
@@ -118,7 +118,7 @@ public class ScrapyLord {
     private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Long airbnbID) {
         String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
 
-        WebDriver driver = SeleniumUtils.getWebDriverImpl(url, ChromeOptionEnum.HEADLESS);
+        WebDriver driver = SeleniumUtils.getWebDriverImpl(url, ChromeOptionEnum.HEADLESS, null);
         Optional<WebElement> userEl = SeleniumUtils.findElement(driver, By.cssSelector("a[href='/users/show/" + lord_id + "']"));
         Optional<WebElement> roomsEl = SeleniumUtils.findElement(driver, By.cssSelector("div[class='_h6avcp2']"));
         String lord_name = OptionalUtils.stringVal(userEl, e -> e.getText());
