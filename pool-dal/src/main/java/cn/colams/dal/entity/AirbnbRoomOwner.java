@@ -17,6 +17,8 @@ public class AirbnbRoomOwner {
 
     private Integer processStatus;
 
+    private String evaluate;
+
     private Date createTime;
 
     public Long getId() {
@@ -108,6 +110,19 @@ public class AirbnbRoomOwner {
 
     public void setProcessStatus(Integer processStatus) {
         this.processStatus = processStatus;
+    }
+
+    public String getEvaluate() {
+        return evaluate;
+    }
+
+    public AirbnbRoomOwner withEvaluate(String evaluate) {
+        this.setEvaluate(evaluate);
+        return this;
+    }
+
+    public void setEvaluate(String evaluate) {
+        this.evaluate = evaluate == null ? null : evaluate.trim();
     }
 
     public Date getCreateTime() {

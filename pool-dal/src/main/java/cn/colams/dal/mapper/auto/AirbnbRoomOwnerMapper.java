@@ -36,11 +36,13 @@ public interface AirbnbRoomOwnerMapper {
         "insert into airbnb_room_owner (id, loard_id, ",
         "lord_name, lord_page, ",
         "rooms, airbnb_id, ",
-        "process_status, create_time)",
+        "process_status, evaluate, ",
+        "create_time)",
         "values (#{id,jdbcType=BIGINT}, #{loardId,jdbcType=VARCHAR}, ",
         "#{lordName,jdbcType=VARCHAR}, #{lordPage,jdbcType=VARCHAR}, ",
         "#{rooms,jdbcType=INTEGER}, #{airbnbId,jdbcType=BIGINT}, ",
-        "#{processStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})"
+        "#{processStatus,jdbcType=INTEGER}, #{evaluate,jdbcType=VARCHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP})"
     })
     int insert(AirbnbRoomOwner record);
 
@@ -56,6 +58,7 @@ public interface AirbnbRoomOwnerMapper {
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="airbnb_id", property="airbnbId", jdbcType=JdbcType.BIGINT),
         @Result(column="process_status", property="processStatus", jdbcType=JdbcType.INTEGER),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<AirbnbRoomOwner> selectByExampleWithRowbounds(AirbnbRoomOwnerExample example, RowBounds rowBounds);
@@ -69,13 +72,15 @@ public interface AirbnbRoomOwnerMapper {
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="airbnb_id", property="airbnbId", jdbcType=JdbcType.BIGINT),
         @Result(column="process_status", property="processStatus", jdbcType=JdbcType.INTEGER),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<AirbnbRoomOwner> selectByExample(AirbnbRoomOwnerExample example);
 
     @Select({
         "select",
-        "id, loard_id, lord_name, lord_page, rooms, airbnb_id, process_status, create_time",
+        "id, loard_id, lord_name, lord_page, rooms, airbnb_id, process_status, evaluate, ",
+        "create_time",
         "from airbnb_room_owner",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -87,6 +92,7 @@ public interface AirbnbRoomOwnerMapper {
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="airbnb_id", property="airbnbId", jdbcType=JdbcType.BIGINT),
         @Result(column="process_status", property="processStatus", jdbcType=JdbcType.INTEGER),
+        @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
     AirbnbRoomOwner selectByPrimaryKey(Long id);
@@ -108,6 +114,7 @@ public interface AirbnbRoomOwnerMapper {
           "rooms = #{rooms,jdbcType=INTEGER},",
           "airbnb_id = #{airbnbId,jdbcType=BIGINT},",
           "process_status = #{processStatus,jdbcType=INTEGER},",
+          "evaluate = #{evaluate,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"
     })

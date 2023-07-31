@@ -555,6 +555,76 @@ public class AirbnbRoomOwnerExample {
             return (Criteria) this;
         }
 
+        public Criteria andEvaluateIsNull() {
+            addCriterion("evaluate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateIsNotNull() {
+            addCriterion("evaluate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateEqualTo(String value) {
+            addCriterion("evaluate =", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateNotEqualTo(String value) {
+            addCriterion("evaluate <>", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateGreaterThan(String value) {
+            addCriterion("evaluate >", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateGreaterThanOrEqualTo(String value) {
+            addCriterion("evaluate >=", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateLessThan(String value) {
+            addCriterion("evaluate <", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateLessThanOrEqualTo(String value) {
+            addCriterion("evaluate <=", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateLike(String value) {
+            addCriterion("evaluate like", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateNotLike(String value) {
+            addCriterion("evaluate not like", value, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateIn(List<String> values) {
+            addCriterion("evaluate in", values, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateNotIn(List<String> values) {
+            addCriterion("evaluate not in", values, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateBetween(String value1, String value2) {
+            addCriterion("evaluate between", value1, value2, "evaluate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateNotBetween(String value1, String value2) {
+            addCriterion("evaluate not between", value1, value2, "evaluate");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -627,6 +697,11 @@ public class AirbnbRoomOwnerExample {
 
         public Criteria andLordPageLikeInsensitive(String value) {
             addCriterion("upper(lord_page) like", value.toUpperCase(), "lordPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateLikeInsensitive(String value) {
+            addCriterion("upper(evaluate) like", value.toUpperCase(), "evaluate");
             return (Criteria) this;
         }
     }

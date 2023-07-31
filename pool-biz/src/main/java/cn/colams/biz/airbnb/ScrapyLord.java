@@ -132,6 +132,7 @@ public class ScrapyLord {
         airbnbRoomOwner.setLordName(lord_name);
         airbnbRoomOwner.setLordPage(lordPage);
         airbnbRoomOwner.setAirbnbId(airbnbID);
+        airbnbRoomOwner.setEvaluate("");
         driver.quit();
         return airbnbRoomOwner;
     }
