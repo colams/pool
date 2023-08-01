@@ -76,7 +76,7 @@
         <table tableName="ticks"/>
         <table tableName="weight_history"/>
         <table tableName="airbnb"/>
-        <table tableName="airbnb_room_owner"/>
+        <table tableName="airbnb_lord"/>
     </context>
 
 

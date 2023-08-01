@@ -2,10 +2,10 @@ package cn.colams.biz.airbnb;
 
 import cn.colams.common.SeleniumUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
-import cn.colams.dal.entity.AirbnbRoomOwner;
-import cn.colams.dal.entity.AirbnbRoomOwnerExample;
+import cn.colams.dal.entity.AirbnbLord;
+import cn.colams.dal.entity.AirbnbLordExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
-import cn.colams.dal.mapper.extension.AirbnbRoomOwnerExtensionMapper;
+import cn.colams.dal.mapper.extension.AirbnbLordExtensionMapper;
 import com.google.common.collect.Lists;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -25,16 +25,16 @@ public class ScrapyLord2List {
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
     @Autowired
-    AirbnbRoomOwnerExtensionMapper airbnbRoomOwnerExtensionMapper;
+    AirbnbLordExtensionMapper airbnbLordExtensionMapper;
 
 
     public void lord2List(Boolean showBrowser) {
-        AirbnbRoomOwnerExample example = new AirbnbRoomOwnerExample();
-        AirbnbRoomOwnerExample.Criteria criteria = example.createCriteria();
+        AirbnbLordExample example = new AirbnbLordExample();
+        AirbnbLordExample.Criteria criteria = example.createCriteria();
         criteria.andProcessStatusIn(Lists.newArrayList(0, 3));
-        List<AirbnbRoomOwner> airbnbRoomOwners = airbnbRoomOwnerExtensionMapper.selectByExample(example);
+        List<AirbnbLord> airbnbRoomOwners = airbnbLordExtensionMapper.selectByExample(example);
 
-        for (AirbnbRoomOwner airbnbRoomOwner : airbnbRoomOwners) {
+        for (AirbnbLord airbnbRoomOwner : airbnbRoomOwners) {
             WebDriver driver = null;
             try {
                 ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
@@ -48,7 +48,7 @@ public class ScrapyLord2List {
             if (Objects.nonNull(driver)) {
                 driver.quit();
             }
-            airbnbRoomOwnerExtensionMapper.updateByPrimaryKeySelective(airbnbRoomOwner);
+            airbnbLordExtensionMapper.updateByPrimaryKeySelective(airbnbRoomOwner);
         }
     }
 

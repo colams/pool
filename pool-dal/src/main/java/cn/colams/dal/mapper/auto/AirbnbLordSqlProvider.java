@@ -1,32 +1,32 @@
 package cn.colams.dal.mapper.auto;
 
-import cn.colams.dal.entity.AirbnbRoomOwner;
-import cn.colams.dal.entity.AirbnbRoomOwnerExample.Criteria;
-import cn.colams.dal.entity.AirbnbRoomOwnerExample.Criterion;
-import cn.colams.dal.entity.AirbnbRoomOwnerExample;
+import cn.colams.dal.entity.AirbnbLord;
+import cn.colams.dal.entity.AirbnbLordExample.Criteria;
+import cn.colams.dal.entity.AirbnbLordExample.Criterion;
+import cn.colams.dal.entity.AirbnbLordExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class AirbnbRoomOwnerSqlProvider {
+public class AirbnbLordSqlProvider {
 
-    public String countByExample(AirbnbRoomOwnerExample example) {
+    public String countByExample(AirbnbLordExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("airbnb_room_owner");
+        sql.SELECT("count(*)").FROM("airbnb_lord");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(AirbnbRoomOwnerExample example) {
+    public String deleteByExample(AirbnbLordExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("airbnb_room_owner");
+        sql.DELETE_FROM("airbnb_lord");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(AirbnbRoomOwner record) {
+    public String insertSelective(AirbnbLord record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("airbnb_room_owner");
+        sql.INSERT_INTO("airbnb_lord");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
@@ -71,7 +71,7 @@ public class AirbnbRoomOwnerSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(AirbnbRoomOwnerExample example) {
+    public String selectByExample(AirbnbLordExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -87,7 +87,7 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.SELECT("evaluate");
         sql.SELECT("brief");
         sql.SELECT("create_time");
-        sql.FROM("airbnb_room_owner");
+        sql.FROM("airbnb_lord");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -98,11 +98,11 @@ public class AirbnbRoomOwnerSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        AirbnbRoomOwner record = (AirbnbRoomOwner) parameter.get("record");
-        AirbnbRoomOwnerExample example = (AirbnbRoomOwnerExample) parameter.get("example");
+        AirbnbLord record = (AirbnbLord) parameter.get("record");
+        AirbnbLordExample example = (AirbnbLordExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("airbnb_room_owner");
+        sql.UPDATE("airbnb_lord");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -150,7 +150,7 @@ public class AirbnbRoomOwnerSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("airbnb_room_owner");
+        sql.UPDATE("airbnb_lord");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("loard_id = #{record.loardId,jdbcType=VARCHAR}");
@@ -163,14 +163,14 @@ public class AirbnbRoomOwnerSqlProvider {
         sql.SET("brief = #{record.brief,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
-        AirbnbRoomOwnerExample example = (AirbnbRoomOwnerExample) parameter.get("example");
+        AirbnbLordExample example = (AirbnbLordExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(AirbnbRoomOwner record) {
+    public String updateByPrimaryKeySelective(AirbnbLord record) {
         SQL sql = new SQL();
-        sql.UPDATE("airbnb_room_owner");
+        sql.UPDATE("airbnb_lord");
         
         if (record.getLoardId() != null) {
             sql.SET("loard_id = #{loardId,jdbcType=VARCHAR}");
@@ -213,7 +213,7 @@ public class AirbnbRoomOwnerSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, AirbnbRoomOwnerExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, AirbnbLordExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

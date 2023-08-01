@@ -1,7 +1,7 @@
 package cn.colams.dal.mapper.auto;
 
-import cn.colams.dal.entity.AirbnbRoomOwner;
-import cn.colams.dal.entity.AirbnbRoomOwnerExample;
+import cn.colams.dal.entity.AirbnbLord;
+import cn.colams.dal.entity.AirbnbLordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -19,21 +19,21 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
 
 @Mapper
-public interface AirbnbRoomOwnerMapper {
-    @SelectProvider(type=AirbnbRoomOwnerSqlProvider.class, method="countByExample")
-    long countByExample(AirbnbRoomOwnerExample example);
+public interface AirbnbLordMapper {
+    @SelectProvider(type=AirbnbLordSqlProvider.class, method="countByExample")
+    long countByExample(AirbnbLordExample example);
 
-    @DeleteProvider(type=AirbnbRoomOwnerSqlProvider.class, method="deleteByExample")
-    int deleteByExample(AirbnbRoomOwnerExample example);
+    @DeleteProvider(type=AirbnbLordSqlProvider.class, method="deleteByExample")
+    int deleteByExample(AirbnbLordExample example);
 
     @Delete({
-        "delete from airbnb_room_owner",
+        "delete from airbnb_lord",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into airbnb_room_owner (id, loard_id, ",
+        "insert into airbnb_lord (id, loard_id, ",
         "lord_name, lord_page, ",
         "rooms, airbnb_id, ",
         "process_status, evaluate, ",
@@ -44,12 +44,12 @@ public interface AirbnbRoomOwnerMapper {
         "#{processStatus,jdbcType=INTEGER}, #{evaluate,jdbcType=VARCHAR}, ",
         "#{brief,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})"
     })
-    int insert(AirbnbRoomOwner record);
+    int insert(AirbnbLord record);
 
-    @InsertProvider(type=AirbnbRoomOwnerSqlProvider.class, method="insertSelective")
-    int insertSelective(AirbnbRoomOwner record);
+    @InsertProvider(type=AirbnbLordSqlProvider.class, method="insertSelective")
+    int insertSelective(AirbnbLord record);
 
-    @SelectProvider(type=AirbnbRoomOwnerSqlProvider.class, method="selectByExample")
+    @SelectProvider(type=AirbnbLordSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="loard_id", property="loardId", jdbcType=JdbcType.VARCHAR),
@@ -62,9 +62,9 @@ public interface AirbnbRoomOwnerMapper {
         @Result(column="brief", property="brief", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<AirbnbRoomOwner> selectByExampleWithRowbounds(AirbnbRoomOwnerExample example, RowBounds rowBounds);
+    List<AirbnbLord> selectByExampleWithRowbounds(AirbnbLordExample example, RowBounds rowBounds);
 
-    @SelectProvider(type=AirbnbRoomOwnerSqlProvider.class, method="selectByExample")
+    @SelectProvider(type=AirbnbLordSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="loard_id", property="loardId", jdbcType=JdbcType.VARCHAR),
@@ -77,13 +77,13 @@ public interface AirbnbRoomOwnerMapper {
         @Result(column="brief", property="brief", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<AirbnbRoomOwner> selectByExample(AirbnbRoomOwnerExample example);
+    List<AirbnbLord> selectByExample(AirbnbLordExample example);
 
     @Select({
         "select",
         "id, loard_id, lord_name, lord_page, rooms, airbnb_id, process_status, evaluate, ",
         "brief, create_time",
-        "from airbnb_room_owner",
+        "from airbnb_lord",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
@@ -98,19 +98,19 @@ public interface AirbnbRoomOwnerMapper {
         @Result(column="brief", property="brief", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    AirbnbRoomOwner selectByPrimaryKey(Long id);
+    AirbnbLord selectByPrimaryKey(Long id);
 
-    @UpdateProvider(type=AirbnbRoomOwnerSqlProvider.class, method="updateByExampleSelective")
-    int updateByExampleSelective(@Param("record") AirbnbRoomOwner record, @Param("example") AirbnbRoomOwnerExample example);
+    @UpdateProvider(type=AirbnbLordSqlProvider.class, method="updateByExampleSelective")
+    int updateByExampleSelective(@Param("record") AirbnbLord record, @Param("example") AirbnbLordExample example);
 
-    @UpdateProvider(type=AirbnbRoomOwnerSqlProvider.class, method="updateByExample")
-    int updateByExample(@Param("record") AirbnbRoomOwner record, @Param("example") AirbnbRoomOwnerExample example);
+    @UpdateProvider(type=AirbnbLordSqlProvider.class, method="updateByExample")
+    int updateByExample(@Param("record") AirbnbLord record, @Param("example") AirbnbLordExample example);
 
-    @UpdateProvider(type=AirbnbRoomOwnerSqlProvider.class, method="updateByPrimaryKeySelective")
-    int updateByPrimaryKeySelective(AirbnbRoomOwner record);
+    @UpdateProvider(type=AirbnbLordSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(AirbnbLord record);
 
     @Update({
-        "update airbnb_room_owner",
+        "update airbnb_lord",
         "set loard_id = #{loardId,jdbcType=VARCHAR},",
           "lord_name = #{lordName,jdbcType=VARCHAR},",
           "lord_page = #{lordPage,jdbcType=VARCHAR},",
@@ -122,5 +122,5 @@ public interface AirbnbRoomOwnerMapper {
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    int updateByPrimaryKey(AirbnbRoomOwner record);
+    int updateByPrimaryKey(AirbnbLord record);
 }

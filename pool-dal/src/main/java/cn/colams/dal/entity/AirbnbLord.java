@@ -2,7 +2,7 @@ package cn.colams.dal.entity;
 
 import java.util.Date;
 
-public class AirbnbRoomOwner {
+public class AirbnbLord {
     private Long id;
 
     private String loardId;
@@ -27,7 +27,7 @@ public class AirbnbRoomOwner {
         return id;
     }
 
-    public AirbnbRoomOwner withId(Long id) {
+    public AirbnbLord withId(Long id) {
         this.setId(id);
         return this;
     }
@@ -40,7 +40,7 @@ public class AirbnbRoomOwner {
         return loardId;
     }
 
-    public AirbnbRoomOwner withLoardId(String loardId) {
+    public AirbnbLord withLoardId(String loardId) {
         this.setLoardId(loardId);
         return this;
     }
@@ -53,7 +53,7 @@ public class AirbnbRoomOwner {
         return lordName;
     }
 
-    public AirbnbRoomOwner withLordName(String lordName) {
+    public AirbnbLord withLordName(String lordName) {
         this.setLordName(lordName);
         return this;
     }
@@ -66,7 +66,7 @@ public class AirbnbRoomOwner {
         return lordPage;
     }
 
-    public AirbnbRoomOwner withLordPage(String lordPage) {
+    public AirbnbLord withLordPage(String lordPage) {
         this.setLordPage(lordPage);
         return this;
     }
@@ -79,7 +79,7 @@ public class AirbnbRoomOwner {
         return rooms;
     }
 
-    public AirbnbRoomOwner withRooms(Integer rooms) {
+    public AirbnbLord withRooms(Integer rooms) {
         this.setRooms(rooms);
         return this;
     }
@@ -92,7 +92,7 @@ public class AirbnbRoomOwner {
         return airbnbId;
     }
 
-    public AirbnbRoomOwner withAirbnbId(Long airbnbId) {
+    public AirbnbLord withAirbnbId(Long airbnbId) {
         this.setAirbnbId(airbnbId);
         return this;
     }
@@ -105,7 +105,7 @@ public class AirbnbRoomOwner {
         return processStatus;
     }
 
-    public AirbnbRoomOwner withProcessStatus(Integer processStatus) {
+    public AirbnbLord withProcessStatus(Integer processStatus) {
         this.setProcessStatus(processStatus);
         return this;
     }
@@ -118,7 +118,7 @@ public class AirbnbRoomOwner {
         return evaluate;
     }
 
-    public AirbnbRoomOwner withEvaluate(String evaluate) {
+    public AirbnbLord withEvaluate(String evaluate) {
         this.setEvaluate(evaluate);
         return this;
     }
@@ -131,7 +131,7 @@ public class AirbnbRoomOwner {
         return brief;
     }
 
-    public AirbnbRoomOwner withBrief(String brief) {
+    public AirbnbLord withBrief(String brief) {
         this.setBrief(brief);
         return this;
     }
@@ -144,7 +144,7 @@ public class AirbnbRoomOwner {
         return createTime;
     }
 
-    public AirbnbRoomOwner withCreateTime(Date createTime) {
+    public AirbnbLord withCreateTime(Date createTime) {
         this.setCreateTime(createTime);
         return this;
     }

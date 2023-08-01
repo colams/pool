@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AirbnbRoomOwnerExample {
+public class AirbnbLordExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public AirbnbRoomOwnerExample() {
+    public AirbnbLordExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
