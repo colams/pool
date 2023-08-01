@@ -136,11 +136,10 @@ public class ScrapyList {
                 .withrSrouce(0);
 
         airbnb.withArea("")
-                .withLandlordId("")
+                .withLordId("")
                 .withPrice("");
 
-        airbnb.withEvaluate(evaluate)
-                .withPictureCount(picture_count)
+        airbnb.withPictureCount(picture_count)
                 .withRoomName(roomName)
                 .withPage(pageIndex);
         return airbnb;

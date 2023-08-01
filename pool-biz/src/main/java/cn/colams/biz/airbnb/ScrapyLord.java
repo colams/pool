@@ -100,7 +100,7 @@ public class ScrapyLord {
             price = OptionalUtils.stringVal(op1, e -> e.getText());
         }
 
-        airbnb.withLandlordId(lord_id).withRoomLocation(location).withPrice(price);
+        airbnb.withLordId(lord_id).withRoomLocation(location).withPrice(price);
 
         AirbnbRoomOwnerExample example = new AirbnbRoomOwnerExample();
         AirbnbRoomOwnerExample.Criteria criteria = example.createCriteria();
