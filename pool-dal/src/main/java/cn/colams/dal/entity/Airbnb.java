@@ -11,7 +11,7 @@ public class Airbnb {
 
     private String roomUrl;
 
-    private String landlordId;
+    private String lordId;
 
     private String price;
 
@@ -25,11 +25,11 @@ public class Airbnb {
 
     private String orgUrl;
 
-    private String evaluate;
-
     private Integer pictureCount;
 
     private String area;
+
+    private Date datechangeLasttime;
 
     private Date createTime;
 
@@ -87,17 +87,17 @@ public class Airbnb {
         this.roomUrl = roomUrl == null ? null : roomUrl.trim();
     }
 
-    public String getLandlordId() {
-        return landlordId;
+    public String getLordId() {
+        return lordId;
     }
 
-    public Airbnb withLandlordId(String landlordId) {
-        this.setLandlordId(landlordId);
+    public Airbnb withLordId(String lordId) {
+        this.setLordId(lordId);
         return this;
     }
 
-    public void setLandlordId(String landlordId) {
-        this.landlordId = landlordId == null ? null : landlordId.trim();
+    public void setLordId(String lordId) {
+        this.lordId = lordId == null ? null : lordId.trim();
     }
 
     public String getPrice() {
@@ -178,19 +178,6 @@ public class Airbnb {
         this.orgUrl = orgUrl == null ? null : orgUrl.trim();
     }
 
-    public String getEvaluate() {
-        return evaluate;
-    }
-
-    public Airbnb withEvaluate(String evaluate) {
-        this.setEvaluate(evaluate);
-        return this;
-    }
-
-    public void setEvaluate(String evaluate) {
-        this.evaluate = evaluate == null ? null : evaluate.trim();
-    }
-
     public Integer getPictureCount() {
         return pictureCount;
     }
@@ -215,6 +202,19 @@ public class Airbnb {
 
     public void setArea(String area) {
         this.area = area == null ? null : area.trim();
+    }
+
+    public Date getDatechangeLasttime() {
+        return datechangeLasttime;
+    }
+
+    public Airbnb withDatechangeLasttime(Date datechangeLasttime) {
+        this.setDatechangeLasttime(datechangeLasttime);
+        return this;
+    }
+
+    public void setDatechangeLasttime(Date datechangeLasttime) {
+        this.datechangeLasttime = datechangeLasttime;
     }
 
     public Date getCreateTime() {

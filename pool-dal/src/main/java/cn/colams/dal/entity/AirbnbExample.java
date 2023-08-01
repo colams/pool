@@ -375,73 +375,73 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdIsNull() {
-            addCriterion("landlord_id is null");
+        public Criteria andLordIdIsNull() {
+            addCriterion("lord_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdIsNotNull() {
-            addCriterion("landlord_id is not null");
+        public Criteria andLordIdIsNotNull() {
+            addCriterion("lord_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdEqualTo(String value) {
-            addCriterion("landlord_id =", value, "landlordId");
+        public Criteria andLordIdEqualTo(String value) {
+            addCriterion("lord_id =", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdNotEqualTo(String value) {
-            addCriterion("landlord_id <>", value, "landlordId");
+        public Criteria andLordIdNotEqualTo(String value) {
+            addCriterion("lord_id <>", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdGreaterThan(String value) {
-            addCriterion("landlord_id >", value, "landlordId");
+        public Criteria andLordIdGreaterThan(String value) {
+            addCriterion("lord_id >", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdGreaterThanOrEqualTo(String value) {
-            addCriterion("landlord_id >=", value, "landlordId");
+        public Criteria andLordIdGreaterThanOrEqualTo(String value) {
+            addCriterion("lord_id >=", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdLessThan(String value) {
-            addCriterion("landlord_id <", value, "landlordId");
+        public Criteria andLordIdLessThan(String value) {
+            addCriterion("lord_id <", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdLessThanOrEqualTo(String value) {
-            addCriterion("landlord_id <=", value, "landlordId");
+        public Criteria andLordIdLessThanOrEqualTo(String value) {
+            addCriterion("lord_id <=", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdLike(String value) {
-            addCriterion("landlord_id like", value, "landlordId");
+        public Criteria andLordIdLike(String value) {
+            addCriterion("lord_id like", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdNotLike(String value) {
-            addCriterion("landlord_id not like", value, "landlordId");
+        public Criteria andLordIdNotLike(String value) {
+            addCriterion("lord_id not like", value, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdIn(List<String> values) {
-            addCriterion("landlord_id in", values, "landlordId");
+        public Criteria andLordIdIn(List<String> values) {
+            addCriterion("lord_id in", values, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdNotIn(List<String> values) {
-            addCriterion("landlord_id not in", values, "landlordId");
+        public Criteria andLordIdNotIn(List<String> values) {
+            addCriterion("lord_id not in", values, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdBetween(String value1, String value2) {
-            addCriterion("landlord_id between", value1, value2, "landlordId");
+        public Criteria andLordIdBetween(String value1, String value2) {
+            addCriterion("lord_id between", value1, value2, "lordId");
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdNotBetween(String value1, String value2) {
-            addCriterion("landlord_id not between", value1, value2, "landlordId");
+        public Criteria andLordIdNotBetween(String value1, String value2) {
+            addCriterion("lord_id not between", value1, value2, "lordId");
             return (Criteria) this;
         }
 
@@ -835,76 +835,6 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andEvaluateIsNull() {
-            addCriterion("evaluate is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateIsNotNull() {
-            addCriterion("evaluate is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateEqualTo(String value) {
-            addCriterion("evaluate =", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateNotEqualTo(String value) {
-            addCriterion("evaluate <>", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateGreaterThan(String value) {
-            addCriterion("evaluate >", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateGreaterThanOrEqualTo(String value) {
-            addCriterion("evaluate >=", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateLessThan(String value) {
-            addCriterion("evaluate <", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateLessThanOrEqualTo(String value) {
-            addCriterion("evaluate <=", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateLike(String value) {
-            addCriterion("evaluate like", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateNotLike(String value) {
-            addCriterion("evaluate not like", value, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateIn(List<String> values) {
-            addCriterion("evaluate in", values, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateNotIn(List<String> values) {
-            addCriterion("evaluate not in", values, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateBetween(String value1, String value2) {
-            addCriterion("evaluate between", value1, value2, "evaluate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateNotBetween(String value1, String value2) {
-            addCriterion("evaluate not between", value1, value2, "evaluate");
-            return (Criteria) this;
-        }
-
         public Criteria andPictureCountIsNull() {
             addCriterion("picture_count is null");
             return (Criteria) this;
@@ -1035,6 +965,66 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
+        public Criteria andDatechangeLasttimeIsNull() {
+            addCriterion("datechange_lasttime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeIsNotNull() {
+            addCriterion("datechange_lasttime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeEqualTo(Date value) {
+            addCriterion("datechange_lasttime =", value, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeNotEqualTo(Date value) {
+            addCriterion("datechange_lasttime <>", value, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeGreaterThan(Date value) {
+            addCriterion("datechange_lasttime >", value, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("datechange_lasttime >=", value, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeLessThan(Date value) {
+            addCriterion("datechange_lasttime <", value, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeLessThanOrEqualTo(Date value) {
+            addCriterion("datechange_lasttime <=", value, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeIn(List<Date> values) {
+            addCriterion("datechange_lasttime in", values, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeNotIn(List<Date> values) {
+            addCriterion("datechange_lasttime not in", values, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeBetween(Date value1, Date value2) {
+            addCriterion("datechange_lasttime between", value1, value2, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatechangeLasttimeNotBetween(Date value1, Date value2) {
+            addCriterion("datechange_lasttime not between", value1, value2, "datechangeLasttime");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -1110,8 +1100,8 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andLandlordIdLikeInsensitive(String value) {
-            addCriterion("upper(landlord_id) like", value.toUpperCase(), "landlordId");
+        public Criteria andLordIdLikeInsensitive(String value) {
+            addCriterion("upper(lord_id) like", value.toUpperCase(), "lordId");
             return (Criteria) this;
         }
 
@@ -1127,11 +1117,6 @@ public class AirbnbExample {
 
         public Criteria andOrgUrlLikeInsensitive(String value) {
             addCriterion("upper(org_url) like", value.toUpperCase(), "orgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluateLikeInsensitive(String value) {
-            addCriterion("upper(evaluate) like", value.toUpperCase(), "evaluate");
             return (Criteria) this;
         }
 

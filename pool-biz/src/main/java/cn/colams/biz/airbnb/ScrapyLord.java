@@ -19,7 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -49,7 +52,7 @@ public class ScrapyLord {
             WebDriver driver = null;
             try {
                 ChromeOptionEnum optionEnum = showBrowser ? null : ChromeOptionEnum.HEADLESS;
-                driver = SeleniumUtils.getWebDriverV2(airbnb.getRoomUrl(), optionEnum);
+                driver = SeleniumUtils.getWebDriverImpl(airbnb.getRoomUrl(), optionEnum);
                 analysisDetail(driver, airbnb);
             } catch (Exception e) {
                 LOGGER.error("scrapyLord:" + airbnb.getRoomId(), e);
@@ -69,7 +72,7 @@ public class ScrapyLord {
      * @param airbnb
      * @return
      */
-    private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) {
+    private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) throws ParseException {
         Optional<WebElement> loadPageEl = SeleniumUtils.findElement(driver,
                 By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT'] a[href^='/users/show/']"));
         if (!loadPageEl.isPresent()) {
@@ -121,7 +124,7 @@ public class ScrapyLord {
      * @param airbnbID
      * @return
      */
-    private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Long airbnbID) {
+    private AirbnbRoomOwner getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Long airbnbID) throws ParseException {
         String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
         String url2 = String.format("https://zh.airbnb.com/users/show/%s", lord_id);
 
@@ -142,31 +145,58 @@ public class ScrapyLord {
         return airbnbRoomOwner;
     }
 
+    /**
+     * 获取房东名
+     *
+     * @param driver
+     * @param lord_id
+     * @return
+     */
     public String getLordName(WebDriver driver, String lord_id) {
         By by = By.cssSelector("a[href='/users/show/" + lord_id + "']");
         Optional<WebElement> userEl = SeleniumUtils.findElement(driver, by);
         return OptionalUtils.stringVal(userEl, e -> e.getText());
     }
 
-    public int getLordRooms(WebDriver driver) {
+    /**
+     * 获取房间数
+     *
+     * @param driver
+     * @return
+     * @throws ParseException
+     */
+    public int getLordRooms(WebDriver driver) throws ParseException {
         By by = By.cssSelector("div[class='_h6avcp2']");
         Optional<WebElement> roomsEl = SeleniumUtils.findElement(driver, by);
-        return Integer.valueOf(OptionalUtils.stringVal(roomsEl, e -> e.getText()).split("个")[0]);
+        String numberStr = OptionalUtils.stringVal(roomsEl, e -> e.getText()).split("个")[0];
+        return NumberFormat.getNumberInstance(Locale.US).parse(numberStr).intValue();
     }
 
+    /**
+     * 获取房东简介
+     *
+     * @param driver
+     * @return
+     */
     public String getLordBrief(WebDriver driver) {
         By by = By.cssSelector("div[data-testid='user-profile-content'] section");
         Optional<WebElement> briefEl = SeleniumUtils.findElement(driver, by);
         return OptionalUtils.stringVal(briefEl, e -> e.getText());
     }
 
+    /**
+     * 获取评价信息
+     *
+     * @param driver
+     * @return
+     */
     public String getEvaluate(WebDriver driver) {
         By by = By.cssSelector("div[data-veloute='user_profile_frame'] section section .sxz955h > div > span");
         Optional<List<WebElement>> evaluateEls = SeleniumUtils.findElements(driver, by);
         StringBuffer stringBuffer = new StringBuffer();
         if (evaluateEls.isPresent()) {
             for (WebElement el : evaluateEls.get()) {
-                stringBuffer.append(el.getText());
+                stringBuffer.append(el.getText() + ";");
             }
         }
         return stringBuffer.toString();

@@ -24,7 +24,6 @@ public class SeleniumUtils {
      *
      * @param targetUrl 目标地址
      * @param options
-     * @param cookies
      * @return
      */
     public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options) {
