@@ -4,6 +4,7 @@ import cn.colams.common.dto.airbnb.UserPromoListsResponse;
 import cn.colams.common.dto.airbnb.entity.UserPromoListings;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
+import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.dal.entity.AirbnbLordExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
@@ -35,10 +36,13 @@ public class CrawlerLord2List {
     AirbnbLordExtensionMapper airbnbLordExtensionMapper;
 
 
-    public void lord2List(Boolean showBrowser) {
+    public void lord2List(Boolean showBrowser, String lordId) {
         AirbnbLordExample example = new AirbnbLordExample();
         AirbnbLordExample.Criteria criteria = example.createCriteria();
         criteria.andProcessStatusIn(Lists.newArrayList(0, 2));
+        if (Objects.nonNull(lordId)) {
+            criteria.andLoardIdEqualTo(lordId);
+        }
         List<AirbnbLord> airbnbRoomOwners = airbnbLordExtensionMapper.selectByExample(example);
 
         for (AirbnbLord airbnbRoomOwner : airbnbRoomOwners) {
@@ -61,7 +65,7 @@ public class CrawlerLord2List {
         }
     }
 
-    private boolean getUserListings(String lord_id, int rooms) throws IOException {
+    private boolean getUserListings(String lord_id, int rooms) throws IOException, InterruptedException {
         String user_lists_url = String.format("%s%s", Constant.HOST_URL, Constant.USER_PROMO_LISTINGS_URL);
         int groupCount = getGroupCount(rooms);
         List<Header> headers = new ArrayList<>();
@@ -75,13 +79,21 @@ public class CrawlerLord2List {
             response.getUserPromoListings().forEach(userPromoListings -> {
                 saveAirbnbRoom(userPromoListings, lord_id);
             });
+            Thread.sleep(1 * 1000);
         }
         return true;
     }
 
     private void saveAirbnbRoom(UserPromoListings userPromoListings, String lord_id) {
         try {
-
+            Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(userPromoListings.getIdStr());
+            if (airbnb == null) {
+                airbnb = new Airbnb();
+            }
+            airbnb.setRoomName(userPromoListings.getName());
+            airbnb.setRoomId(userPromoListings.getIdStr());
+            airbnb.setLordId(lord_id);
+            airbnbExtensionMapper.insertOrUpdate(airbnb);
         } catch (Exception e) {
             LOGGER.error("saveAirbnbRoom error", e);
         }

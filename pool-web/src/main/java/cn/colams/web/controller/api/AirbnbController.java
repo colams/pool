@@ -38,8 +38,8 @@ public class AirbnbController {
 
 
     @GetMapping("/lord2list")
-    public String lordList(@RequestParam Boolean showBrowser) {
-        lord2List.lord2List(showBrowser);
+    public String lordList(@RequestParam Boolean showBrowser, @RequestParam String lordId) {
+        lord2List.lord2List(showBrowser, lordId);
         return "success";
     }
 
