@@ -1,9 +1,9 @@
 package cn.colams.web.controller.api;
 
 
-import cn.colams.biz.airbnb.ScrapyList;
-import cn.colams.biz.airbnb.ScrapyLord;
-import cn.colams.biz.airbnb.ScrapyLord2List;
+import cn.colams.biz.airbnb.CrawlerList;
+import cn.colams.biz.airbnb.CrawlerLord;
+import cn.colams.biz.airbnb.CrawlerLord2List;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,31 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(value = "airbnb", tags = {"airbnb"})
 @RestController
-@RequestMapping("/airbnb")
+@RequestMapping("/api/airbnb")
 public class AirbnbController {
 
     @Autowired
-    private ScrapyList scrapyList;
+    private CrawlerList crawlerList;
     @Autowired
-    private ScrapyLord scrapyLord;
+    private CrawlerLord crawlerLord;
     @Autowired
-    private ScrapyLord2List lord2List;
+    private CrawlerLord2List lord2List;
 
 
-    @GetMapping("/scrapy/list")
-    public String scrapyList(@RequestParam String targetUrl, @RequestParam Boolean showBrowser) {
-        scrapyList.scrapyList(targetUrl, null, showBrowser);
+    @GetMapping("/list")
+    public String crawlerList(@RequestParam String targetUrl, @RequestParam Boolean showBrowser) {
+        crawlerList.crawlerList(targetUrl, null, showBrowser);
         return "success";
     }
 
-    @GetMapping("/scrapy/lord")
-    public String scrapyLord(@RequestParam Boolean showBrowser) {
-        scrapyLord.scrapyLord(showBrowser);
+    @GetMapping("/lord")
+    public String crawlerLord(@RequestParam Boolean showBrowser) {
+        crawlerLord.crawlerLord(showBrowser);
         return "success";
     }
 
 
-    @GetMapping("/scrapy/lord2list")
+    @GetMapping("/lord2list")
     public String lordList(@RequestParam Boolean showBrowser) {
         lord2List.lord2List(showBrowser);
         return "success";

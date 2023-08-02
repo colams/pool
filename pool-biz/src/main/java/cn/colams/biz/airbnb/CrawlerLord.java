@@ -27,9 +27,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public class ScrapyLord {
+public class CrawlerLord {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ScrapyLord.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrawlerLord.class);
 
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
@@ -42,7 +42,7 @@ public class ScrapyLord {
      *
      * @param showBrowser
      */
-    public void scrapyLord(Boolean showBrowser) {
+    public void crawlerLord(Boolean showBrowser) {
         AirbnbExample airbnbExample = new AirbnbExample();
         AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
         criteria.andDealStatusIn(Lists.newArrayList(0, 2));

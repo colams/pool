@@ -1,6 +1,7 @@
 package cn.colams.biz.airbnb;
 
 import cn.colams.common.dto.airbnb.UserPromoListsResponse;
+import cn.colams.common.dto.airbnb.entity.UserPromoListings;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
 import cn.colams.dal.entity.AirbnbLord;
@@ -8,6 +9,7 @@ import cn.colams.dal.entity.AirbnbLordExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.dal.mapper.extension.AirbnbLordExtensionMapper;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.message.BasicHeader;
 import org.openqa.selenium.WebDriver;
@@ -22,10 +24,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public class ScrapyLord2List {
+public class CrawlerLord2List {
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ScrapyLord.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrawlerLord.class);
 
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
@@ -36,37 +38,52 @@ public class ScrapyLord2List {
     public void lord2List(Boolean showBrowser) {
         AirbnbLordExample example = new AirbnbLordExample();
         AirbnbLordExample.Criteria criteria = example.createCriteria();
-        criteria.andProcessStatusIn(Lists.newArrayList(0, 3));
+        criteria.andProcessStatusIn(Lists.newArrayList(0, 2));
         List<AirbnbLord> airbnbRoomOwners = airbnbLordExtensionMapper.selectByExample(example);
 
         for (AirbnbLord airbnbRoomOwner : airbnbRoomOwners) {
             WebDriver driver = null;
             try {
-                getUserListings(airbnbRoomOwner.getLoardId(), airbnbRoomOwner.getRooms());
-                airbnbRoomOwner.setProcessStatus(1);
+                if (airbnbRoomOwner.getRooms() > 0) {
+                    boolean isSucc = getUserListings(airbnbRoomOwner.getLoardId(), airbnbRoomOwner.getRooms());
+                    airbnbRoomOwner.setProcessStatus(isSucc ? 1 : 2);
+                } else {
+                    airbnbRoomOwner.setProcessStatus(1);
+                }
             } catch (Exception e) {
                 LOGGER.error("scrapyLord:" + airbnbRoomOwner.getId(), e);
-                airbnbRoomOwner.setProcessStatus(3);
+                airbnbRoomOwner.setProcessStatus(2);
             }
             if (Objects.nonNull(driver)) {
                 driver.quit();
             }
-            // airbnbLordExtensionMapper.updateByPrimaryKeySelective(airbnbRoomOwner);
+            airbnbLordExtensionMapper.updateByPrimaryKeySelective(airbnbRoomOwner);
         }
     }
 
-    private void getUserListings(String lord_id, int rooms) throws IOException {
-        if (rooms <= 0) {
-            return;
-        }
+    private boolean getUserListings(String lord_id, int rooms) throws IOException {
         String user_lists_url = String.format("%s%s", Constant.HOST_URL, Constant.USER_PROMO_LISTINGS_URL);
         int groupCount = getGroupCount(rooms);
         List<Header> headers = new ArrayList<>();
         headers.add(new BasicHeader(AirbnbApiKey.HEADER_KEY, AirbnbApiKey.HEADER_VALUE));
         for (int i = 0; i < groupCount; i++) {
             String res = HttpUtils.doGet(String.format(user_lists_url, i * Constant.GROUP_SIZE, lord_id), headers);
+            if (StringUtils.isEmpty(res)) {
+                return false;
+            }
             UserPromoListsResponse response = JacksonSerializerUtil.deserialize(res, UserPromoListsResponse.class);
-            System.out.println(res);
+            response.getUserPromoListings().forEach(userPromoListings -> {
+                saveAirbnbRoom(userPromoListings, lord_id);
+            });
+        }
+        return true;
+    }
+
+    private void saveAirbnbRoom(UserPromoListings userPromoListings, String lord_id) {
+        try {
+
+        } catch (Exception e) {
+            LOGGER.error("saveAirbnbRoom error", e);
         }
     }
 

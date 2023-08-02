@@ -3,6 +3,7 @@ package cn.colams.web.controller.api;
 
 import cn.colams.biz.haipi111.Haipi111Biz;
 import cn.colams.common.utils.JacksonSerializerUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Api(value = "haipi", tags = {"haipi"})
 @Controller
 @RequestMapping("/api/haipi")
 public class Haipi111Controller {

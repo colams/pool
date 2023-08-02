@@ -23,9 +23,9 @@ import java.util.Optional;
 import java.util.Set;
 
 @Component
-public class ScrapyList {
+public class CrawlerList {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ScrapyList.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrawlerList.class);
 
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
@@ -38,7 +38,7 @@ public class ScrapyList {
      * @param showBrowser
      * @return
      */
-    public boolean scrapyList(String targetUrl, Integer pageIndex, Boolean showBrowser) {
+    public boolean crawlerList(String targetUrl, Integer pageIndex, Boolean showBrowser) {
         return scrapyListWithCookies(targetUrl, pageIndex, showBrowser, null);
     }
 
