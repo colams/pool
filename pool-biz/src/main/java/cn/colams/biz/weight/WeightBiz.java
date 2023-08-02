@@ -24,19 +24,11 @@ public class WeightBiz {
         return list;
     }
 
-    public boolean insert(WeightHistory weightHistory) {
+    public boolean insertOrUpdate(WeightHistory weightHistory) {
         if (weightHistory.getWeight() == null) {
             return false;
         }
-        boolean result = weightHistoryExtensionMapper.insertSelective(weightHistory) > 0;
-        return result;
-    }
-
-    public boolean update(WeightHistory weightHistory) {
-        if (weightHistory.getWeight() == null) {
-            return false;
-        }
-        boolean result = weightHistoryExtensionMapper.updateByPrimaryKeySelective(weightHistory) > 0;
+        boolean result = weightHistoryExtensionMapper.insertOrUpdate(weightHistory) > 0;
         return result;
     }
 

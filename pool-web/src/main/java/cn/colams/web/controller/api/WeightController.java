@@ -30,11 +30,7 @@ public class WeightController {
         if (data == null || data.getWeight() == null) {
             return "parameter error";
         }
-        if (data.getId() == null) {
-            return weightBiz.insert(data);
-        } else {
-            return weightBiz.update(data);
-        }
+        return weightBiz.insertOrUpdate(data);
     }
 
     @ResponseBody
