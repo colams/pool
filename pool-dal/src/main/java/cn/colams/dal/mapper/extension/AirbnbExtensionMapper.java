@@ -56,7 +56,7 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
             "#{area,jdbcType=VARCHAR}, #{datechangeLasttime,jdbcType=TIMESTAMP}, ",
             "#{createTime,jdbcType=TIMESTAMP}, #{extra,jdbcType=LONGVARCHAR})",
             "on duplicate key update",
-            "lord_id = values(lord_id)",
+            "lord_id = values(lord_id),",
             "deal_status = values(deal_status)",
     })
     int insertOrUpdate(Airbnb record);
