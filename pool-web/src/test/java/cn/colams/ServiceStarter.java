@@ -17,6 +17,6 @@ public class ServiceStarter {
         SpringApplication.run(WebApplication.class);
 
         // port 8080 is configured in src/test/resources/application.properties(key: server.port)
-        Desktop.getDesktop().browse(new URI("http://127.0.0.1:5000/"));
+        Desktop.getDesktop().browse(new URI("http://127.0.0.1:5001/"));
     }
 }

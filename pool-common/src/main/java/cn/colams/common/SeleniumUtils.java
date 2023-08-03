@@ -7,6 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 public class SeleniumUtils {
 
@@ -27,21 +32,13 @@ public class SeleniumUtils {
      * @return
      */
     public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options) {
-        System.setProperty("webdriver.chrome.driver", ClassLoader.getSystemResource("driver/chromedriver.exe").getPath());
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--start-maximized");
-        if (Objects.nonNull(options)) {
-            chromeOptions.addArguments(options.getValue());
-        }
-        WebDriver webDriver = new ChromeDriver(chromeOptions);
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriver.get(targetUrl);
+        WebDriver driver = getWebDriverV2(targetUrl, options);
         try {
             Thread.sleep(10 * 1000);
-            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
             boolean result = (Boolean) executor.executeScript("return document.body.style.overflow!=\"hidden\"");
             if (!result) {
-                WebElement modalButton = findElement(webDriver, By.cssSelector("div[data-testid='modal-container'] button")).orElse(null);
+                WebElement modalButton = findElement(driver, By.cssSelector("div[data-testid='modal-container'] button")).orElse(null);
                 modalButton.click();
             }
             Thread.sleep(3 * 1000);
@@ -51,7 +48,7 @@ public class SeleniumUtils {
         } catch (InterruptedException e) {
             LOGGER.error("getWebDriverImpl", e);
         }
-        return webDriver;
+        return driver;
     }
 
     /**
@@ -68,16 +65,22 @@ public class SeleniumUtils {
         if (Objects.nonNull(options)) {
             chromeOptions.addArguments(options.getValue());
         }
-        WebDriver webDriver = new ChromeDriver(chromeOptions);
-        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        webDriver.get(targetUrl);
+        DesiredCapabilities caps = DesiredCapabilities.chrome();
+        LoggingPreferences logPrefs = new LoggingPreferences();
+        logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+        caps.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+        caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+        WebDriver driver = new ChromeDriver(caps);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.get(targetUrl);
 
         try {
             Thread.sleep(1 * 1000);
         } catch (InterruptedException e) {
             LOGGER.error("getWebDriverV2", e);
         }
-        return webDriver;
+        return driver;
     }
 
     public static Optional<WebElement> findElement(WebDriver driver, By by) {

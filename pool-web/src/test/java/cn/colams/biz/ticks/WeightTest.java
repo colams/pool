@@ -41,7 +41,7 @@ public class WeightTest {
     public void add() {
         WeightHistory weight = new WeightHistory();
         Mockito.doReturn(1).when(weightHistoryExtensionMapper).insertSelective(any());
-        boolean resutl = weightBiz.insert(weight);
+        boolean resutl = weightBiz.insertOrUpdate(weight);
         System.out.print(resutl);
     }
 }

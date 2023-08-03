@@ -1,6 +1,7 @@
 package cn.colams.web.controller.api;
 
 
+import cn.colams.biz.airbnb.CrawlerApiKey;
 import cn.colams.biz.airbnb.CrawlerList;
 import cn.colams.biz.airbnb.CrawlerLord;
 import cn.colams.biz.airbnb.CrawlerLord2List;
@@ -22,6 +23,8 @@ public class AirbnbController {
     private CrawlerLord crawlerLord;
     @Autowired
     private CrawlerLord2List lord2List;
+    @Autowired
+    private CrawlerApiKey crawlerApiKey;
 
 
     @GetMapping("/list")
@@ -41,6 +44,11 @@ public class AirbnbController {
     public String lordList(@RequestParam Boolean showBrowser, @RequestParam String lordId) {
         lord2List.lord2List(showBrowser, lordId);
         return "success";
+    }
+
+    @GetMapping("/apikey")
+    public String apikey(@RequestParam String url) {
+        return crawlerApiKey.crawlerApiKey(url);
     }
 
 }
