@@ -6,23 +6,25 @@ import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbLord;
-import cn.colams.dal.entity.AirbnbLordExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.dal.mapper.extension.AirbnbLordExtensionMapper;
-import com.google.common.collect.Lists;
+import com.github.rholder.retry.RetryException;
+import com.github.rholder.retry.RetryerBuilder;
+import com.github.rholder.retry.StopStrategies;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.message.BasicHeader;
-import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class CrawlerLord2List {
@@ -33,49 +35,51 @@ public class CrawlerLord2List {
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
     @Autowired
-    AirbnbLordExtensionMapper airbnbLordExtensionMapper;
+    AirbnbLordExtensionMapper lordExtensionMapper;
+    @Autowired
+    CrawlerApiKey crawlerApiKey;
 
-
-    public void lord2List(Boolean showBrowser, String lordId) {
-        AirbnbLordExample example = new AirbnbLordExample();
-        AirbnbLordExample.Criteria criteria = example.createCriteria();
-        criteria.andProcessStatusIn(Lists.newArrayList(0, 2));
-        if (Objects.nonNull(lordId)) {
-            criteria.andLoardIdEqualTo(lordId);
-        }
-        List<AirbnbLord> airbnbRoomOwners = airbnbLordExtensionMapper.selectByExample(example);
+    public void lord2List(String lordId) {
+        List<AirbnbLord> airbnbRoomOwners = lordExtensionMapper.selectAirbnbLordByStatus(lordId);
 
         for (AirbnbLord airbnbRoomOwner : airbnbRoomOwners) {
-            WebDriver driver = null;
+            boolean isSucc = false;
             try {
                 if (airbnbRoomOwner.getRooms() > 0) {
-                    boolean isSucc = getUserListings(airbnbRoomOwner.getLoardId(), airbnbRoomOwner.getRooms());
-                    airbnbRoomOwner.setProcessStatus(isSucc ? 1 : 2);
-                } else {
-                    airbnbRoomOwner.setProcessStatus(1);
+                    isSucc = getUserListings(airbnbRoomOwner.getLoardId(), airbnbRoomOwner.getRooms());
                 }
             } catch (Exception e) {
                 LOGGER.error("scrapyLord:" + airbnbRoomOwner.getId(), e);
-                airbnbRoomOwner.setProcessStatus(2);
+                isSucc = false;
             }
-            if (Objects.nonNull(driver)) {
-                driver.quit();
-            }
-            airbnbLordExtensionMapper.updateByPrimaryKeySelective(airbnbRoomOwner);
+            airbnbRoomOwner.setProcessStatus(isSucc ? 1 : 2);
+            lordExtensionMapper.updateByPrimaryKeySelective(airbnbRoomOwner);
         }
     }
 
-    private boolean getUserListings(String lord_id, int rooms) throws IOException, InterruptedException {
-        String user_lists_url = String.format("%s%s", Constant.HOST_URL, Constant.USER_PROMO_LISTINGS_URL);
+    private boolean getUserListings(String lord_id, int rooms) throws IOException, InterruptedException, ExecutionException, RetryException {
         int groupCount = getGroupCount(rooms);
         List<Header> headers = new ArrayList<>();
         headers.add(new BasicHeader(AirbnbApiKey.HEADER_KEY, AirbnbApiKey.HEADER_VALUE));
+        int retryTime = 3;
         for (int i = 0; i < groupCount; i++) {
-            String res = HttpUtils.doGet(String.format(user_lists_url, i * Constant.GROUP_SIZE, lord_id), headers);
-            if (StringUtils.isEmpty(res)) {
+            int group = i;
+            // 重试三次
+            UserPromoListsResponse response = RetryerBuilder.<UserPromoListsResponse>newBuilder()
+                    .retryIfResult(e -> {
+                        if (e.getErrorCode() == 400) {
+                            headers.clear();
+                            headers.add(new BasicHeader(AirbnbApiKey.HEADER_KEY, crawlerApiKey.crawlerApiKey(null)));
+                        }
+                        return e.getErrorCode() == 400;
+                    })
+                    .withBlockStrategy(Objects::isNull)
+                    .withStopStrategy(StopStrategies.stopAfterAttempt(retryTime))
+                    .build().call(() -> queryUserPromoLists(group, lord_id, headers));
+            if (Objects.isNull(response) || CollectionUtils.isEmpty(response.getUserPromoListings())) {
                 return false;
             }
-            UserPromoListsResponse response = JacksonSerializerUtil.deserialize(res, UserPromoListsResponse.class);
+
             response.getUserPromoListings().forEach(userPromoListings -> {
                 saveAirbnbRoom(userPromoListings, lord_id);
             });
@@ -83,6 +87,13 @@ public class CrawlerLord2List {
         }
         return true;
     }
+
+    private UserPromoListsResponse queryUserPromoLists(int group, String lord_id, List<Header> headers) throws IOException {
+        String user_lists_url = String.format("%s%s", Constant.HOST_URL, Constant.USER_PROMO_LISTINGS_URL);
+        String res = HttpUtils.doGet(String.format(user_lists_url, group * Constant.GROUP_SIZE, lord_id), headers);
+        return StringUtils.isNotBlank(res) ? JacksonSerializerUtil.deserialize(res, UserPromoListsResponse.class) : null;
+    }
+
 
     private void saveAirbnbRoom(UserPromoListings userPromoListings, String lord_id) {
         try {

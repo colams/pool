@@ -41,8 +41,8 @@ public class AirbnbController {
 
 
     @GetMapping("/lord2list")
-    public String lordList(@RequestParam Boolean showBrowser, @RequestParam String lordId) {
-        lord2List.lord2List(showBrowser, lordId);
+    public String lordList(@RequestParam(required = false, defaultValue = "") String lordId) {
+        lord2List.lord2List(lordId);
         return "success";
     }
 
