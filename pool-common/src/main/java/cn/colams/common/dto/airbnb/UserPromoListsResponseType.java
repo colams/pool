@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class UserPromoListsResponse {
+public class UserPromoListsResponseType {
     @JsonProperty("error_code")
     private int errorCode;
     private String error;

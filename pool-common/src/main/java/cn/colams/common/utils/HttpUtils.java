@@ -8,6 +8,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -40,10 +41,27 @@ public class HttpUtils {
     @LogParam
     public static String doGet(String url, List<Header> headers) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpPost = new HttpGet(url);
+        HttpGet httpGet = new HttpGet(url);
+        if (!CollectionUtils.isEmpty(headers)) {
+            httpGet.setHeaders(headers.toArray(new Header[headers.size()]));
+        }
+        CloseableHttpResponse httpResponse = httpclient.execute(httpGet);
+        String result = EntityUtils.toString(httpResponse.getEntity());
+        return result;
+    }
+
+    @Metric
+    @LogParam
+    public static String doPost(String url, String data, List<Header> headers) throws IOException {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);
         if (!CollectionUtils.isEmpty(headers)) {
             httpPost.setHeaders(headers.toArray(new Header[headers.size()]));
         }
+        StringEntity entity = new StringEntity(data);
+        entity.setContentEncoding("UTF-8");
+        entity.setContentType("application/json");//发送json数据需要设置contentType
+        httpPost.setEntity(entity);
         CloseableHttpResponse httpResponse = httpclient.execute(httpPost);
         String result = EntityUtils.toString(httpResponse.getEntity());
         return result;

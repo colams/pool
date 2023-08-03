@@ -1,6 +1,7 @@
 package cn.colams.biz.airbnb;
 
-import cn.colams.common.dto.airbnb.UserPromoListsResponse;
+import cn.colams.common.airbnb.AirbnbApiKeyUtils;
+import cn.colams.common.dto.airbnb.UserPromoListsResponseType;
 import cn.colams.common.dto.airbnb.entity.UserPromoListings;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -59,17 +59,16 @@ public class CrawlerLord2List {
 
     private boolean getUserListings(String lord_id, int rooms) throws IOException, InterruptedException, ExecutionException, RetryException {
         int groupCount = getGroupCount(rooms);
-        List<Header> headers = new ArrayList<>();
-        headers.add(new BasicHeader(AirbnbApiKey.HEADER_KEY, AirbnbApiKey.HEADER_VALUE));
+        List<Header> headers = AirbnbApiKeyUtils.getHeaders();
         int retryTime = 3;
         for (int i = 0; i < groupCount; i++) {
             int group = i;
             // 重试三次
-            UserPromoListsResponse response = RetryerBuilder.<UserPromoListsResponse>newBuilder()
+            UserPromoListsResponseType response = RetryerBuilder.<UserPromoListsResponseType>newBuilder()
                     .retryIfResult(e -> {
                         if (e.getErrorCode() == 400) {
                             headers.clear();
-                            headers.add(new BasicHeader(AirbnbApiKey.HEADER_KEY, crawlerApiKey.crawlerApiKey(null)));
+                            headers.add(new BasicHeader(AirbnbApiKeyUtils.AirbnbApiKey.HEADER_KEY, crawlerApiKey.crawlerApiKey(null)));
                         }
                         return e.getErrorCode() == 400;
                     })
@@ -88,10 +87,10 @@ public class CrawlerLord2List {
         return true;
     }
 
-    private UserPromoListsResponse queryUserPromoLists(int group, String lord_id, List<Header> headers) throws IOException {
+    private UserPromoListsResponseType queryUserPromoLists(int group, String lord_id, List<Header> headers) throws IOException {
         String user_lists_url = String.format("%s%s", Constant.HOST_URL, Constant.USER_PROMO_LISTINGS_URL);
         String res = HttpUtils.doGet(String.format(user_lists_url, group * Constant.GROUP_SIZE, lord_id), headers);
-        return StringUtils.isNotBlank(res) ? JacksonSerializerUtil.deserialize(res, UserPromoListsResponse.class) : null;
+        return StringUtils.isNotBlank(res) ? JacksonSerializerUtil.deserialize(res, UserPromoListsResponseType.class) : null;
     }
 
 
@@ -123,10 +122,5 @@ public class CrawlerLord2List {
         int GROUP_SIZE = 50;
         String HOST_URL = "https://zh.airbnb.com/";
         String USER_PROMO_LISTINGS_URL = "api/v2/user_promo_listings?locale=zh&currency=SGD&_limit=50&_offset=%s&user_id=%s";
-    }
-
-    public interface AirbnbApiKey {
-        String HEADER_KEY = "X-Airbnb-API-Key";
-        String HEADER_VALUE = "d306zoyjsyarp7ifhu67rjxn52tv0t20";
     }
 }
