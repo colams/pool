@@ -1,8 +1,8 @@
 package cn.colams.biz.airbnb;
 
 import cn.colams.common.airbnb.AirbnbApiKeyUtils;
-import cn.colams.common.dto.airbnb.response.UserPromoListsResponseType;
 import cn.colams.common.dto.airbnb.entity.UserPromoListings;
+import cn.colams.common.dto.airbnb.response.UserPromoListsResponseType;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
 import cn.colams.dal.entity.Airbnb;
@@ -97,13 +97,9 @@ public class CrawlerLord2List {
     private void saveAirbnbRoom(UserPromoListings userPromoListings, String lord_id) {
         try {
             Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(userPromoListings.getIdStr());
-            if (airbnb == null) {
-                airbnb = new Airbnb();
+            if (Objects.nonNull(airbnb)) {
+                airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
             }
-            airbnb.setRoomName(userPromoListings.getName());
-            airbnb.setRoomId(userPromoListings.getIdStr());
-            airbnb.setLordId(lord_id);
-            airbnbExtensionMapper.insertOrUpdate(airbnb);
         } catch (Exception e) {
             LOGGER.error("saveAirbnbRoom error", e);
         }

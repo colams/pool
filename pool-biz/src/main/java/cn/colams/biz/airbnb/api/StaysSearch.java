@@ -12,6 +12,8 @@ import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -24,6 +26,8 @@ import java.util.Optional;
 
 @Component
 public class StaysSearch {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StaysSearch.class);
 
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
@@ -38,6 +42,8 @@ public class StaysSearch {
 
     public String crawlerStaysSearch(PageCourse pageCourse) throws IOException, InterruptedException {
         String data = getStaysSearchParamsV2(pageCourse);
+        int pageIndex = (pageCourse.getItemsOffset() / 18) + 1;
+        LOGGER.info(JacksonSerializerUtil.serialize(pageCourse));
         CommonResponseType<StaySearchData> commonResponseType = staysSearch(data);
         if (Objects.isNull(commonResponseType)
                 || !CollectionUtils.isEmpty(commonResponseType.getErrors())
@@ -56,8 +62,6 @@ public class StaysSearch {
         if (CollectionUtils.isEmpty(searchResults)) {
             return "fail";
         } else {
-            String state = response.getLoggingMetadata().getRemarketingLoggingData().getState();
-            int pageIndex = (pageCourse.getItemsOffset() / 18) + 1;
             String cursor = response.getPaginationInfo().getNextPageCursor();
             PageCourse nextPageCourse = pageCourse;
             if (StringUtils.isBlank(cursor)) {
@@ -65,7 +69,7 @@ public class StaysSearch {
             } else {
                 nextPageCourse = JacksonSerializerUtil.deserialize(Base64Utils.getBase64Decode(cursor), PageCourse.class);
             }
-            saveAirbnbRoom(searchResults, state, pageIndex);
+            saveAirbnbRoom(searchResults, pageIndex);
             Thread.sleep(1000);
             crawlerStaysSearch(nextPageCourse);
         }
@@ -73,24 +77,28 @@ public class StaysSearch {
     }
 
 
-    private void saveAirbnbRoom(List<StaySearchResult> searchResults, String state, int pageIndex) {
+    private void saveAirbnbRoom(List<StaySearchResult> searchResults, int pageIndex) {
         searchResults.forEach(result -> {
             if (Objects.nonNull(result.getListing())) {
                 Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(result.getListing().getId());
-                airbnb = Objects.isNull(airbnb) ? new Airbnb() : airbnb;
-                airbnb.withrState(state)
-                        .withPrice(Objects.isNull(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice()) ? result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel() : result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice())
-                        .withrSrouce(2)
-                        .withPage(pageIndex)
-                        .withRoomName(result.getListing().getName())
-                        .withPictureCount(result.getListing().getContextualPicturesCount())
-                        .withRoomId(result.getListing().getId())
-                        .withRoomUrl(String.format(Constant.ROOM_DETAIL_URL_TEMPLATE, result.getListing().getId()))
-                        .withExtra(result.getListing().getAvgRatingA11yLabel())
-                        .withRoomLocation(String.format("%s,%s", result.getListing().getCoordinate().getLatitude(), result.getListing().getCoordinate().getLongitude()))
-                        .withOrgUrl("")
-                        .withDealStatus(0);
-                airbnbExtensionMapper.insertOrUpdate(airbnb);
+                if (Objects.isNull(airbnb)) {
+                    airbnb = new Airbnb();
+                    airbnb.withrState(StringUtils.isEmpty(result.getListing().getCity()) ?
+                                    result.getListing().getLocalizedCityName() : result.getListing().getCity())
+                            .withPrice(Objects.isNull(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice()) ? result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel() : result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice())
+                            .withrSrouce(2)
+                            .withPage(pageIndex)
+                            .withRoomName(result.getListing().getName())
+                            .withPictureCount(result.getListing().getContextualPicturesCount())
+                            .withRoomId(result.getListing().getId())
+                            .withRoomUrl(String.format(Constant.ROOM_DETAIL_URL_TEMPLATE, result.getListing().getId()))
+                            .withExtra(result.getListing().getAvgRatingA11yLabel())
+                            .withRoomLocation(String.format("%s,%s", result.getListing().getCoordinate().getLatitude(), result.getListing().getCoordinate().getLongitude()))
+                            .withOrgUrl("")
+                            .withLordId("")
+                            .withDealStatus(0);
+                    airbnbExtensionMapper.insertSelective(airbnb);
+                }
             }
         });
     }

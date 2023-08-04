@@ -8,21 +8,18 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class HttpUtils {
-
-    private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
-
     @Metric
     @LogParam
     public static String postForm(String url, List<NameValuePair> formParams) throws IOException {
@@ -42,6 +39,21 @@ public class HttpUtils {
     public static String doGet(String url, List<Header> headers) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
+        if (!CollectionUtils.isEmpty(headers)) {
+            httpGet.setHeaders(headers.toArray(new Header[headers.size()]));
+        }
+        CloseableHttpResponse httpResponse = httpclient.execute(httpGet);
+        String result = EntityUtils.toString(httpResponse.getEntity());
+        return result;
+    }
+
+    @Metric
+    @LogParam
+    public static String doGet(String url, List<NameValuePair> list, List<Header> headers) throws IOException, URISyntaxException {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        URIBuilder builder = new URIBuilder(url);
+        builder.setParameters(list);
+        HttpGet httpGet = new HttpGet(builder.build());
         if (!CollectionUtils.isEmpty(headers)) {
             httpGet.setHeaders(headers.toArray(new Header[headers.size()]));
         }
