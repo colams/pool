@@ -17,6 +17,9 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 获取房东信息
+ */
 @Component
 public class StaysPdpSections {
 
@@ -43,7 +46,7 @@ public class StaysPdpSections {
     }
 
     private List<NameValuePair> getUrlTemplate(String queryID) {
-        String variables = "{\"id\":\"%s\",\"pdpSectionsRequest\":{\"adults\":\"1\",\"layouts\":[\"SIDEBAR\"],\"p3ImpressionId\":\"p3_1691141850_Bskl3b6izuyuSzO+\",\"sectionIds\":[\"MEET_YOUR_HOST\"]}}";
+        String variables = "{\"id\":\"%s\",\"pdpSectionsRequest\":{\"adults\":\"1\",\"layouts\":[\"SIDEBAR\",\"SINGLE_COLUMN\"],\"p3ImpressionId\":\"p3_1691141850_Bskl3b6izuyuSzO+\",\"sectionIds\":null}}";
 
         String extensions = "{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"8d81cb13cad5ae18d52f3552f60f081b8c6d5221bafd7006150d6ba594574779\"}}";
 

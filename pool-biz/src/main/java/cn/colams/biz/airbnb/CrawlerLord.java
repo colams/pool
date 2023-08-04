@@ -26,6 +26,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * 爬取airbnb房东信息
+ */
 @Component
 public class CrawlerLord {
 

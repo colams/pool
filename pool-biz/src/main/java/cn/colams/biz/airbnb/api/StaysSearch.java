@@ -24,6 +24,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * 爬取房间信息
+ * 注意：需要有一个请求参数
+ * 当前查询：https://zh.airbnb.com/s/Dubai/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=2023-10-01&monthly_length=1&price_filter_input_type=0&price_filter_num_nights=5&channel=EXPLORE&query=Dubai&place_id=ChIJRcbZaklDXz4RYlEphFBu5r0&date_picker_type=monthly_stay&source=structured_search_input_header&search_type=autocomplete_click
+ */
 @Component
 public class StaysSearch {
 

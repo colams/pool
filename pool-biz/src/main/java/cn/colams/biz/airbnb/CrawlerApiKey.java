@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 获取 airbnb接口用到的 apikey
+ */
 @Component
 public class CrawlerApiKey {
 

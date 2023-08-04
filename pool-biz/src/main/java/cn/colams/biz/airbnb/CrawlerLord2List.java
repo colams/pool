@@ -1,5 +1,6 @@
 package cn.colams.biz.airbnb;
 
+import cn.colams.biz.airbnb.api.StaysSearch;
 import cn.colams.common.airbnb.AirbnbApiKeyUtils;
 import cn.colams.common.dto.airbnb.entity.UserPromoListings;
 import cn.colams.common.dto.airbnb.response.UserPromoListsResponseType;
@@ -26,6 +27,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * 爬取房东名下的房源信息
+ */
 @Component
 public class CrawlerLord2List {
 
@@ -98,7 +102,16 @@ public class CrawlerLord2List {
         try {
             Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(userPromoListings.getIdStr());
             if (Objects.nonNull(airbnb)) {
+                airbnb.withLordId(lord_id);
                 airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
+            } else {
+                airbnb = new Airbnb();
+                airbnb.setLordId(lord_id);
+                airbnb.setRoomId(userPromoListings.getIdStr());
+                airbnb.setRoomName(userPromoListings.getName());
+                airbnb.setRoomUrl(String.format(StaysSearch.Constant.ROOM_DETAIL_URL_TEMPLATE, userPromoListings.getIdStr()));
+                airbnb.setrSrouce(1);
+                airbnbExtensionMapper.insertSelective(airbnb);
             }
         } catch (Exception e) {
             LOGGER.error("saveAirbnbRoom error", e);

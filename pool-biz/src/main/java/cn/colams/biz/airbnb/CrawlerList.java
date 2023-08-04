@@ -22,6 +22,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * 爬取airbnb页面数据
+ */
 @Component
 public class CrawlerList {
 
