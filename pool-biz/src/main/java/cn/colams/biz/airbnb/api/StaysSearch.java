@@ -4,18 +4,23 @@ import cn.colams.common.airbnb.AirbnbApiKeyUtils;
 import cn.colams.common.dto.airbnb.entity.*;
 import cn.colams.common.dto.airbnb.request.CommonRequestType;
 import cn.colams.common.dto.airbnb.response.CommonResponseType;
+import cn.colams.common.utils.Base64Utils;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class StaysSearch {
@@ -23,9 +28,16 @@ public class StaysSearch {
     @Autowired
     AirbnbExtensionMapper airbnbExtensionMapper;
 
-    public String crawlerStaysSearch() throws IOException {
-        int pageIndex = 1;
-        String data = getStaysSearchParamsV2();
+    public String crawlerStaysSearch() throws IOException, InterruptedException {
+        PageCourse course = new PageCourse();
+        course.setVersion(1);
+        course.setItemsOffset(0);
+        course.setSectionOffset(0);
+        return crawlerStaysSearch(course);
+    }
+
+    public String crawlerStaysSearch(PageCourse pageCourse) throws IOException, InterruptedException {
+        String data = getStaysSearchParamsV2(pageCourse);
         CommonResponseType<StaySearchData> commonResponseType = staysSearch(data);
         if (Objects.isNull(commonResponseType)
                 || !CollectionUtils.isEmpty(commonResponseType.getErrors())
@@ -40,27 +52,47 @@ public class StaysSearch {
                 .getSectionIndependentData()
                 .getStaysSearch();
 
-        String cursor = response.getPaginationInfo().getNextPageCursor();
-        Base64.getDecoder().decode(cursor);
-
-        String state = response.getLoggingMetadata().getRemarketingLoggingData().getState();
-        Optional.ofNullable(response.getSearchResults()).orElse(Lists.newArrayList()).forEach(result -> {
-            Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(result.getListing().getId());
-            airbnb.withrState(state)
-                    .withPrice(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel())
-                    .withrSrouce(2)
-                    .withPage(pageIndex)
-                    .withRoomName(result.getListing().getName())
-                    .withPictureCount(result.getListing().getContextualPicturesCount())
-                    .withRoomId(result.getListing().getId())
-                    .withRoomUrl(String.format(Constant.ROOM_DETAIL_URL_TEMPLATE, result.getListing().getId()))
-                    .withExtra(result.getListing().getAvgRatingA11yLabel())
-                    .withRoomLocation(String.format("%s,%s", result.getListing().getCoordinate().getLatitude(), result.getListing().getCoordinate().getLongitude()))
-                    .withOrgUrl("")
-                    .withDealStatus(0);
-            airbnbExtensionMapper.insertOrUpdate(airbnb);
-        });
+        List<StaySearchResult> searchResults = Optional.ofNullable(response.getSearchResults()).orElse(Lists.newArrayList());
+        if (CollectionUtils.isEmpty(searchResults)) {
+            return "fail";
+        } else {
+            String state = response.getLoggingMetadata().getRemarketingLoggingData().getState();
+            int pageIndex = (pageCourse.getItemsOffset() / 18) + 1;
+            String cursor = response.getPaginationInfo().getNextPageCursor();
+            PageCourse nextPageCourse = pageCourse;
+            if (StringUtils.isBlank(cursor)) {
+                nextPageCourse.setItemsOffset(nextPageCourse.getItemsOffset() + 18);
+            } else {
+                nextPageCourse = JacksonSerializerUtil.deserialize(Base64Utils.getBase64Decode(cursor), PageCourse.class);
+            }
+            saveAirbnbRoom(searchResults, state, pageIndex);
+            Thread.sleep(1000);
+            crawlerStaysSearch(nextPageCourse);
+        }
         return "success";
+    }
+
+
+    private void saveAirbnbRoom(List<StaySearchResult> searchResults, String state, int pageIndex) {
+        searchResults.forEach(result -> {
+            if (Objects.nonNull(result.getListing())) {
+                Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(result.getListing().getId());
+                airbnb = Objects.isNull(airbnb) ? new Airbnb() : airbnb;
+                airbnb.withrState(state)
+                        .withPrice(Objects.isNull(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice()) ? result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel() : result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice())
+                        .withrSrouce(2)
+                        .withPage(pageIndex)
+                        .withRoomName(result.getListing().getName())
+                        .withPictureCount(result.getListing().getContextualPicturesCount())
+                        .withRoomId(result.getListing().getId())
+                        .withRoomUrl(String.format(Constant.ROOM_DETAIL_URL_TEMPLATE, result.getListing().getId()))
+                        .withExtra(result.getListing().getAvgRatingA11yLabel())
+                        .withRoomLocation(String.format("%s,%s", result.getListing().getCoordinate().getLatitude(), result.getListing().getCoordinate().getLongitude()))
+                        .withOrgUrl("")
+                        .withDealStatus(0);
+                airbnbExtensionMapper.insertOrUpdate(airbnb);
+            }
+        });
     }
 
     public CommonResponseType<StaySearchData> staysSearch(String requestData) throws IOException {
@@ -71,32 +103,33 @@ public class StaysSearch {
         return response;
     }
 
-    private String getStaysSearchParamsV2() {
+    private String getStaysSearchParamsV2(PageCourse pageCourse) {
         CommonRequestType<StaysSearchVariables> requestType = new CommonRequestType<>();
         requestType.setExtensions(buildExtensions());
         requestType.setOperationName("StaysSearch");
-        requestType.setVariables(buildVariables());
+        requestType.setVariables(buildVariables(pageCourse));
         return JacksonSerializerUtil.serialize(requestType);
     }
 
-    private StaysSearchVariables buildVariables() {
+    private StaysSearchVariables buildVariables(PageCourse pageCourse) {
         StaysSearchVariables variables = new StaysSearchVariables();
         variables.setDecomposeCleanupEnabled(false);
         variables.setDecomposeFiltersEnabled(false);
         variables.setFeedMapDecoupleEnabled(true);
-        StaysSearchRequest searchRequest = buildSearchRequest();
+        StaysSearchRequest searchRequest = buildSearchRequest(pageCourse);
         variables.setStaysMapSearchRequestV2(searchRequest);
         variables.setStaysSearchRequest(searchRequest);
         return variables;
     }
 
-    private StaysSearchRequest buildSearchRequest() {
+    private StaysSearchRequest buildSearchRequest(PageCourse pageCourse) {
         StaysSearchRequest request = new StaysSearchRequest();
         request.setMetadataOnly(false);
         request.setRawParams(initRawParams());
         request.setRequestedPageType("STAYS_SEARCH");
         request.setSearchType("filter_change");
         request.setSource("structured_search_input_header");
+        request.setCursor(Base64Utils.getBase64Encode(JacksonSerializerUtil.serialize(pageCourse)));
         request.setTreatmentFlags(Lists.newArrayList(
                 "decompose_stays_search_m2_treatment",
                 "decompose_stays_search_m3_treatment",
@@ -115,7 +148,6 @@ public class StaysSearch {
                 "micro_flex_show_by_default",
                 "search_input_placeholder_phrases",
                 "pets_fee_treatment"));
-        request.setCursor("{\"section_offset\":0,\"items_offset\":0,\"version\":1}");
         return request;
     }
 

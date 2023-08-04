@@ -23,7 +23,7 @@ public class StaysSearchTest extends CommonTest {
     }
 
     @Test
-    public void testCrawlerStaysSearch() throws IOException {
+    public void testCrawlerStaysSearch() throws IOException, InterruptedException {
         String result = staysSearch.crawlerStaysSearch();
         System.out.println(result);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");

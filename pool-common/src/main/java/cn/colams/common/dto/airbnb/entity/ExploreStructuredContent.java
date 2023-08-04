@@ -2,15 +2,17 @@ package cn.colams.common.dto.airbnb.entity;
 
 import cn.colams.common.dto.airbnb.ITypeName;
 
+import java.util.List;
+
 public class ExploreStructuredContent extends ITypeName {
 
-    private MainSectionMessage secondaryLine;
+    private List<MainSectionMessage> secondaryLine;
 
-    public MainSectionMessage getSecondaryLine() {
+    public List<MainSectionMessage> getSecondaryLine() {
         return secondaryLine;
     }
 
-    public void setSecondaryLine(MainSectionMessage secondaryLine) {
+    public void setSecondaryLine(List<MainSectionMessage> secondaryLine) {
         this.secondaryLine = secondaryLine;
     }
 }
