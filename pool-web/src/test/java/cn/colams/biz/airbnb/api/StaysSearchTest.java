@@ -2,6 +2,7 @@ package cn.colams.biz.airbnb.api;
 
 import cn.colams.common.CommonTest;
 import cn.colams.common.dto.airbnb.entity.StaySearchData;
+import cn.colams.common.dto.airbnb.response.CommonResponseType;
 import cn.colams.common.utils.JacksonSerializerUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,14 @@ public class StaysSearchTest extends CommonTest {
     public void testCrawlerStaysSearch() throws IOException {
         String result = staysSearch.crawlerStaysSearch();
         System.out.println(result);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
+    }
+
+    @Test
+    public void testData() {
+        String json = "{\"errors\":[{\"message\":\"java.lang.NullPointerException: null\",\"locations\":[{\"line\":24,\"column\":7}],\"path\":[\"presentation\",\"explore\",\"sections\"],\"extensions\":{\"fieldName\":\"sections\",\"parentType\":\"ExplorePresentation\",\"tenant\":\"viaduct-presentation-explore\",\"localizedMessage\":\"Sorry, something went wrong. Please try again later.\",\"classification\":\"DataFetchingException\"}}],\"data\":{\"presentation\":{\"__typename\":\"RootPresentationContainer\",\"explore\":{\"__typename\":\"ExplorePresentation\",\"sections\":null}}},\"extensions\":{\"traceId\":\"4wRGD7MDVHNp32VZOk6-aw==\"}}";
+        CommonResponseType<StaySearchData> responseType = JacksonSerializerUtil.deserialize(json, CommonResponseType.class, StaySearchData.class);
+
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
 
     }

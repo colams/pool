@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import org.apache.http.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,11 +29,20 @@ public class StaysSearch {
     public String crawlerStaysSearch() throws IOException {
         int pageIndex = 1;
         String data = getStaysSearchParamsV2();
-        StaySearchData searchData = staysSearch(data);
-        if (Objects.isNull(searchData) || Objects.isNull(searchData.getPresentation())) {
+        CommonResponseType<StaySearchData> commonResponseType = staysSearch(data);
+        if (Objects.isNull(commonResponseType)
+                || !CollectionUtils.isEmpty(commonResponseType.getErrors())
+                || Objects.isNull(commonResponseType.getData().getPresentation())) {
             return "no data";
         }
-        StaysSearchResponse response = searchData.getPresentation().getExplore().getSections().getSectionIndependentData().getStaysSearch();
+        StaysSearchResponse response = commonResponseType
+                .getData()
+                .getPresentation()
+                .getExplore()
+                .getSections()
+                .getSectionIndependentData()
+                .getStaysSearch();
+
         String state = response.getLoggingMetadata().getRemarketingLoggingData().getState();
         Optional.ofNullable(response.getSearchResults()).orElse(Lists.newArrayList()).forEach(result -> {
             Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(result.getListing().getId());
@@ -53,12 +63,12 @@ public class StaysSearch {
         return "success";
     }
 
-    public StaySearchData staysSearch(String requestData) throws IOException {
+    public CommonResponseType<StaySearchData> staysSearch(String requestData) throws IOException {
         String url = "https://zh.airbnb.com/api/v3/StaysSearch?operationName=StaysSearch&locale=zh&currency=SGD";
         List<Header> headers = AirbnbApiKeyUtils.getHeaders();
         String res = HttpUtils.doPost(url, requestData, headers);
         CommonResponseType<StaySearchData> response = JacksonSerializerUtil.deserialize(res, CommonResponseType.class, StaySearchData.class);
-        return response.getData();
+        return response;
     }
 
     private String getStaysSearchParams() {

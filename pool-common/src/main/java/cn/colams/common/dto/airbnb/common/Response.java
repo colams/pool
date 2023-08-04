@@ -1,19 +1,16 @@
 package cn.colams.common.dto.airbnb.common;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Response {
 
-    @JsonProperty("statusCode")
-    private int statuscode;
+    private int statusCode;
     private Body body;
 
-    public void setStatuscode(int statuscode) {
-        this.statuscode = statuscode;
+    public int getStatusCode() {
+        return statusCode;
     }
 
-    public int getStatuscode() {
-        return statuscode;
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
     public void setBody(Body body) {
