@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class ITypeName {
     @JsonProperty("__typename")
-    public String typeName;
+    private String typeName;
 
     public String getTypeName() {
         return typeName;

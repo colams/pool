@@ -895,73 +895,73 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andAreaIsNull() {
-            addCriterion("area is null");
+        public Criteria andRStateIsNull() {
+            addCriterion("r_state is null");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIsNotNull() {
-            addCriterion("area is not null");
+        public Criteria andRStateIsNotNull() {
+            addCriterion("r_state is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAreaEqualTo(String value) {
-            addCriterion("area =", value, "area");
+        public Criteria andRStateEqualTo(String value) {
+            addCriterion("r_state =", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaNotEqualTo(String value) {
-            addCriterion("area <>", value, "area");
+        public Criteria andRStateNotEqualTo(String value) {
+            addCriterion("r_state <>", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaGreaterThan(String value) {
-            addCriterion("area >", value, "area");
+        public Criteria andRStateGreaterThan(String value) {
+            addCriterion("r_state >", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaGreaterThanOrEqualTo(String value) {
-            addCriterion("area >=", value, "area");
+        public Criteria andRStateGreaterThanOrEqualTo(String value) {
+            addCriterion("r_state >=", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaLessThan(String value) {
-            addCriterion("area <", value, "area");
+        public Criteria andRStateLessThan(String value) {
+            addCriterion("r_state <", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaLessThanOrEqualTo(String value) {
-            addCriterion("area <=", value, "area");
+        public Criteria andRStateLessThanOrEqualTo(String value) {
+            addCriterion("r_state <=", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaLike(String value) {
-            addCriterion("area like", value, "area");
+        public Criteria andRStateLike(String value) {
+            addCriterion("r_state like", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaNotLike(String value) {
-            addCriterion("area not like", value, "area");
+        public Criteria andRStateNotLike(String value) {
+            addCriterion("r_state not like", value, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIn(List<String> values) {
-            addCriterion("area in", values, "area");
+        public Criteria andRStateIn(List<String> values) {
+            addCriterion("r_state in", values, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaNotIn(List<String> values) {
-            addCriterion("area not in", values, "area");
+        public Criteria andRStateNotIn(List<String> values) {
+            addCriterion("r_state not in", values, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaBetween(String value1, String value2) {
-            addCriterion("area between", value1, value2, "area");
+        public Criteria andRStateBetween(String value1, String value2) {
+            addCriterion("r_state between", value1, value2, "rState");
             return (Criteria) this;
         }
 
-        public Criteria andAreaNotBetween(String value1, String value2) {
-            addCriterion("area not between", value1, value2, "area");
+        public Criteria andRStateNotBetween(String value1, String value2) {
+            addCriterion("r_state not between", value1, value2, "rState");
             return (Criteria) this;
         }
 
@@ -1120,8 +1120,8 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andAreaLikeInsensitive(String value) {
-            addCriterion("upper(area) like", value.toUpperCase(), "area");
+        public Criteria andRStateLikeInsensitive(String value) {
+            addCriterion("upper(r_state) like", value.toUpperCase(), "rState");
             return (Criteria) this;
         }
     }

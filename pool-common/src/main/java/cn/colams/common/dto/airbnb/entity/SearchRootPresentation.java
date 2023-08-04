@@ -4,7 +4,7 @@ import cn.colams.common.dto.airbnb.face.ITypeName;
 
 public class SearchRootPresentation extends ITypeName {
 
-    public ExploreData explore;
+    private ExploreData explore;
 
     public ExploreData getExplore() {
         return explore;

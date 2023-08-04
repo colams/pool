@@ -27,7 +27,7 @@ public class Airbnb {
 
     private Integer pictureCount;
 
-    private String area;
+    private String rState;
 
     private Date datechangeLasttime;
 
@@ -191,17 +191,17 @@ public class Airbnb {
         this.pictureCount = pictureCount;
     }
 
-    public String getArea() {
-        return area;
+    public String getrState() {
+        return rState;
     }
 
-    public Airbnb withArea(String area) {
-        this.setArea(area);
+    public Airbnb withrState(String rState) {
+        this.setrState(rState);
         return this;
     }
 
-    public void setArea(String area) {
-        this.area = area == null ? null : area.trim();
+    public void setrState(String rState) {
+        this.rState = rState == null ? null : rState.trim();
     }
 
     public Date getDatechangeLasttime() {

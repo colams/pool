@@ -3,26 +3,61 @@ package cn.colams.biz.airbnb.api;
 import cn.colams.common.airbnb.AirbnbApiKeyUtils;
 import cn.colams.common.dto.airbnb.CommonResponseType;
 import cn.colams.common.dto.airbnb.entity.StaySearchData;
+import cn.colams.common.dto.airbnb.entity.StaysSearchResponse;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;
+import cn.colams.dal.entity.Airbnb;
+import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
+import com.google.common.collect.Lists;
 import org.apache.http.Header;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class StaysSearch {
 
+    @Autowired
+    AirbnbExtensionMapper airbnbExtensionMapper;
 
+    public String crawlerStaysSearch() throws IOException {
+        int pageIndex = 1;
+        String data = getStaysSearchParams();
+        StaySearchData searchData = staysSearch(data);
+        if (Objects.isNull(searchData) || Objects.isNull(searchData.getPresentation())) {
+            return "no data";
+        }
+        StaysSearchResponse response = searchData.getPresentation().getExplore().getSections().getSectionIndependentData().getStaysSearch();
+        String state = response.getLoggingMetadata().getRemarketingLoggingData().getState();
+        Optional.ofNullable(response.getSearchResults()).orElse(Lists.newArrayList()).forEach(result -> {
+            Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(result.getListing().getId());
+            airbnb.withrState(state)
+                    .withPrice(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel())
+                    .withrSrouce(2)
+                    .withPage(pageIndex)
+                    .withRoomName(result.getListing().getName())
+                    .withPictureCount(result.getListing().getContextualPicturesCount())
+                    .withRoomId(result.getListing().getId())
+                    .withRoomUrl(result.getListing().getId())   // todo modify
+                    .withExtra(result.getListing().getAvgRatingA11yLabel())
+                    .withRoomLocation(String.format("%s,%s", result.getListing().getCoordinate().getLatitude(), result.getListing().getCoordinate().getLongitude()))
+                    .withOrgUrl("")
+                    .withDealStatus(0);
+            airbnbExtensionMapper.insertOrUpdate(airbnb);
+        });
+        return "success";
+    }
 
-    public CommonResponseType<StaySearchData> staysSearch() throws IOException {
+    public StaySearchData staysSearch(String requestData) throws IOException {
         String url = "https://zh.airbnb.com/api/v3/StaysSearch?operationName=StaysSearch&locale=zh&currency=SGD";
         List<Header> headers = AirbnbApiKeyUtils.getHeaders();
-        String data = getStaysSearchParams();
-        String res = HttpUtils.doPost(url, data, headers);
+        String res = HttpUtils.doPost(url, requestData, headers);
         CommonResponseType<StaySearchData> response = JacksonSerializerUtil.deserialize(res, CommonResponseType.class, StaySearchData.class);
-        return response;
+        return response.getData();
     }
 
     private String getStaysSearchParams() {
