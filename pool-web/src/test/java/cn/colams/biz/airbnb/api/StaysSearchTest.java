@@ -21,6 +21,13 @@ public class StaysSearchTest extends CommonTest {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
+    @Test
+    public void testCrawlerStaysSearch() throws IOException {
+        String result = staysSearch.crawlerStaysSearch();
+        System.out.println(result);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
+
+    }
 
     private String getStaysSearchParams() {
         return "{\n" +
@@ -308,4 +315,5 @@ public class StaysSearchTest extends CommonTest {
                 "    }\n" +
                 "}";
     }
+
 }

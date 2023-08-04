@@ -1,6 +1,6 @@
 package cn.colams.common.dto.airbnb.common;
 
-public class Extensions {
+public class ErrorExtensions {
     private Response response;
     private String code;
 

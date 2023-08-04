@@ -1,6 +1,6 @@
 package cn.colams.common.dto.airbnb.entity;
 
-import cn.colams.common.dto.airbnb.face.ITypeName;
+import cn.colams.common.dto.airbnb.ITypeName;
 
 public class ExplorePricingQuote extends ITypeName {
 

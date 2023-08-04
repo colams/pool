@@ -3,12 +3,10 @@ package cn.colams.common.dto.airbnb.common;
 import java.util.List;
 
 public class Errors {
-
-
     private String message;
     private List<Locations> locations;
     private List<String> path;
-    private Extensions extensions;
+    private ErrorExtensions extensions;
 
     public void setMessage(String message) {
         this.message = message;
@@ -34,11 +32,11 @@ public class Errors {
         return path;
     }
 
-    public void setExtensions(Extensions extensions) {
+    public void setExtensions(ErrorExtensions extensions) {
         this.extensions = extensions;
     }
 
-    public Extensions getExtensions() {
+    public ErrorExtensions getExtensions() {
         return extensions;
     }
 }

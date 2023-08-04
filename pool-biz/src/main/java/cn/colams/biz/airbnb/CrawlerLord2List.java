@@ -1,7 +1,7 @@
 package cn.colams.biz.airbnb;
 
 import cn.colams.common.airbnb.AirbnbApiKeyUtils;
-import cn.colams.common.dto.airbnb.UserPromoListsResponseType;
+import cn.colams.common.dto.airbnb.response.UserPromoListsResponseType;
 import cn.colams.common.dto.airbnb.entity.UserPromoListings;
 import cn.colams.common.utils.HttpUtils;
 import cn.colams.common.utils.JacksonSerializerUtil;

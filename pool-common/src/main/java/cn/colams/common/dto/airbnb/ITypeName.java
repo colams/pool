@@ -1,4 +1,4 @@
-package cn.colams.common.dto.airbnb.face;
+package cn.colams.common.dto.airbnb;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

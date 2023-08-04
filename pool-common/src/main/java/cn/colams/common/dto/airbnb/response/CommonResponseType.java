@@ -1,4 +1,4 @@
-package cn.colams.common.dto.airbnb;
+package cn.colams.common.dto.airbnb.response;
 
 import cn.colams.common.dto.airbnb.common.LogExtensions;
 
