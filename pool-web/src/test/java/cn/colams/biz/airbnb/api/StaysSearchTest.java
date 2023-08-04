@@ -17,8 +17,8 @@ public class StaysSearchTest extends CommonTest {
 
     @Test
     public void testStaysSearch() throws IOException {
-        StaySearchData data = staysSearch.staysSearch(getStaysSearchParams());
-        System.out.println(JacksonSerializerUtil.serialize(data));
+        CommonResponseType<StaySearchData> response = staysSearch.staysSearch(getStaysSearchParams());
+        System.out.println(JacksonSerializerUtil.serialize(response));
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 

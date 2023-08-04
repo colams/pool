@@ -13,6 +13,8 @@ public class StaysSearchRequest {
 
     private String cursor;
 
+    private String source;
+
     public boolean isMetadataOnly() {
         return metadataOnly;
     }
@@ -59,5 +61,13 @@ public class StaysSearchRequest {
 
     public void setCursor(String cursor) {
         this.cursor = cursor;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }
