@@ -75,8 +75,10 @@ public class StaysSearch {
                 nextPageCourse = JacksonSerializerUtil.deserialize(Base64Utils.getBase64Decode(cursor), PageCourse.class);
             }
             saveAirbnbRoom(searchResults, pageIndex);
-            Thread.sleep(1000);
-            crawlerStaysSearch(nextPageCourse);
+            Thread.sleep(5000);
+            if (searchResults.size() >= 18) {
+                crawlerStaysSearch(nextPageCourse);
+            }
         }
         return "success";
     }

@@ -99,11 +99,11 @@
             </dependency>
 
 
-<!--            <dependency>-->
-<!--                <groupId>org.postgresql</groupId>-->
-<!--                <artifactId>postgresql</artifactId>-->
-<!--                <version>42.2.2</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.postgresql</groupId>-->
+            <!--                <artifactId>postgresql</artifactId>-->
+            <!--                <version>42.2.2</version>-->
+            <!--            </dependency>-->
 
             <!--mybatis-->
             <dependency>
@@ -154,12 +154,12 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.9</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.h2database</groupId>-->
-<!--                <artifactId>h2</artifactId>-->
-<!--                <version>1.4.197</version>-->
-<!--                <scope>test</scope>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.h2database</groupId>-->
+            <!--                <artifactId>h2</artifactId>-->
+            <!--                <version>1.4.197</version>-->
+            <!--                <scope>test</scope>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
@@ -169,11 +169,23 @@
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
                 <version>3.141.59</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.github.rholder</groupId>
                 <artifactId>guava-retrying</artifactId>
                 <version>2.0.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

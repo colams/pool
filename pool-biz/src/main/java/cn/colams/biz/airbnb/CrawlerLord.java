@@ -4,12 +4,12 @@ import cn.colams.common.SeleniumUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
 import cn.colams.common.utils.OptionalUtils;
 import cn.colams.dal.entity.Airbnb;
-import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.dal.entity.AirbnbLordExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.dal.mapper.extension.AirbnbLordExtensionMapper;
-import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,12 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 爬取airbnb房东信息
@@ -46,10 +46,7 @@ public class CrawlerLord {
      * @param showBrowser
      */
     public void crawlerLord(Boolean showBrowser) {
-        AirbnbExample airbnbExample = new AirbnbExample();
-        AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
-        criteria.andDealStatusIn(Lists.newArrayList(0, 2));
-        List<Airbnb> airbnbs = airbnbExtensionMapper.selectByExampleWithBLOBs(airbnbExample);
+        List<Airbnb> airbnbs = airbnbExtensionMapper.selectRoom2Process(null);
 
         for (Airbnb airbnb : airbnbs) {
             WebDriver driver = null;
@@ -88,6 +85,11 @@ public class CrawlerLord {
         if (loadPageEl.isPresent()) {
             lord_page = OptionalUtils.stringVal(loadPageEl, e -> e.getAttribute("href"));
             lord_id = lord_page.substring(lord_page.lastIndexOf("/") + 1);
+        }
+
+        if (StringUtils.isBlank(lord_id)) {
+            airbnb.setDealStatus(4);
+            return airbnb;
         }
 
         Optional<WebElement> googleElement = SeleniumUtils.findElement(driver, By.cssSelector("a[title='向 Google 报告道路地图或图像中的错误']"));
@@ -155,7 +157,7 @@ public class CrawlerLord {
      * @param lord_id
      * @return
      */
-    public String getLordName(WebDriver driver, String lord_id) {
+    private String getLordName(WebDriver driver, String lord_id) {
         By by = By.cssSelector("a[href='/users/show/" + lord_id + "']");
         Optional<WebElement> userEl = SeleniumUtils.findElement(driver, by);
         return OptionalUtils.stringVal(userEl, e -> e.getText());
@@ -168,11 +170,19 @@ public class CrawlerLord {
      * @return
      * @throws ParseException
      */
-    public int getLordRooms(WebDriver driver) throws ParseException {
-        By by = By.cssSelector("div[class='_h6avcp2']");
-        Optional<WebElement> roomsEl = SeleniumUtils.findElement(driver, by);
-        String numberStr = OptionalUtils.stringVal(roomsEl, e -> e.getText()).split("个")[0];
-        return NumberFormat.getNumberInstance(Locale.US).parse(numberStr).intValue();
+    private int getLordRooms(WebDriver driver) throws ParseException {
+        String value = getValueByRegex(">(\\d*?)个房源<", driver.getPageSource());
+        return NumberUtils.toInt(value);
+    }
+
+    private String getValueByRegex(String regex, String inputText) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(inputText);
+        String value = "";
+        if (matcher.find()) {
+            value = matcher.group(1);
+        }
+        return value;
     }
 
     /**
@@ -181,7 +191,7 @@ public class CrawlerLord {
      * @param driver
      * @return
      */
-    public String getLordBrief(WebDriver driver) {
+    private String getLordBrief(WebDriver driver) {
         By by = By.cssSelector("div[data-testid='user-profile-content'] section");
         Optional<WebElement> briefEl = SeleniumUtils.findElement(driver, by);
         return OptionalUtils.stringVal(briefEl, e -> e.getText());
@@ -193,7 +203,7 @@ public class CrawlerLord {
      * @param driver
      * @return
      */
-    public String getEvaluate(WebDriver driver) {
+    private String getEvaluate(WebDriver driver) {
         By by = By.cssSelector("div[data-veloute='user_profile_frame'] section section .sxz955h > div > span");
         Optional<List<WebElement>> evaluateEls = SeleniumUtils.findElements(driver, by);
         StringBuffer stringBuffer = new StringBuffer();
