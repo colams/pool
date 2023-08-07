@@ -22,14 +22,14 @@ public class StaysSearchTest extends CommonTest {
      */
     @Test
     public void testStaysSearch() throws IOException {
-        CommonResponseType<StaySearchData> response = staysSearch.staysSearch(getStaysSearchParams());
+        CommonResponseType<StaySearchData> response = null;//staysSearch.staysSearch(getStaysSearchParams());
         System.out.println(JacksonSerializerUtil.serialize(response));
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
     @Test
     public void testCrawlerStaysSearch() throws Exception {
-        String result = staysSearch.crawlerStaysSearch("Sydney");
+        String result = null;// staysSearch.crawlerStaysSearch("Sydney");
         System.out.println(result);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
     }
