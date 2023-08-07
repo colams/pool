@@ -36,13 +36,15 @@ public interface AirbnbLordMapper {
         "insert into airbnb_lord (id, loard_id, ",
         "lord_name, lord_page, ",
         "rooms, airbnb_id, ",
-        "process_status, evaluate, ",
-        "brief, create_time)",
+        "process_status, city, ",
+        "evaluate, brief, ",
+        "create_time)",
         "values (#{id,jdbcType=BIGINT}, #{loardId,jdbcType=VARCHAR}, ",
         "#{lordName,jdbcType=VARCHAR}, #{lordPage,jdbcType=VARCHAR}, ",
         "#{rooms,jdbcType=INTEGER}, #{airbnbId,jdbcType=BIGINT}, ",
-        "#{processStatus,jdbcType=INTEGER}, #{evaluate,jdbcType=VARCHAR}, ",
-        "#{brief,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})"
+        "#{processStatus,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, ",
+        "#{evaluate,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP})"
     })
     int insert(AirbnbLord record);
 
@@ -58,6 +60,7 @@ public interface AirbnbLordMapper {
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="airbnb_id", property="airbnbId", jdbcType=JdbcType.BIGINT),
         @Result(column="process_status", property="processStatus", jdbcType=JdbcType.INTEGER),
+        @Result(column="city", property="city", jdbcType=JdbcType.VARCHAR),
         @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
         @Result(column="brief", property="brief", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -73,6 +76,7 @@ public interface AirbnbLordMapper {
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="airbnb_id", property="airbnbId", jdbcType=JdbcType.BIGINT),
         @Result(column="process_status", property="processStatus", jdbcType=JdbcType.INTEGER),
+        @Result(column="city", property="city", jdbcType=JdbcType.VARCHAR),
         @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
         @Result(column="brief", property="brief", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -81,8 +85,8 @@ public interface AirbnbLordMapper {
 
     @Select({
         "select",
-        "id, loard_id, lord_name, lord_page, rooms, airbnb_id, process_status, evaluate, ",
-        "brief, create_time",
+        "id, loard_id, lord_name, lord_page, rooms, airbnb_id, process_status, city, ",
+        "evaluate, brief, create_time",
         "from airbnb_lord",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -94,6 +98,7 @@ public interface AirbnbLordMapper {
         @Result(column="rooms", property="rooms", jdbcType=JdbcType.INTEGER),
         @Result(column="airbnb_id", property="airbnbId", jdbcType=JdbcType.BIGINT),
         @Result(column="process_status", property="processStatus", jdbcType=JdbcType.INTEGER),
+        @Result(column="city", property="city", jdbcType=JdbcType.VARCHAR),
         @Result(column="evaluate", property="evaluate", jdbcType=JdbcType.VARCHAR),
         @Result(column="brief", property="brief", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
@@ -117,6 +122,7 @@ public interface AirbnbLordMapper {
           "rooms = #{rooms,jdbcType=INTEGER},",
           "airbnb_id = #{airbnbId,jdbcType=BIGINT},",
           "process_status = #{processStatus,jdbcType=INTEGER},",
+          "city = #{city,jdbcType=VARCHAR},",
           "evaluate = #{evaluate,jdbcType=VARCHAR},",
           "brief = #{brief,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",

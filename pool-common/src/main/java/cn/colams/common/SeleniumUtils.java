@@ -1,10 +1,7 @@
 package cn.colams.common;
 
 import cn.colams.common.constant.ChromeOptionEnum;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
@@ -34,16 +31,14 @@ public class SeleniumUtils {
     public static WebDriver getWebDriverImpl(String targetUrl, ChromeOptionEnum options) {
         WebDriver driver = getWebDriverV2(targetUrl, options);
         try {
-            Thread.sleep(10 * 1000);
+            Thread.sleep(9 * 1000);
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             boolean result = (Boolean) executor.executeScript("return document.body.style.overflow!=\"hidden\"");
             if (!result) {
                 WebElement modalButton = findElement(driver, By.cssSelector("div[data-testid='modal-container'] button")).orElse(null);
                 modalButton.click();
             }
-            Thread.sleep(3 * 1000);
-            executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
-            Thread.sleep(3 * 1000);
+            Thread.sleep(4 * 1000);
             executor.executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
         } catch (InterruptedException e) {
             LOGGER.error("getWebDriverImpl", e);
@@ -76,6 +71,7 @@ public class SeleniumUtils {
         WebDriver driver = new ChromeDriver(caps);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get(targetUrl);
+        driver.manage().getCookies().add(new Cookie("SRCHHPGUSR", "SRCHLANG=zh-Hans&BRW=XW&BRH=M&CW=1920&CH=969&SCW=1903&SCH=2975&DPR=1.0&UTC=480&DM=0&WTS=63821186637&HV=1685589848&PRVCW=1920&PRVCH=969&BZA=0&PV=10.0.0"));
 
         try {
             Thread.sleep(1 * 1000);

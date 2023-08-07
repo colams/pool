@@ -17,6 +17,8 @@ public class AirbnbLord {
 
     private Integer processStatus;
 
+    private String city;
+
     private String evaluate;
 
     private String brief;
@@ -112,6 +114,19 @@ public class AirbnbLord {
 
     public void setProcessStatus(Integer processStatus) {
         this.processStatus = processStatus;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public AirbnbLord withCity(String city) {
+        this.setCity(city);
+        return this;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
     public String getEvaluate() {

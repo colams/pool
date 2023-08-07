@@ -56,6 +56,10 @@ public class AirbnbLordSqlProvider {
             sql.VALUES("process_status", "#{processStatus,jdbcType=INTEGER}");
         }
         
+        if (record.getCity() != null) {
+            sql.VALUES("city", "#{city,jdbcType=VARCHAR}");
+        }
+        
         if (record.getEvaluate() != null) {
             sql.VALUES("evaluate", "#{evaluate,jdbcType=VARCHAR}");
         }
@@ -84,6 +88,7 @@ public class AirbnbLordSqlProvider {
         sql.SELECT("rooms");
         sql.SELECT("airbnb_id");
         sql.SELECT("process_status");
+        sql.SELECT("city");
         sql.SELECT("evaluate");
         sql.SELECT("brief");
         sql.SELECT("create_time");
@@ -132,6 +137,10 @@ public class AirbnbLordSqlProvider {
             sql.SET("process_status = #{record.processStatus,jdbcType=INTEGER}");
         }
         
+        if (record.getCity() != null) {
+            sql.SET("city = #{record.city,jdbcType=VARCHAR}");
+        }
+        
         if (record.getEvaluate() != null) {
             sql.SET("evaluate = #{record.evaluate,jdbcType=VARCHAR}");
         }
@@ -159,6 +168,7 @@ public class AirbnbLordSqlProvider {
         sql.SET("rooms = #{record.rooms,jdbcType=INTEGER}");
         sql.SET("airbnb_id = #{record.airbnbId,jdbcType=BIGINT}");
         sql.SET("process_status = #{record.processStatus,jdbcType=INTEGER}");
+        sql.SET("city = #{record.city,jdbcType=VARCHAR}");
         sql.SET("evaluate = #{record.evaluate,jdbcType=VARCHAR}");
         sql.SET("brief = #{record.brief,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
@@ -194,6 +204,10 @@ public class AirbnbLordSqlProvider {
         
         if (record.getProcessStatus() != null) {
             sql.SET("process_status = #{processStatus,jdbcType=INTEGER}");
+        }
+        
+        if (record.getCity() != null) {
+            sql.SET("city = #{city,jdbcType=VARCHAR}");
         }
         
         if (record.getEvaluate() != null) {

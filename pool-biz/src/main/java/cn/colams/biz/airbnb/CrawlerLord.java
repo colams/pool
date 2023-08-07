@@ -116,7 +116,7 @@ public class CrawlerLord {
         criteria.andLoardIdEqualTo(lord_id);
         List<AirbnbLord> airbnbRoomOwners = airbnbLordExtensionMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
-            AirbnbLord airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb.getId());
+            AirbnbLord airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb);
             airbnbLordExtensionMapper.insertSelective(airbnbRoomOwner);
             airbnb.setDealStatus(1);
         } else {
@@ -131,10 +131,10 @@ public class CrawlerLord {
      *
      * @param lordPage
      * @param lord_id
-     * @param airbnbID
+     * @param airbnb
      * @return
      */
-    private AirbnbLord getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Long airbnbID) throws ParseException {
+    private AirbnbLord getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Airbnb airbnb) throws ParseException {
         String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
         String url2 = String.format("https://zh.airbnb.com/users/show/%s", lord_id);
 
@@ -147,7 +147,8 @@ public class CrawlerLord {
         airbnbRoomOwner.setLoardId(lord_id);
         airbnbRoomOwner.setLordName(getLordName(driver, lord_id));
         airbnbRoomOwner.setLordPage(lordPage);
-        airbnbRoomOwner.setAirbnbId(airbnbID);
+        airbnbRoomOwner.setAirbnbId(airbnb.getId());
+        airbnbRoomOwner.setCity(airbnb.getrState());
         airbnbRoomOwner.setEvaluate(getEvaluate(driver2));
         airbnbRoomOwner.setBrief(getLordBrief(driver2));
         driver2.quit();

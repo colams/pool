@@ -5,6 +5,7 @@ import cn.colams.biz.airbnb.CrawlerApiKey;
 import cn.colams.biz.airbnb.CrawlerList;
 import cn.colams.biz.airbnb.CrawlerLord;
 import cn.colams.biz.airbnb.CrawlerLord2List;
+import cn.colams.biz.airbnb.api.StaysSearch;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ public class AirbnbController {
     private CrawlerLord2List lord2List;
     @Autowired
     private CrawlerApiKey crawlerApiKey;
+    @Autowired
+    private StaysSearch staysSearch;
 
 
     @GetMapping("/list")
@@ -49,6 +52,12 @@ public class AirbnbController {
     @GetMapping("/apikey")
     public String apikey(@RequestParam String url) {
         return crawlerApiKey.crawlerApiKey(url);
+    }
+
+
+    @GetMapping("/staySearch")
+    public String staySearch(@RequestParam String cityName) throws Exception {
+        return staysSearch.crawlerStaysSearch(cityName);
     }
 
 }
