@@ -15,6 +15,11 @@ public class StaysSearchTest extends CommonTest {
     @Autowired
     StaysSearch staysSearch;
 
+    /**
+     * 爬取房间信息
+     *
+     * @throws IOException
+     */
     @Test
     public void testStaysSearch() throws IOException {
         CommonResponseType<StaySearchData> response = staysSearch.staysSearch(getStaysSearchParams());

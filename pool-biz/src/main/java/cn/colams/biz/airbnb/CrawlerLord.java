@@ -61,6 +61,7 @@ public class CrawlerLord {
             if (Objects.nonNull(driver)) {
                 driver.quit();
             }
+            airbnb.withDatechangeLasttime(null);
             airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
         }
     }
@@ -105,7 +106,10 @@ public class CrawlerLord {
             price = OptionalUtils.stringVal(op1, e -> e.getText());
         }
 
-        airbnb.withLordId(lord_id).withRoomLocation(location).withPrice(price);
+        airbnb.withLordId(lord_id).withRoomLocation(location);
+        if (StringUtils.isEmpty(airbnb.getPrice())) {
+            airbnb.withPrice(price);
+        }
 
         AirbnbLordExample example = new AirbnbLordExample();
         AirbnbLordExample.Criteria criteria = example.createCriteria();
@@ -118,6 +122,7 @@ public class CrawlerLord {
         } else {
             airbnb.setDealStatus(3);
         }
+        LOGGER.info("roomId:{},lordId:{},{}", airbnb.getRoomId(), lord_id, airbnb.getDealStatus());
         return airbnb;
     }
 

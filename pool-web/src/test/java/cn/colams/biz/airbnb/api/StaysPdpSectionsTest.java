@@ -12,6 +12,12 @@ public class StaysPdpSectionsTest extends CommonTest {
     @Autowired
     StaysPdpSections staysPdpSections;
 
+    /**
+     * 爬取房东信息
+     *
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     @Test
     public void testStaysPdpSections() throws IOException, URISyntaxException {
         String resut = staysPdpSections.staysPdpSections("920878657404836142");
