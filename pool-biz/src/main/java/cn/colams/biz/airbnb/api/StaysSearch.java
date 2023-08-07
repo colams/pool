@@ -183,7 +183,7 @@ public class StaysSearch {
     }
 
     public interface Constant {
-        String ROOM_DETAIL_URL_TEMPLATE = "https://zh.airbnb.com/rooms/%s?check_in=2023-10-01&check_out=2023-11-01";
+        String ROOM_DETAIL_URL_TEMPLATE = "https://zh.airbnb.com/rooms/%s?check_in=2023-11-01&check_out=2023-12-01";
 
         String Singapore = "[{\"filterName\":\"cdnCacheSafe\",\"filterValues\":[\"false\"]},{\"filterName\":\"channel\",\"filterValues\":[\"EXPLORE\"]},{\"filterName\":\"datePickerType\",\"filterValues\":[\"monthly_stay\"]},{\"filterName\":\"flexibleTripLengths\",\"filterValues\":[\"one_week\"]},{\"filterName\":\"itemsPerGrid\",\"filterValues\":[\"18\"]},{\"filterName\":\"monthlyLength\",\"filterValues\":[\"1\"]},{\"filterName\":\"monthlyStartDate\",\"filterValues\":[\"2023-11-01\"]},{\"filterName\":\"placeId\",\"filterValues\":[\"ChIJyY4rtGcX2jERIKTarqz3AAQ\"]},{\"filterName\":\"priceFilterInputType\",\"filterValues\":[\"0\"]},{\"filterName\":\"priceFilterNumNights\",\"filterValues\":[\"31\"]},{\"filterName\":\"query\",\"filterValues\":[\"新加坡\"]},{\"filterName\":\"refinementPaths\",\"filterValues\":[\"/homes\"]},{\"filterName\":\"screenSize\",\"filterValues\":[\"small\"]},{\"filterName\":\"tabId\",\"filterValues\":[\"home_tab\"]},{\"filterName\":\"version\",\"filterValues\":[\"1.8.3\"]}]";
 

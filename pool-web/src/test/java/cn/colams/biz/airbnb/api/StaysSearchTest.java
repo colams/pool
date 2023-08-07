@@ -29,7 +29,7 @@ public class StaysSearchTest extends CommonTest {
 
     @Test
     public void testCrawlerStaysSearch() throws Exception {
-        String result = staysSearch.crawlerStaysSearch("Singapore");
+        String result = staysSearch.crawlerStaysSearch("Sydney");
         System.out.println(result);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
     }
