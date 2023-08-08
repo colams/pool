@@ -73,7 +73,7 @@ public class CrawlerLord {
      * @param airbnb
      * @return
      */
-    private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) throws ParseException {
+    private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) {
         Optional<WebElement> loadPageEl = SeleniumUtils.findElement(driver,
                 By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT'] a[href^='/users/show/']"));
         if (!loadPageEl.isPresent()) {
@@ -134,25 +134,21 @@ public class CrawlerLord {
      * @param airbnb
      * @return
      */
-    private AirbnbLord getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Airbnb airbnb) throws ParseException {
-        String url = String.format("https://zh.airbnb.com/users/%s/listings", lord_id);
+    private AirbnbLord getAirbnbRoomOwnerInfo(String lordPage, String lord_id, Airbnb airbnb) {
         String url2 = String.format("https://zh.airbnb.com/users/show/%s", lord_id);
-
-        WebDriver driver = SeleniumUtils.getWebDriverV2(url, ChromeOptionEnum.HEADLESS);
         WebDriver driver2 = SeleniumUtils.getWebDriverV2(url2, ChromeOptionEnum.HEADLESS);
 
 
         AirbnbLord airbnbRoomOwner = new AirbnbLord();
-        airbnbRoomOwner.setRooms(getLordRooms(driver));
+        airbnbRoomOwner.setRooms(getLordRooms(driver2));
         airbnbRoomOwner.setLoardId(lord_id);
-        airbnbRoomOwner.setLordName(getLordName(driver, lord_id));
+        airbnbRoomOwner.setLordName(getLordName(driver2));
         airbnbRoomOwner.setLordPage(lordPage);
         airbnbRoomOwner.setAirbnbId(airbnb.getId());
         airbnbRoomOwner.setCity(airbnb.getrState());
         airbnbRoomOwner.setEvaluate(getEvaluate(driver2));
         airbnbRoomOwner.setBrief(getLordBrief(driver2));
         driver2.quit();
-        driver.quit();
         return airbnbRoomOwner;
     }
 
@@ -160,13 +156,10 @@ public class CrawlerLord {
      * 获取房东名
      *
      * @param driver
-     * @param lord_id
      * @return
      */
-    private String getLordName(WebDriver driver, String lord_id) {
-        By by = By.cssSelector("a[href='/users/show/" + lord_id + "']");
-        Optional<WebElement> userEl = SeleniumUtils.findElement(driver, by);
-        return OptionalUtils.stringVal(userEl, e -> e.getText());
+    private String getLordName(WebDriver driver) {
+        return getValueByRegex("<span .*>(.*?)的房源</span>", driver.getPageSource());
     }
 
     /**
@@ -176,9 +169,14 @@ public class CrawlerLord {
      * @return
      * @throws ParseException
      */
-    private int getLordRooms(WebDriver driver) throws ParseException {
-        String value = getValueByRegex(">(\\d*?)个房源<", driver.getPageSource());
-        return NumberUtils.toInt(value);
+    private int getLordRooms(WebDriver driver) {
+        String value1 = getValueByRegex("查看所有 (\\d*?) 个房源</button", driver.getPageSource());
+        String value2 = getValueByRegex("id=\"listings-scroller-description\">显示 (\\d*?) 项中的 \\d 项</div>", driver.getPageSource());
+        if (StringUtils.isNotBlank(value1)) {
+            return NumberUtils.toInt(value1);
+        } else {
+            return NumberUtils.toInt(value2);
+        }
     }
 
     private String getValueByRegex(String regex, String inputText) {

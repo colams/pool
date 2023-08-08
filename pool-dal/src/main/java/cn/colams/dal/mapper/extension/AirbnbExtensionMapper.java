@@ -26,7 +26,7 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
         if (!StringUtils.isEmpty(roomId)) {
             criteria.andRoomIdEqualTo(roomId);
         } else {
-            criteria.andDealStatusIn(Lists.newArrayList(0, 2));
+            criteria.andDealStatusIn(Lists.newArrayList(0, 2, 4));
         }
         List<Airbnb> airbnbs = selectByExample(airbnbExample);
         return airbnbs;
