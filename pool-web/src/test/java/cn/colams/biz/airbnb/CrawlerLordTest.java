@@ -11,7 +11,7 @@ public class CrawlerLordTest extends CommonTest {
 
     @Test
     public void testCrawlerLord() {
-//        crawlerLord.crawlerLord(true);
+        crawlerLord.crawlerLord(true);
         System.out.println("over");
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>");
     }

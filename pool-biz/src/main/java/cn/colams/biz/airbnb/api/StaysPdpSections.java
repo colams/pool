@@ -1,10 +1,15 @@
 package cn.colams.biz.airbnb.api;
 
 import cn.colams.common.airbnb.AirbnbApiKeyUtils;
+import cn.colams.common.dto.airbnb.entity.LocationSection;
 import cn.colams.common.utils.Base64Utils;
 import cn.colams.common.utils.HttpUtils;
+import cn.colams.common.utils.JacksonSerializerUtil;
+import cn.colams.common.utils.RegexUtils;
 import cn.colams.dal.entity.Airbnb;
+import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
+import cn.colams.dal.mapper.extension.AirbnbLordExtensionMapper;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
@@ -16,6 +21,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 获取房东信息
@@ -28,19 +34,35 @@ public class StaysPdpSections {
     @Autowired
     private AirbnbExtensionMapper airbnbExtensionMapper;
 
+    @Autowired
+    private AirbnbLordExtensionMapper airbnbLordExtensionMapper;
 
-    public String staysPdpSections() throws IOException, URISyntaxException {
+
+    public String staysPdpSections() throws IOException, URISyntaxException, InterruptedException {
         return staysPdpSections(null);
     }
 
-    public String staysPdpSections(String roomId) throws IOException, URISyntaxException {
+    public String staysPdpSections(String roomId) throws IOException, URISyntaxException, InterruptedException {
         List<Airbnb> airbnbs = airbnbExtensionMapper.selectRoom2Process(roomId);
         for (Airbnb airbnb : airbnbs) {
             String queryID = getQueryId(airbnb.getRoomId());
             String url = "https://zh.airbnb.com/api/v3/StaysPdpSections";
             List<NameValuePair> list = getUrlTemplate(queryID);
             String result = HttpUtils.doGet(url, list, AirbnbApiKeyUtils.getHeaders());
+
+            String jsonPart = RegexUtils.getValueByRegex("(\\{\"__typename\":\"LocationSection\".*?})},\\{", result);
+            LocationSection locationSection = JacksonSerializerUtil.deserialize(jsonPart, LocationSection.class);
+            String address = "";
+            if (Objects.nonNull(locationSection.getPreviewLocationDetails())) {
+                address = locationSection.getPreviewLocationDetails().get(0).getTitle();
+            } else {
+                address = locationSection.getSubtitle();
+            }
+            AirbnbLord airbnbLord = airbnbLordExtensionMapper.query
+
+
             LOGGER.info(result);
+            Thread.sleep(1000);
         }
         return "success";
     }

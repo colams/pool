@@ -3,6 +3,7 @@ package cn.colams.biz.airbnb;
 import cn.colams.common.SeleniumUtils;
 import cn.colams.common.constant.ChromeOptionEnum;
 import cn.colams.common.utils.OptionalUtils;
+import cn.colams.common.utils.RegexUtils;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.dal.entity.AirbnbLordExample;
@@ -23,8 +24,6 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 爬取airbnb房东信息
@@ -74,6 +73,10 @@ public class CrawlerLord {
      * @return
      */
     private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) {
+        if (driver.getPageSource().indexOf("<h6>Error code: 410</h6>") > 0) {
+            airbnb.setDealStatus(5);
+            return airbnb;
+        }
         Optional<WebElement> loadPageEl = SeleniumUtils.findElement(driver,
                 By.cssSelector("div[data-section-id='HOST_PROFILE_DEFAULT'] a[href^='/users/show/']"));
         if (!loadPageEl.isPresent()) {
@@ -159,7 +162,7 @@ public class CrawlerLord {
      * @return
      */
     private String getLordName(WebDriver driver) {
-        return getValueByRegex("<span .*>(.*?)的房源</span>", driver.getPageSource());
+        return RegexUtils.getValueByRegex("<span .*>(.*?)的房源</span>", driver.getPageSource());
     }
 
     /**
@@ -170,8 +173,8 @@ public class CrawlerLord {
      * @throws ParseException
      */
     private int getLordRooms(WebDriver driver) {
-        String value1 = getValueByRegex("查看所有 (\\d*?) 个房源</button", driver.getPageSource());
-        String value2 = getValueByRegex("id=\"listings-scroller-description\">显示 (\\d*?) 项中的 \\d 项</div>", driver.getPageSource());
+        String value1 = RegexUtils.getValueByRegex("查看所有 (\\d*?) 个房源</button", driver.getPageSource());
+        String value2 = RegexUtils.getValueByRegex("id=\"listings-scroller-description\">显示 (\\d*?) 项中的 \\d 项</div>", driver.getPageSource());
         if (StringUtils.isNotBlank(value1)) {
             return NumberUtils.toInt(value1);
         } else {
@@ -179,15 +182,6 @@ public class CrawlerLord {
         }
     }
 
-    private String getValueByRegex(String regex, String inputText) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(inputText);
-        String value = "";
-        if (matcher.find()) {
-            value = matcher.group(1);
-        }
-        return value;
-    }
 
     /**
      * 获取房东简介

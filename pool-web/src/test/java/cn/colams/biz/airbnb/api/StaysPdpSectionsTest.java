@@ -19,7 +19,7 @@ public class StaysPdpSectionsTest extends CommonTest {
      * @throws URISyntaxException
      */
     @Test
-    public void testStaysPdpSections() throws IOException, URISyntaxException {
+    public void testStaysPdpSections() throws IOException, URISyntaxException, InterruptedException {
         String resut = staysPdpSections.staysPdpSections("920878657404836142");
         System.out.println(resut);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
