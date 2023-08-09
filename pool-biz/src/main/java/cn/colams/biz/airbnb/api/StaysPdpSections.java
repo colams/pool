@@ -10,18 +10,19 @@ import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.dal.mapper.extension.AirbnbLordExtensionMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 获取房东信息
@@ -43,28 +44,48 @@ public class StaysPdpSections {
     }
 
     public String staysPdpSections(String roomId) throws IOException, URISyntaxException, InterruptedException {
-        List<Airbnb> airbnbs = airbnbExtensionMapper.selectRoom2Process(roomId);
+        List<Airbnb> airbnbs = airbnbExtensionMapper.selectAllRooms(roomId);
         for (Airbnb airbnb : airbnbs) {
             String queryID = getQueryId(airbnb.getRoomId());
             String url = "https://zh.airbnb.com/api/v3/StaysPdpSections";
             List<NameValuePair> list = getUrlTemplate(queryID);
             String result = HttpUtils.doGet(url, list, AirbnbApiKeyUtils.getHeaders());
-
-            String jsonPart = RegexUtils.getValueByRegex("(\\{\"__typename\":\"LocationSection\".*?})},\\{", result);
-            LocationSection locationSection = JacksonSerializerUtil.deserialize(jsonPart, LocationSection.class);
-            String address = "";
-            if (Objects.nonNull(locationSection.getPreviewLocationDetails())) {
-                address = locationSection.getPreviewLocationDetails().get(0).getTitle();
-            } else {
-                address = locationSection.getSubtitle();
+            String address = getAddress(result);
+            if (StringUtils.isEmpty(address)) {
+                continue;
             }
-            AirbnbLord airbnbLord = airbnbLordExtensionMapper.query
-
-
-            LOGGER.info(result);
+            refreshCityInfo(airbnb, address);
+            LOGGER.info(address);
             Thread.sleep(1000);
         }
         return "success";
+    }
+
+    private String getAddress(String inputText) {
+        String regex = "(\\{\"__typename\":\"LocationSection\".*?})},\\{";
+        String jsonPart = RegexUtils.getValueByRegex(regex, inputText);
+        if (StringUtils.isBlank(jsonPart)) {
+            return "";
+        }
+        LocationSection locationSection = JacksonSerializerUtil.deserialize(jsonPart, LocationSection.class);
+        String address = "";
+        if (!CollectionUtils.isEmpty(locationSection.getPreviewLocationDetails())) {
+            address = locationSection.getPreviewLocationDetails().get(0).getTitle();
+        } else {
+            address = locationSection.getSubtitle();
+        }
+        return address;
+    }
+
+    private boolean refreshCityInfo(Airbnb airbnb, String address) {
+
+        AirbnbLord airbnbLord = airbnbLordExtensionMapper.queryByLoardId(airbnb.getLordId());
+        airbnbLord.setCity(address);
+        airbnbLordExtensionMapper.updateByPrimaryKeySelective(airbnbLord);
+
+        airbnb.setrState("1");
+        airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
+        return true;
     }
 
     private List<NameValuePair> getUrlTemplate(String queryID) {

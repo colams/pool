@@ -9,7 +9,7 @@ public class LocationSection extends ITypeName {
     private String address;
     private String addressTitle;
     private String homeIcon;
-    private String hostGuidebookButton;
+    private BasicListItem hostGuidebookButton;
     private double lat;
     private double lng;
     private String locationDisclaimer;
@@ -48,11 +48,11 @@ public class LocationSection extends ITypeName {
         this.homeIcon = homeIcon;
     }
 
-    public String getHostGuidebookButton() {
+    public BasicListItem getHostGuidebookButton() {
         return hostGuidebookButton;
     }
 
-    public void setHostGuidebookButton(String hostGuidebookButton) {
+    public void setHostGuidebookButton(BasicListItem hostGuidebookButton) {
         this.hostGuidebookButton = hostGuidebookButton;
     }
 

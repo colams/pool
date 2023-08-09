@@ -31,4 +31,17 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
         List<Airbnb> airbnbs = selectByExample(airbnbExample);
         return airbnbs;
     }
+
+    default List<Airbnb> selectAllRooms(String roomId) {
+        AirbnbExample airbnbExample = new AirbnbExample();
+        AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
+        if (!StringUtils.isEmpty(roomId)) {
+            criteria.andRoomIdEqualTo(roomId);
+        } else {
+            criteria.andLordIdNotEqualTo("");
+            criteria.andRStateNotEqualTo("1");
+        }
+        List<Airbnb> airbnbs = selectByExample(airbnbExample);
+        return airbnbs;
+    }
 }
