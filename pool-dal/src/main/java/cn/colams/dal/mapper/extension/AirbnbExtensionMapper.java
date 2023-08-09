@@ -38,6 +38,7 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
         if (!StringUtils.isEmpty(roomId)) {
             criteria.andRoomIdEqualTo(roomId);
         } else {
+            criteria.andDealStatusNotEqualTo(3);
             criteria.andLordIdNotEqualTo("");
             criteria.andRStateNotEqualTo("1");
         }
