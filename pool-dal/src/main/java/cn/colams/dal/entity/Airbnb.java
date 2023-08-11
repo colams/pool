@@ -17,7 +17,7 @@ public class Airbnb {
 
     private String roomLocation;
 
-    private Integer dealStatus;
+    private Integer status;
 
     private Integer rSrouce;
 
@@ -126,17 +126,17 @@ public class Airbnb {
         this.roomLocation = roomLocation == null ? null : roomLocation.trim();
     }
 
-    public Integer getDealStatus() {
-        return dealStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public Airbnb withDealStatus(Integer dealStatus) {
-        this.setDealStatus(dealStatus);
+    public Airbnb withStatus(Integer status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setDealStatus(Integer dealStatus) {
-        this.dealStatus = dealStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getrSrouce() {

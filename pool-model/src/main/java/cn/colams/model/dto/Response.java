@@ -1,6 +1,6 @@
 package cn.colams.model.dto;
 
-public class BaseDTO<T> {
+public class Response<T> {
 
     private int resultCode;
 

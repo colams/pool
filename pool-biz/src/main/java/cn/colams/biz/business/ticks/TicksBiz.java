@@ -1,4 +1,4 @@
-package cn.colams.biz.ticks;
+package cn.colams.biz.business.ticks;
 
 import cn.colams.dal.entity.Ticks;
 import cn.colams.dal.entity.TicksExample;

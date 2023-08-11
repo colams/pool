@@ -1,5 +1,6 @@
 package cn.colams.biz.ticks;
 
+import cn.colams.biz.business.ticks.TicksBiz;
 import cn.colams.biz.dalTest;
 import cn.colams.dal.mapper.extension.TicksExtensionMapper;
 import org.junit.Test;

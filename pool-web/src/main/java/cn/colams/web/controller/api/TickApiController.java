@@ -1,7 +1,7 @@
 package cn.colams.web.controller.api;
 
 
-import cn.colams.biz.ticks.TicksBiz;
+import cn.colams.biz.business.ticks.TicksBiz;
 import cn.colams.dal.entity.Ticks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package cn.colams.biz.ticks;
 
 import cn.colams.biz.dalTest;
-import cn.colams.biz.weight.WeightBiz;
+import cn.colams.biz.business.weight.WeightBiz;
 import cn.colams.dal.entity.WeightHistory;
 import cn.colams.dal.mapper.extension.WeightHistoryExtensionMapper;
 import com.google.common.collect.Lists;

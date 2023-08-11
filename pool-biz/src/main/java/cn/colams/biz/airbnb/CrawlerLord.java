@@ -55,7 +55,7 @@ public class CrawlerLord {
                 analysisDetail(driver, airbnb);
             } catch (Exception e) {
                 LOGGER.error("scrapyLord:" + airbnb.getRoomId(), e);
-                airbnb.setDealStatus(2);
+                airbnb.setStatus(2);
             }
             if (Objects.nonNull(driver)) {
                 driver.quit();
@@ -74,7 +74,7 @@ public class CrawlerLord {
      */
     private Airbnb analysisDetail(WebDriver driver, Airbnb airbnb) {
         if (driver.getPageSource().indexOf("<h6>Error code: 410</h6>") > 0) {
-            airbnb.setDealStatus(5);
+            airbnb.setStatus(5);
             return airbnb;
         }
         Optional<WebElement> loadPageEl = SeleniumUtils.findElement(driver,
@@ -92,7 +92,7 @@ public class CrawlerLord {
         }
 
         if (StringUtils.isBlank(lord_id)) {
-            airbnb.setDealStatus(4);
+            airbnb.setStatus(4);
             return airbnb;
         }
 
@@ -121,11 +121,11 @@ public class CrawlerLord {
         if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
             AirbnbLord airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb);
             airbnbLordExtensionMapper.insertSelective(airbnbRoomOwner);
-            airbnb.setDealStatus(1);
+            airbnb.setStatus(1);
         } else {
-            airbnb.setDealStatus(3);
+            airbnb.setStatus(3);
         }
-        LOGGER.info("roomId:{},lordId:{},{}", airbnb.getRoomId(), lord_id, airbnb.getDealStatus());
+        LOGGER.info("roomId:{},lordId:{},{}", airbnb.getRoomId(), lord_id, airbnb.getStatus());
         return airbnb;
     }
 

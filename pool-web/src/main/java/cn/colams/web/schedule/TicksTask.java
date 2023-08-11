@@ -1,6 +1,6 @@
 package cn.colams.web.schedule;
 
-import cn.colams.biz.ticks.TicksBiz;
+import cn.colams.biz.business.ticks.TicksBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.TriggerContext;

@@ -1,6 +1,6 @@
 package cn.colams.web.controller.api;
 
-import cn.colams.biz.weight.WeightBiz;
+import cn.colams.biz.business.weight.WeightBiz;
 import cn.colams.dal.entity.WeightHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

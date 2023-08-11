@@ -1,8 +1,8 @@
 package cn.colams.web.controller;
 
 import cn.colams.common.utils.UUIDUtils;
-import cn.colams.model.dto.Account;
-import cn.colams.model.dto.BaseDTO;
+import cn.colams.model.dto.entity.Account;
+import cn.colams.model.dto.Response;
 import cn.colams.model.enums.RetCode;
 import cn.colams.web.utils.ResultUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @GetMapping("/uuid")
-    public BaseDTO<Account> getUUID(HttpServletRequest request) {
+    public Response<Account> getUUID(HttpServletRequest request) {
         String uuid = UUIDUtils.getUuid();
 
         Account account = new Account();
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/valid")
-    public BaseDTO<Account> validUser(HttpSession session, @RequestParam String uuid) {
+    public Response<Account> validUser(HttpSession session, @RequestParam String uuid) {
 
         Account account = null;
         RetCode retCode;

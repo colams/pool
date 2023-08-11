@@ -1,4 +1,4 @@
-package cn.colams.biz.weight;
+package cn.colams.biz.business.weight;
 
 import cn.colams.dal.entity.WeightHistory;
 import cn.colams.dal.entity.WeightHistoryExample;

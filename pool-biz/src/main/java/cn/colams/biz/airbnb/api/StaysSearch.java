@@ -100,7 +100,17 @@ public class StaysSearch {
                 Airbnb airbnb = airbnbExtensionMapper.selectByRoomId(result.getListing().getId());
                 if (Objects.isNull(airbnb)) {
                     airbnb = new Airbnb();
-                    airbnb.withrState(StringUtils.isEmpty(result.getListing().getCity()) ? result.getListing().getLocalizedCityName() : result.getListing().getCity()).withPrice(Objects.isNull(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice()) ? result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel() : result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice()).withrSrouce(2).withPage(pageIndex).withRoomName(result.getListing().getName()).withPictureCount(result.getListing().getContextualPicturesCount()).withRoomId(result.getListing().getId()).withRoomUrl(String.format(Constant.ROOM_DETAIL_URL_TEMPLATE, result.getListing().getId())).withExtra(result.getListing().getAvgRatingA11yLabel()).withRoomLocation(String.format("%s,%s", result.getListing().getCoordinate().getLatitude(), result.getListing().getCoordinate().getLongitude())).withOrgUrl("").withLordId("").withDealStatus(0);
+                    airbnb.withrState(StringUtils.isEmpty(result.getListing().getCity()) ? result.getListing().getLocalizedCityName() : result.getListing().getCity()).withPrice(Objects.isNull(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice()) ? result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel() : result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice())
+                            .withrSrouce(2)
+                            .withPage(pageIndex)
+                            .withRoomName(result.getListing().getName()).withPictureCount(result.getListing().getContextualPicturesCount())
+                            .withRoomId(result.getListing().getId())
+                            .withRoomUrl(String.format(Constant.ROOM_DETAIL_URL_TEMPLATE, result.getListing().getId()))
+                            .withExtra(result.getListing().getAvgRatingA11yLabel())
+                            .withRoomLocation(String.format("%s,%s", result.getListing().getCoordinate().getLatitude(), result.getListing().getCoordinate().getLongitude()))
+                            .withOrgUrl("")
+                            .withLordId("")
+                            .withStatus(0);
                     airbnbExtensionMapper.insertSelective(airbnb);
                 }
             }

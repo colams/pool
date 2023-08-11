@@ -1,4 +1,4 @@
-package cn.colams.model.dto;
+package cn.colams.model.dto.entity;
 
 public class Account {
 

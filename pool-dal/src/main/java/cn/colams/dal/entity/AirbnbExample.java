@@ -585,63 +585,63 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusIsNull() {
-            addCriterion("deal_status is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusIsNotNull() {
-            addCriterion("deal_status is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusEqualTo(Integer value) {
-            addCriterion("deal_status =", value, "dealStatus");
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusNotEqualTo(Integer value) {
-            addCriterion("deal_status <>", value, "dealStatus");
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusGreaterThan(Integer value) {
-            addCriterion("deal_status >", value, "dealStatus");
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("deal_status >=", value, "dealStatus");
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusLessThan(Integer value) {
-            addCriterion("deal_status <", value, "dealStatus");
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("deal_status <=", value, "dealStatus");
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusIn(List<Integer> values) {
-            addCriterion("deal_status in", values, "dealStatus");
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusNotIn(List<Integer> values) {
-            addCriterion("deal_status not in", values, "dealStatus");
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusBetween(Integer value1, Integer value2) {
-            addCriterion("deal_status between", value1, value2, "dealStatus");
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDealStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("deal_status not between", value1, value2, "dealStatus");
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 
