@@ -11,6 +11,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,7 +55,9 @@ public class SeleniumUtils {
      * @return
      */
     public static WebDriver getWebDriverV2(String targetUrl, ChromeOptionEnum options) {
-        System.setProperty("webdriver.chrome.driver", ClassLoader.getSystemResource("driver/chromedriver.exe").getPath());
+        URL url = SeleniumUtils.class.getResource("/" + "driver/chromedriver.exe");
+        LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>:" + url.getPath());
+        System.setProperty("webdriver.chrome.driver", url.getPath());
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
         chromeOptions.addArguments("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36");

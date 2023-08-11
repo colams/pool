@@ -17,8 +17,7 @@ public class CustomizedExceptionHandler {
     @ExceptionHandler(value = RuntimeException.class)
     public ModelAndView handler(Exception e) {
         String message = String.format("sorry:%s", e.getMessage());
-
-        logger.error(message);
+        logger.error(message,e);
 
         ModelAndView modelAndView = new ModelAndView("error");
         modelAndView.addObject("message", message);

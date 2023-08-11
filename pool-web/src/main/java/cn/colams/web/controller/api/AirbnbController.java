@@ -50,7 +50,7 @@ public class AirbnbController {
     }
 
     @GetMapping("/apikey")
-    public String apikey(@RequestParam String url) {
+    public String apikey(@RequestParam(required = false, defaultValue = "") String url) {
         return crawlerApiKey.crawlerApiKey(url);
     }
 
