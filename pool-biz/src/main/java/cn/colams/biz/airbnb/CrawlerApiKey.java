@@ -26,7 +26,7 @@ public class CrawlerApiKey {
 
     public String crawlerApiKey(String url) {
         if (StringUtils.isBlank(url)) {
-            url = "https://wwww.airbnb.com";
+            url = "https://www.airbnb.com";
         }
         WebDriver driver = SeleniumUtils.getWebDriverV2(url, ChromeOptionEnum.HEADLESS);
 
