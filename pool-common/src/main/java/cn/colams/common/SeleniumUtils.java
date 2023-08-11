@@ -74,7 +74,6 @@ public class SeleniumUtils {
         WebDriver driver = new ChromeDriver(caps);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get(targetUrl);
-        driver.manage().getCookies().add(new Cookie("SRCHHPGUSR", "SRCHLANG=zh-Hans&BRW=XW&BRH=M&CW=1920&CH=969&SCW=1903&SCH=2975&DPR=1.0&UTC=480&DM=0&WTS=63821186637&HV=1685589848&PRVCW=1920&PRVCH=969&BZA=0&PV=10.0.0"));
 
         try {
             Thread.sleep(1 * 1000);
