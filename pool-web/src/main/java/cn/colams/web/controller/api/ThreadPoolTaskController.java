@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(value = "xiancheng ", tags = {"xiancheng"})
+@Api(value = "线程 ", tags = {"线程"})
 @RestController
 @RequestMapping("/api/thread")
 public class ThreadPoolTaskController {

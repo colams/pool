@@ -9,7 +9,11 @@ public class ResultUtils {
         Response<T> result = new Response<T>();
         result.setResult(t);
         result.setMessage(retCode.message);
-        result.setResultCode(retCode.code);
+        result.setErrorCode(retCode.code);
+
+        result.setTraceId("");
+        result.setHost("");
+        result.setShowType(0);
         return result;
     }
 }
