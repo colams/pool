@@ -71,6 +71,6 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
         if (StringUtils.isNotBlank(data.getLord())) {
             criteria.andLordIdEqualTo(data.getLord());
         }
-        return selectByExample(airbnbExample);
+        return selectByExampleWithBLOBs(airbnbExample);
     }
 }
