@@ -3,11 +3,14 @@ package cn.colams.dal.mapper.extension;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.mapper.auto.AirbnbMapper;
+import cn.colams.model.dto.airbnb.SearchAirbnbRoomsParams;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Repository
@@ -40,9 +43,34 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
         } else {
             criteria.andStatusNotEqualTo(3);
             criteria.andLordIdNotEqualTo("");
-            criteria.andRStateNotEqualTo("1");
+            criteria.andStateNotEqualTo("1");
         }
         List<Airbnb> airbnbs = selectByExample(airbnbExample);
         return airbnbs;
+    }
+
+    /**
+     * 获取
+     *
+     * @param data
+     * @return
+     */
+    default List<Airbnb> searchAirbnbRooms(SearchAirbnbRoomsParams data) throws ParseException {
+        AirbnbExample airbnbExample = new AirbnbExample();
+        AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
+        if (StringUtils.isNotBlank(data.getState())) {
+            criteria.andStateEqualTo(data.getState());
+        }
+        if (StringUtils.isNotBlank(data.getCreateTimeStart())) {
+            criteria.andCreateTimeGreaterThan(DateUtils.parseDate(data.getCreateTimeStart(), "yyyy-MM-dd HH:mm:ss"));
+        }
+
+        if (StringUtils.isNotBlank(data.getCreateTimeEnd())) {
+            criteria.andCreateTimeLessThan(DateUtils.parseDate(data.getCreateTimeEnd(), "yyyy-MM-dd HH:mm:ss"));
+        }
+        if (StringUtils.isNotBlank(data.getLord())) {
+            criteria.andLordIdEqualTo(data.getLord());
+        }
+        return selectByExample(airbnbExample);
     }
 }

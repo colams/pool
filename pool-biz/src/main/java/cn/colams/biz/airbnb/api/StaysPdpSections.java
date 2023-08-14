@@ -82,8 +82,7 @@ public class StaysPdpSections {
         AirbnbLord airbnbLord = airbnbLordExtensionMapper.queryByLoardId(airbnb.getLordId());
         airbnbLord.setCity(address);
         airbnbLordExtensionMapper.updateByPrimaryKeySelective(airbnbLord);
-
-        airbnb.setrState("1");
+        airbnb.setState("1");
         airbnbExtensionMapper.updateByPrimaryKeySelective(airbnb);
         return true;
     }

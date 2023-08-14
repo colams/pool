@@ -138,7 +138,7 @@ public class CrawlerList {
                 .withRoomId(roomId)
                 .withrSrouce(0);
 
-        airbnb.withrState("")
+        airbnb.withState("")
                 .withLordId("")
                 .withPrice("");
 

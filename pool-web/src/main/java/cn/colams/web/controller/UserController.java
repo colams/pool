@@ -5,6 +5,7 @@ import cn.colams.model.dto.entity.Account;
 import cn.colams.model.dto.Response;
 import cn.colams.model.enums.RetCode;
 import cn.colams.web.utils.ResultUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,6 @@ public class UserController {
         account.setUserName("测试");
         HttpSession session = request.getSession();
         session.setAttribute(uuid, account);
-
         return ResultUtils.createResult(account, RetCode.SUCCESS);
     }
 

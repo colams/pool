@@ -148,7 +148,7 @@ public class CrawlerLord {
         airbnbRoomOwner.setLordName(getLordName(driver2));
         airbnbRoomOwner.setLordPage(lordPage);
         airbnbRoomOwner.setAirbnbId(airbnb.getId());
-        airbnbRoomOwner.setCity(airbnb.getrState());
+        airbnbRoomOwner.setCity(airbnb.getState());
         airbnbRoomOwner.setEvaluate(getEvaluate(driver2));
         airbnbRoomOwner.setBrief(getLordBrief(driver2));
         driver2.quit();

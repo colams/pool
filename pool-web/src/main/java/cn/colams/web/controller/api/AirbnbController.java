@@ -7,6 +7,7 @@ import cn.colams.biz.airbnb.CrawlerLord;
 import cn.colams.biz.airbnb.CrawlerLord2List;
 import cn.colams.biz.airbnb.api.StaysSearch;
 import cn.colams.biz.business.airbnb.SearchAirbnbRoomsBusiness;
+import cn.colams.dal.entity.Airbnb;
 import cn.colams.model.dto.Request;
 import cn.colams.model.dto.Response;
 import cn.colams.model.dto.airbnb.SearchAirbnbRoomsParams;
@@ -15,6 +16,9 @@ import cn.colams.web.utils.ResultUtils;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.List;
 
 @Api(value = "airbnb", tags = {"airbnb"})
 @RestController
@@ -67,9 +71,9 @@ public class AirbnbController {
     }
 
     @PostMapping("/rooms")
-    public Response searchAirbnbRooms(@RequestBody Request<SearchAirbnbRoomsParams> request) {
-        searchAirbnbRoomsBusiness.searchAirbnbRooms(request.getData());
-        return ResultUtils.createResult(null, RetCode.SUCCESS);
+    public Response searchAirbnbRooms(@RequestBody Request<SearchAirbnbRoomsParams> request) throws ParseException {
+        List<Airbnb> airbnbs = searchAirbnbRoomsBusiness.searchAirbnbRooms(request.getData());
+        return ResultUtils.createResult(airbnbs, RetCode.SUCCESS);
     }
 
 
