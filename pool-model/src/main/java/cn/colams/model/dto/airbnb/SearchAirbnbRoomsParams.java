@@ -1,6 +1,8 @@
 package cn.colams.model.dto.airbnb;
 
-public class SearchAirbnbRoomsParams {
+import cn.colams.model.dto.IPageRequest;
+
+public class SearchAirbnbRoomsParams extends IPageRequest {
 
     private String createTimeStart;
     private String createTimeEnd;

@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public interface AirbnbExtensionMapper extends AirbnbMapper {
@@ -61,6 +62,7 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
         if (StringUtils.isNotBlank(data.getState())) {
             criteria.andStateEqualTo(data.getState());
         }
+
         if (StringUtils.isNotBlank(data.getCreateTimeStart())) {
             criteria.andCreateTimeGreaterThan(DateUtils.parseDate(data.getCreateTimeStart(), "yyyy-MM-dd HH:mm:ss"));
         }
@@ -68,9 +70,13 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
         if (StringUtils.isNotBlank(data.getCreateTimeEnd())) {
             criteria.andCreateTimeLessThan(DateUtils.parseDate(data.getCreateTimeEnd(), "yyyy-MM-dd HH:mm:ss"));
         }
+
         if (StringUtils.isNotBlank(data.getLord())) {
             criteria.andLordIdEqualTo(data.getLord());
         }
+
+
+
         return selectByExampleWithBLOBs(airbnbExample);
     }
 }
