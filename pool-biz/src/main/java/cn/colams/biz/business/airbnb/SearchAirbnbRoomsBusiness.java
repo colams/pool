@@ -3,6 +3,7 @@ package cn.colams.biz.business.airbnb;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
 import cn.colams.model.dto.airbnb.SearchAirbnbRoomsParams;
+import cn.colams.model.dto.airbnb.SearchResultWithPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +16,8 @@ public class SearchAirbnbRoomsBusiness {
     @Autowired
     private AirbnbExtensionMapper airbnbExtensionMapper;
 
-    public List<Airbnb> searchAirbnbRooms(SearchAirbnbRoomsParams data) throws ParseException {
-        List<Airbnb> airbnbs = airbnbExtensionMapper.searchAirbnbRooms(data);
-        return airbnbs;
+    public SearchResultWithPage<List<Airbnb>> searchAirbnbRooms(SearchAirbnbRoomsParams data) throws ParseException {
+        SearchResultWithPage<List<Airbnb>> result = airbnbExtensionMapper.searchAirbnbRooms(data);
+        return result;
     }
 }

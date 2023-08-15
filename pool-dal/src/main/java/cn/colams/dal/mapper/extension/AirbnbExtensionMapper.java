@@ -1,18 +1,20 @@
 package cn.colams.dal.mapper.extension;
 
+import cn.colams.common.utils.CommonUtils;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.mapper.auto.AirbnbMapper;
 import cn.colams.model.dto.airbnb.SearchAirbnbRoomsParams;
+import cn.colams.model.dto.airbnb.SearchResultWithPage;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public interface AirbnbExtensionMapper extends AirbnbMapper {
@@ -56,9 +58,11 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
      * @param data
      * @return
      */
-    default List<Airbnb> searchAirbnbRooms(SearchAirbnbRoomsParams data) throws ParseException {
+    default SearchResultWithPage<List<Airbnb>> searchAirbnbRooms(SearchAirbnbRoomsParams data) throws ParseException {
         AirbnbExample airbnbExample = new AirbnbExample();
+        airbnbExample.setOrderByClause(" id ");
         AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
+
         if (StringUtils.isNotBlank(data.getState())) {
             criteria.andStateEqualTo(data.getState());
         }
@@ -75,8 +79,14 @@ public interface AirbnbExtensionMapper extends AirbnbMapper {
             criteria.andLordIdEqualTo(data.getLord());
         }
 
+        RowBounds rowBounds = new RowBounds(data.getCurrentPage() * data.getPageSize(), data.getPageSize());
 
-
-        return selectByExampleWithBLOBs(airbnbExample);
+        long totalCount = countByExample(airbnbExample);
+        List<Airbnb> airbnbs = selectByExampleWithBLOBsWithRowbounds(airbnbExample, rowBounds);
+        SearchResultWithPage<List<Airbnb>> searchResult = new SearchResultWithPage<>();
+        searchResult.setData(airbnbs);
+        searchResult.setTotalCount(totalCount);
+        searchResult.setTotalPages(CommonUtils.aggregationInter(totalCount, data.getPageSize()));
+        return searchResult;
     }
 }
