@@ -58,7 +58,6 @@ public class AirbnbController {
         return "success";
     }
 
-
     @GetMapping("/lord2list")
     public String lordList(@RequestParam(required = false, defaultValue = "") String lordId) {
         lord2List.lord2List(lordId);
@@ -83,12 +82,9 @@ public class AirbnbController {
         return ResultUtils.createResult(airbnbs, RetCode.SUCCESS, request.getTraceId());
     }
 
-
     @PostMapping("/lords")
     public Response searchAirbnbLord(@RequestBody Request<SearchAirbnbLordParams> request) throws ParseException {
         SearchResultWithPage<List<AirbnbLord>> lords = searchAirbnbLordBusiness.searchAirbnbLord(request.getData());
         return ResultUtils.createResult(lords, RetCode.SUCCESS, request.getTraceId());
     }
-
-
 }
