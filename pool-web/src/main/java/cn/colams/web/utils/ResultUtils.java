@@ -39,4 +39,15 @@ public class ResultUtils {
         result.setShowType(0);
         return result;
     }
+
+    public static Response success(String traceId) {
+        Response result = new Response();
+        result.setMessage(RetCode.SUCCESS.getMessage());
+        result.setErrorCode(RetCode.SUCCESS.getCode());
+        result.setTraceId(traceId);
+
+        result.setHost("");
+        result.setShowType(0);
+        return result;
+    }
 }

@@ -72,8 +72,9 @@ public class AirbnbController {
 
 
     @GetMapping("/staySearch")
-    public String staySearch(@RequestParam String cityName) throws Exception {
-        return staysSearch.crawlerStaysSearch(cityName);
+    public Response staySearch(@RequestParam String cityName) throws Exception {
+        String result = staysSearch.crawlerStaysSearch(cityName);
+        return ResultUtils.createResult(result, RetCode.SUCCESS, cityName);
     }
 
     @PostMapping("/rooms")
