@@ -1,11 +1,11 @@
 package cn.colams.web.controller;
 
 import cn.colams.common.utils.UUIDUtils;
-import cn.colams.model.dto.entity.Account;
 import cn.colams.model.dto.Response;
+import cn.colams.model.dto.entity.Account;
 import cn.colams.model.enums.RetCode;
 import cn.colams.web.utils.ResultUtils;
-import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,22 +18,26 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    private HttpServletRequest httpServletRequest;
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/uuid")
-    public Response<Account> getUUID(HttpServletRequest request) {
+    public Response<Account> getUUID() {
         String uuid = UUIDUtils.getUuid();
 
         Account account = new Account();
         account.setUuid(uuid);
         account.setLevel(0);
         account.setUserName("测试");
-        HttpSession session = request.getSession();
+        HttpSession session = httpServletRequest.getSession();
         session.setAttribute(uuid, account);
-        return ResultUtils.createResult(account, RetCode.SUCCESS);
+        return ResultUtils.createResult(account, RetCode.SUCCESS, uuid);
     }
 
     @GetMapping("/valid")
-    public Response<Account> validUser(HttpSession session, @RequestParam String uuid) {
+    public Response<Account> validUser(@RequestParam String uuid) {
 
         Account account = null;
         RetCode retCode;
@@ -48,7 +52,7 @@ public class UserController {
             retCode = RetCode.SUCCESS;
         }
 
-        return ResultUtils.createResult(account, retCode);
+        return ResultUtils.createResult(account, retCode, "");
     }
 
 

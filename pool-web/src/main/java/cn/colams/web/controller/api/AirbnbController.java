@@ -74,7 +74,7 @@ public class AirbnbController {
     @PostMapping("/rooms")
     public Response searchAirbnbRooms(@RequestBody Request<SearchAirbnbRoomsParams> request) throws ParseException {
         SearchResultWithPage<List<Airbnb>> airbnbs = searchAirbnbRoomsBusiness.searchAirbnbRooms(request.getData());
-        return ResultUtils.createResult(airbnbs, RetCode.SUCCESS);
+        return ResultUtils.createResult(airbnbs, RetCode.SUCCESS, request.getTraceId());
     }
 
 
