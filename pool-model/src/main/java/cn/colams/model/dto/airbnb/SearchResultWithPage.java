@@ -29,4 +29,12 @@ public class SearchResultWithPage<T> {
     public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
     }
+
+    public static <T> SearchResultWithPage buildEntity(T data, long totalCount, int totalPages) {
+        SearchResultWithPage result = new SearchResultWithPage();
+        result.setData(data);
+        result.setTotalPages(totalPages);
+        result.setTotalCount(totalCount);
+        return result;
+    }
 }

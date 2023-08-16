@@ -3,7 +3,9 @@ package cn.colams.dal.mapper.extension;
 import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.dal.entity.AirbnbLordExample;
 import cn.colams.dal.mapper.auto.AirbnbLordMapper;
+import cn.colams.model.dto.airbnb.SearchResultWithPage;
 import com.google.common.collect.Lists;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -35,5 +37,11 @@ public interface AirbnbLordExtensionMapper extends AirbnbLordMapper {
         criteria.andLoardIdEqualTo(lordId);
         List<AirbnbLord> airbnbLords = selectByExample(example);
         return CollectionUtils.isEmpty(airbnbLords) ? null : airbnbLords.get(0);
+    }
+
+    default SearchResultWithPage<List<AirbnbLord>> searchAirbnbLords(AirbnbLordExample example, RowBounds rowBounds) {
+        long totalCount = countByExample(example);
+        List<AirbnbLord> list = selectByExampleWithRowbounds(example, rowBounds);
+        return SearchResultWithPage.buildEntity(list, totalCount, rowBounds.getLimit());
     }
 }

@@ -6,10 +6,13 @@ import cn.colams.biz.airbnb.CrawlerList;
 import cn.colams.biz.airbnb.CrawlerLord;
 import cn.colams.biz.airbnb.CrawlerLord2List;
 import cn.colams.biz.airbnb.api.StaysSearch;
+import cn.colams.biz.business.airbnb.SearchAirbnbLordBusiness;
 import cn.colams.biz.business.airbnb.SearchAirbnbRoomsBusiness;
 import cn.colams.dal.entity.Airbnb;
+import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.model.dto.Request;
 import cn.colams.model.dto.Response;
+import cn.colams.model.dto.airbnb.SearchAirbnbLordParams;
 import cn.colams.model.dto.airbnb.SearchAirbnbRoomsParams;
 import cn.colams.model.dto.airbnb.SearchResultWithPage;
 import cn.colams.model.enums.RetCode;
@@ -39,6 +42,8 @@ public class AirbnbController {
 
     @Autowired
     private SearchAirbnbRoomsBusiness searchAirbnbRoomsBusiness;
+    @Autowired
+    private SearchAirbnbLordBusiness searchAirbnbLordBusiness;
 
 
     @GetMapping("/list")
@@ -75,6 +80,13 @@ public class AirbnbController {
     public Response searchAirbnbRooms(@RequestBody Request<SearchAirbnbRoomsParams> request) throws ParseException {
         SearchResultWithPage<List<Airbnb>> airbnbs = searchAirbnbRoomsBusiness.searchAirbnbRooms(request.getData());
         return ResultUtils.createResult(airbnbs, RetCode.SUCCESS, request.getTraceId());
+    }
+
+
+    @PostMapping("/lords")
+    public Response searchAirbnbLord(@RequestBody Request<SearchAirbnbLordParams> request) throws ParseException {
+        SearchResultWithPage<List<AirbnbLord>> lords = searchAirbnbLordBusiness.searchAirbnbLord(request.getData());
+        return ResultUtils.createResult(lords, RetCode.SUCCESS, request.getTraceId());
     }
 
 
