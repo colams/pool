@@ -15,7 +15,8 @@ public class CommonController {
 
     @GetMapping("/message")
     public String message(Map<String, Object> map) {
-        map.put("message", "这个是个错误页");
-        return "error";
+        throw new RuntimeException("这个是个错误页");
+//        map.put("message", "这个是个错误页");
+//        return "error";
     }
 }

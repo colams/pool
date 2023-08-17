@@ -22,7 +22,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cn.colams.web.controller.api"))
+                .apis(RequestHandlerSelectors.basePackage("cn.colams.web.restcontroller"))
                 .paths(PathSelectors.any())
                 .build()
                 .ignoredParameterTypes(HttpSession.class, HttpServletRequest.class, HttpServletResponse.class)

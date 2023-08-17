@@ -1,4 +1,4 @@
-package cn.colams.web.controller;
+package cn.colams.web.restcontroller;
 
 import cn.colams.common.utils.UUIDUtils;
 import cn.colams.model.dto.Response;

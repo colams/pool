@@ -1,4 +1,4 @@
-package cn.colams.web.controller.api;
+package cn.colams.web.restcontroller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package cn.colams.web.controller.api;
+package cn.colams.web.restcontroller;
 
 import cn.colams.biz.business.weight.WeightBiz;
 import cn.colams.dal.entity.WeightHistory;

@@ -1,4 +1,4 @@
-package cn.colams.web.controller.api;
+package cn.colams.web.restcontroller;
 
 
 import cn.colams.biz.airbnb.CrawlerApiKey;
@@ -82,9 +82,11 @@ public class AirbnbController {
         return ResultUtils.createResult(airbnbs, RetCode.SUCCESS, request.getTraceId());
     }
 
-    @PostMapping("/lords")
+    @RequestMapping("/lords")
     public Response searchAirbnbLord(@RequestBody Request<SearchAirbnbLordParams> request) throws ParseException {
-        SearchResultWithPage<List<AirbnbLord>> lords = searchAirbnbLordBusiness.searchAirbnbLord(request.getData());
-        return ResultUtils.createResult(lords, RetCode.SUCCESS, request.getTraceId());
+
+        throw new RuntimeException("searchAirbnbLord");
+//        SearchResultWithPage<List<AirbnbLord>> lords = searchAirbnbLordBusiness.searchAirbnbLord(request.getData());
+//        return ResultUtils.createResult(lords, RetCode.SUCCESS, request.getTraceId());
     }
 }

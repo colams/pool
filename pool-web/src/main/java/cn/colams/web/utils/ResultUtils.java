@@ -40,6 +40,17 @@ public class ResultUtils {
         return result;
     }
 
+    public static Response failure(int errorCode, String message, String traceId) {
+        Response result = new Response();
+        result.setMessage(message);
+        result.setErrorCode(errorCode);
+        result.setTraceId(traceId);
+
+        result.setHost("");
+        result.setShowType(0);
+        return result;
+    }
+
     public static Response success(String traceId) {
         Response result = new Response();
         result.setMessage(RetCode.SUCCESS.getMessage());
