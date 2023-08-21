@@ -26,7 +26,7 @@ public interface AirbnbLordExtensionMapper extends AirbnbLordMapper {
         AirbnbLordExample.Criteria criteria = example.createCriteria();
         criteria.andProcessStatusIn(Lists.newArrayList(0, 2));
         if (Objects.nonNull(lordId)) {
-            criteria.andLoardIdEqualTo(lordId);
+            criteria.andLordIdEqualTo(lordId);
         }
         return selectByExample(example);
     }
@@ -34,7 +34,7 @@ public interface AirbnbLordExtensionMapper extends AirbnbLordMapper {
     default AirbnbLord queryByLoardId(String lordId) {
         AirbnbLordExample example = new AirbnbLordExample();
         AirbnbLordExample.Criteria criteria = example.createCriteria();
-        criteria.andLoardIdEqualTo(lordId);
+        criteria.andLordIdEqualTo(lordId);
         List<AirbnbLord> airbnbLords = selectByExample(example);
         return CollectionUtils.isEmpty(airbnbLords) ? null : airbnbLords.get(0);
     }

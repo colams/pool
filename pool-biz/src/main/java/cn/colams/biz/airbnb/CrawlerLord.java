@@ -116,7 +116,7 @@ public class CrawlerLord {
 
         AirbnbLordExample example = new AirbnbLordExample();
         AirbnbLordExample.Criteria criteria = example.createCriteria();
-        criteria.andLoardIdEqualTo(lord_id);
+        criteria.andLordIdEqualTo(lord_id);
         List<AirbnbLord> airbnbRoomOwners = airbnbLordExtensionMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(airbnbRoomOwners)) {
             AirbnbLord airbnbRoomOwner = getAirbnbRoomOwnerInfo(lord_page, lord_id, airbnb);
@@ -144,7 +144,7 @@ public class CrawlerLord {
 
         AirbnbLord airbnbRoomOwner = new AirbnbLord();
         airbnbRoomOwner.setRooms(getLordRooms(driver2));
-        airbnbRoomOwner.setLoardId(lord_id);
+        airbnbRoomOwner.setLordId(lord_id);
         airbnbRoomOwner.setLordName(getLordName(driver2));
         airbnbRoomOwner.setLordPage(lordPage);
         airbnbRoomOwner.setAirbnbId(airbnb.getId());

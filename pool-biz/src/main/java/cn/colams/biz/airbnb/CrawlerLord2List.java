@@ -50,7 +50,7 @@ public class CrawlerLord2List {
             boolean isSucc = false;
             try {
                 if (airbnbRoomOwner.getRooms() > 0) {
-                    isSucc = getUserListings(airbnbRoomOwner.getLoardId(), airbnbRoomOwner.getRooms());
+                    isSucc = getUserListings(airbnbRoomOwner.getLordId(), airbnbRoomOwner.getRooms());
                 }
             } catch (Exception e) {
                 LOGGER.error("scrapyLord:" + airbnbRoomOwner.getId(), e);

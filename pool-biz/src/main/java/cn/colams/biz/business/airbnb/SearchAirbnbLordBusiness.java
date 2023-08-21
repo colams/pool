@@ -46,7 +46,7 @@ public class SearchAirbnbLordBusiness {
         }
 
         if (StringUtils.isNotBlank(data.getLord())) {
-            criteria.andLoardIdEqualTo(data.getLord());
+            criteria.andLordIdEqualTo(data.getLord());
         }
 
         return airbnbLordExample;

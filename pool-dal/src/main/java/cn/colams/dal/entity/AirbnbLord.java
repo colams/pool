@@ -5,7 +5,7 @@ import java.util.Date;
 public class AirbnbLord {
     private Long id;
 
-    private String loardId;
+    private String lordId;
 
     private String lordName;
 
@@ -38,17 +38,17 @@ public class AirbnbLord {
         this.id = id;
     }
 
-    public String getLoardId() {
-        return loardId;
+    public String getLordId() {
+        return lordId;
     }
 
-    public AirbnbLord withLoardId(String loardId) {
-        this.setLoardId(loardId);
+    public AirbnbLord withLordId(String lordId) {
+        this.setLordId(lordId);
         return this;
     }
 
-    public void setLoardId(String loardId) {
-        this.loardId = loardId == null ? null : loardId.trim();
+    public void setLordId(String lordId) {
+        this.lordId = lordId == null ? null : lordId.trim();
     }
 
     public String getLordName() {
