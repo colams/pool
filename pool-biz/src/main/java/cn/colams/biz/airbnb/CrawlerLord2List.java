@@ -110,7 +110,7 @@ public class CrawlerLord2List {
                 airbnb.setRoomId(userPromoListings.getIdStr());
                 airbnb.setRoomName(userPromoListings.getName());
                 airbnb.setRoomUrl(String.format(StaysSearch.Constant.ROOM_DETAIL_URL_TEMPLATE, userPromoListings.getIdStr()));
-                airbnb.setrSrouce(1);
+                airbnb.setSource(1);
                 airbnbExtensionMapper.insertSelective(airbnb);
             }
         } catch (Exception e) {

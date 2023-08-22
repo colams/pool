@@ -19,7 +19,7 @@ public class Airbnb {
 
     private Integer status;
 
-    private Integer rSrouce;
+    private Integer source;
 
     private Integer page;
 
@@ -139,17 +139,17 @@ public class Airbnb {
         this.status = status;
     }
 
-    public Integer getrSrouce() {
-        return rSrouce;
+    public Integer getSource() {
+        return source;
     }
 
-    public Airbnb withrSrouce(Integer rSrouce) {
-        this.setrSrouce(rSrouce);
+    public Airbnb withSource(Integer source) {
+        this.setSource(source);
         return this;
     }
 
-    public void setrSrouce(Integer rSrouce) {
-        this.rSrouce = rSrouce;
+    public void setSource(Integer source) {
+        this.source = source;
     }
 
     public Integer getPage() {

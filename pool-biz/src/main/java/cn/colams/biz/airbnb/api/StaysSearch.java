@@ -101,7 +101,7 @@ public class StaysSearch {
                 if (Objects.isNull(airbnb)) {
                     airbnb = new Airbnb();
                     airbnb.withState(StringUtils.isEmpty(result.getListing().getCity()) ? result.getListing().getLocalizedCityName() : result.getListing().getCity()).withPrice(Objects.isNull(result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice()) ? result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getAccessibilitylabel() : result.getPricingQuote().getStructuredStayDisplayPrice().getPrimaryline().getDiscountedprice())
-                            .withrSrouce(2)
+                            .withSource(2)
                             .withPage(pageIndex)
                             .withRoomName(result.getListing().getName()).withPictureCount(result.getListing().getContextualPicturesCount())
                             .withRoomId(result.getListing().getId())

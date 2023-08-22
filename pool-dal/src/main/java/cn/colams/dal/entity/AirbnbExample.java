@@ -645,63 +645,63 @@ public class AirbnbExample {
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceIsNull() {
-            addCriterion("r_srouce is null");
+        public Criteria andSourceIsNull() {
+            addCriterion("source is null");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceIsNotNull() {
-            addCriterion("r_srouce is not null");
+        public Criteria andSourceIsNotNull() {
+            addCriterion("source is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceEqualTo(Integer value) {
-            addCriterion("r_srouce =", value, "rSrouce");
+        public Criteria andSourceEqualTo(Integer value) {
+            addCriterion("source =", value, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceNotEqualTo(Integer value) {
-            addCriterion("r_srouce <>", value, "rSrouce");
+        public Criteria andSourceNotEqualTo(Integer value) {
+            addCriterion("source <>", value, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceGreaterThan(Integer value) {
-            addCriterion("r_srouce >", value, "rSrouce");
+        public Criteria andSourceGreaterThan(Integer value) {
+            addCriterion("source >", value, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceGreaterThanOrEqualTo(Integer value) {
-            addCriterion("r_srouce >=", value, "rSrouce");
+        public Criteria andSourceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("source >=", value, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceLessThan(Integer value) {
-            addCriterion("r_srouce <", value, "rSrouce");
+        public Criteria andSourceLessThan(Integer value) {
+            addCriterion("source <", value, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceLessThanOrEqualTo(Integer value) {
-            addCriterion("r_srouce <=", value, "rSrouce");
+        public Criteria andSourceLessThanOrEqualTo(Integer value) {
+            addCriterion("source <=", value, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceIn(List<Integer> values) {
-            addCriterion("r_srouce in", values, "rSrouce");
+        public Criteria andSourceIn(List<Integer> values) {
+            addCriterion("source in", values, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceNotIn(List<Integer> values) {
-            addCriterion("r_srouce not in", values, "rSrouce");
+        public Criteria andSourceNotIn(List<Integer> values) {
+            addCriterion("source not in", values, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceBetween(Integer value1, Integer value2) {
-            addCriterion("r_srouce between", value1, value2, "rSrouce");
+        public Criteria andSourceBetween(Integer value1, Integer value2) {
+            addCriterion("source between", value1, value2, "source");
             return (Criteria) this;
         }
 
-        public Criteria andRSrouceNotBetween(Integer value1, Integer value2) {
-            addCriterion("r_srouce not between", value1, value2, "rSrouce");
+        public Criteria andSourceNotBetween(Integer value1, Integer value2) {
+            addCriterion("source not between", value1, value2, "source");
             return (Criteria) this;
         }
 
