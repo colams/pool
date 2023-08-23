@@ -1,5 +1,6 @@
 package cn.colams.biz.business.airbnb;
 
+import cn.colams.common.utils.AssignUtils;
 import cn.colams.dal.entity.Airbnb;
 import cn.colams.dal.entity.AirbnbExample;
 import cn.colams.dal.mapper.extension.AirbnbExtensionMapper;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 @Component
 public class SearchAirbnbRoomsBusiness {
@@ -38,23 +42,23 @@ public class SearchAirbnbRoomsBusiness {
         AirbnbExample airbnbExample = new AirbnbExample();
         airbnbExample.setOrderByClause(" id ");
         AirbnbExample.Criteria criteria = airbnbExample.createCriteria();
-
-        if (StringUtils.isNotBlank(data.getState())) {
-            criteria.andStateEqualTo(data.getState());
-        }
+        String patterns = "yyyy-MM-dd HH:mm:ss";
 
         if (StringUtils.isNotBlank(data.getCreateTimeStart())) {
-            criteria.andCreateTimeGreaterThan(DateUtils.parseDate(data.getCreateTimeStart(), "yyyy-MM-dd HH:mm:ss"));
+            criteria.andCreateTimeGreaterThan(DateUtils.parseDate(data.getCreateTimeStart(), patterns));
         }
 
         if (StringUtils.isNotBlank(data.getCreateTimeEnd())) {
-            criteria.andCreateTimeLessThan(DateUtils.parseDate(data.getCreateTimeEnd(), "yyyy-MM-dd HH:mm:ss"));
+            criteria.andCreateTimeLessThan(DateUtils.parseDate(data.getCreateTimeEnd(), patterns));
         }
-
-        if (StringUtils.isNotBlank(data.getLord())) {
-            criteria.andLordIdEqualTo(data.getLord());
-        }
-
+//        match(data.getCreateTimeStart(), patterns, DateUtils::parseDate, criteria::andCreateTimeGreaterThan);
+//        match(data.getCreateTimeEnd(), patterns, DateUtils::parseDate, criteria::andCreateTimeLessThan);
+        AssignUtils.stringNotBlankAssign(data.getState(), criteria::andStateEqualTo);
+        AssignUtils.stringNotBlankAssign(data.getState(), criteria::andStateEqualTo);
+        AssignUtils.stringNotBlankAssign(data.getLordId(), criteria::andLordIdEqualTo);
+        AssignUtils.stringNotBlankAssign(data.getRoomId(), criteria::andRoomIdEqualTo);
         return airbnbExample;
     }
+
+
 }

@@ -7,7 +7,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.Objects;
 
-public class AssertUtil {
+public class AssertUtils {
 
     public static void notNull(Object object, IResult result) {
         if (Objects.isNull(object)) {

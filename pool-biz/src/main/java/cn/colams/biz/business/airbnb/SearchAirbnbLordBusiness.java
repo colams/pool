@@ -1,5 +1,6 @@
 package cn.colams.biz.business.airbnb;
 
+import cn.colams.common.utils.AssignUtils;
 import cn.colams.dal.entity.AirbnbLord;
 import cn.colams.dal.entity.AirbnbLordExample;
 import cn.colams.dal.mapper.extension.AirbnbLordExtensionMapper;
@@ -33,9 +34,8 @@ public class SearchAirbnbLordBusiness {
         airbnbLordExample.setOrderByClause(" id ");
         AirbnbLordExample.Criteria criteria = airbnbLordExample.createCriteria();
 
-        if (StringUtils.isNotBlank(data.getState())) {
-            criteria.andCityEqualTo(data.getState());
-        }
+        AssignUtils.stringNotBlankAssign(data.getState(), criteria::andCityEqualTo);
+        AssignUtils.stringNotBlankAssign(data.getLordId(), criteria::andLordIdEqualTo);
 
         if (StringUtils.isNotBlank(data.getCreateTimeStart())) {
             criteria.andCreateTimeGreaterThan(DateUtils.parseDate(data.getCreateTimeStart(), "yyyy-MM-dd HH:mm:ss"));
@@ -45,9 +45,6 @@ public class SearchAirbnbLordBusiness {
             criteria.andCreateTimeLessThan(DateUtils.parseDate(data.getCreateTimeEnd(), "yyyy-MM-dd HH:mm:ss"));
         }
 
-        if (StringUtils.isNotBlank(data.getLord())) {
-            criteria.andLordIdEqualTo(data.getLord());
-        }
 
         return airbnbLordExample;
     }
