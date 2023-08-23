@@ -7,7 +7,7 @@ public class SearchAirbnbLordParams extends IPageRequest {
     private String createTimeStart;
     private String createTimeEnd;
     private String state;
-    private String lord;
+    private String lordId;
 
     public String getCreateTimeStart() {
         return createTimeStart;
@@ -33,11 +33,11 @@ public class SearchAirbnbLordParams extends IPageRequest {
         this.state = state;
     }
 
-    public String getLord() {
-        return lord;
+    public String getLordId() {
+        return lordId;
     }
 
-    public void setLord(String lord) {
-        this.lord = lord;
+    public void setLordId(String lordId) {
+        this.lordId = lordId;
     }
 }
