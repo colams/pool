@@ -30,8 +30,8 @@ public class AssignUtils {
         }
     }
 
-    private <R> void stringNotBlankAssign(String parameter, String patterns,
-                                          BiFunction<String, String, R> function, Consumer<R> consumer) {
+    private <U,R> void stringNotBlankAssign(String parameter, U patterns,
+                                          BiFunction<String, U, R> function, Consumer<R> consumer) {
         if (StringUtils.isNotBlank(parameter) && Objects.nonNull(function)) {
             consumer.accept(function.apply(parameter, patterns));
         }
