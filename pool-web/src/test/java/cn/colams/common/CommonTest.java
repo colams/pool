@@ -20,6 +20,18 @@ public class CommonTest {
         test(array, max);
     }
 
+    @Test
+    public void testStringFormat() {
+        String format = "hello %s, 张 %s,%s";
+        try {
+//            System.out.println(String.format(format, "test", "三"));
+            System.out.println(String.format(format, "test", "三", "小心"));
+            System.out.println(String.format(format, "test", "三", "小心", "测试代码"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private void test(BigDecimal[] array, int max) {
         int[] result = new int[array.length];
 
@@ -29,7 +41,7 @@ public class CommonTest {
         }
 
         for (int i = 0; i < array.length; i++) {
-            
+
         }
 
 
