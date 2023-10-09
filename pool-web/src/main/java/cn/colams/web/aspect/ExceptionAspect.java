@@ -4,7 +4,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.web.BasicErrorController;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -16,8 +15,8 @@ public class ExceptionAspect {
     private static final Logger logger = LoggerFactory.getLogger(ExceptionAspect.class);
 
     // @Around("org.springframework.boot.autoconfigure.web.execution()")
-    @Around("execution(* org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(..))")
-    public void loggerError(){
+    @Around("execution(* org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(..))")
+    public void loggerError() {
 
     }
 

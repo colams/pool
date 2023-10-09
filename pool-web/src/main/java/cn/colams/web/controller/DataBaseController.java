@@ -1,11 +1,8 @@
 package cn.colams.web.controller;
 
-import cn.colams.biz.db.DatabaseBiz;
 import cn.colams.common.setting.PageNameSetting;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,8 +15,8 @@ import java.util.Map;
 @RequestMapping("/")
 public class DataBaseController {
 
-    @Autowired
-    DatabaseBiz databaseBiz;
+//    @Autowired
+//    DatabaseBiz databaseBiz;
 
     @GetMapping("database/list")
     public String list(Model model) throws Exception {

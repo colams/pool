@@ -15,7 +15,7 @@ public class DataBaseApiController {
 
     @Autowired
     DatabaseBiz databaseBiz;
-    @Value("${spring.datasource.url}")
+    @Value("${spring.datasource.jdbc-url}")
     private String url;
 
     @ApiOperation(value = "数据库连接字符串")
