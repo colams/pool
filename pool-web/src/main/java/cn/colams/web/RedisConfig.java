@@ -1,13 +1,13 @@
 package cn.colams.web;
 
 import cn.colams.biz.business.BasicConfigBiz;
-import org.springframework.cache.CacheManager;
+import cn.colams.model.entity.RedisConfigVo;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -36,12 +36,14 @@ public class RedisConfig extends CachingConfigurerSupport {
         poolConfig.setTestWhileIdle(true);
         JedisClientConfiguration clientConfig = JedisClientConfiguration.builder()
                 .usePooling().poolConfig(poolConfig).and().build();
+
+        RedisConfigVo redisConfigVo = new RedisConfigVo();
         // 单点redis
         RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
-
-        redisConfig.setHostName(redisHost);
-        redisConfig.setPort(redisPort);
-        redisConfig.setDatabase(redisDb);
+        redisConfig.setHostName(redisConfigVo.getHost());
+        redisConfig.setPort(redisConfigVo.getPort());
+        redisConfig.setDatabase(0);
+        redisConfig.setPassword(RedisPassword.of(redisConfigVo.getPassword()));
         return new JedisConnectionFactory(redisConfig, clientConfig);
     }
 
@@ -76,5 +78,10 @@ public class RedisConfig extends CachingConfigurerSupport {
 //        redisTemplate.setHashValueSerializer(redisSerializer);
 //        redisTemplate.setStringSerializer(redisSerializer);
         return redisTemplate;
+    }
+
+    private RedisConfigVo getRedisConfig() {
+        RedisConfigVo redisConfigVo = new RedisConfigVo();
+        return redisConfigVo;
     }
 }
