@@ -28,24 +28,24 @@ public class RedisConfig extends CachingConfigurerSupport {
         this.basicConfigBiz = basicConfigBiz;
     }
 
-    @Bean
-    public RedisConnectionFactory connectionFactory() {
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setTestOnBorrow(true);
-        poolConfig.setTestOnReturn(false);
-        poolConfig.setTestWhileIdle(true);
-        JedisClientConfiguration clientConfig = JedisClientConfiguration.builder()
-                .usePooling().poolConfig(poolConfig).and().build();
-
-        RedisConfigVo redisConfigVo = new RedisConfigVo();
-        // 单点redis
-        RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
-        redisConfig.setHostName(redisConfigVo.getHost());
-        redisConfig.setPort(redisConfigVo.getPort());
-        redisConfig.setDatabase(0);
-        redisConfig.setPassword(RedisPassword.of(redisConfigVo.getPassword()));
-        return new JedisConnectionFactory(redisConfig, clientConfig);
-    }
+//    @Bean
+//    public RedisConnectionFactory connectionFactory() {
+//        JedisPoolConfig poolConfig = new JedisPoolConfig();
+//        poolConfig.setTestOnBorrow(true);
+//        poolConfig.setTestOnReturn(false);
+//        poolConfig.setTestWhileIdle(true);
+//        JedisClientConfiguration clientConfig = JedisClientConfiguration.builder()
+//                .usePooling().poolConfig(poolConfig).and().build();
+//
+//        RedisConfigVo redisConfigVo = new RedisConfigVo();
+//        // 单点redis
+//        RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
+//        redisConfig.setHostName(redisConfigVo.getHost());
+//        redisConfig.setPort(redisConfigVo.getPort());
+//        redisConfig.setDatabase(0);
+//        redisConfig.setPassword(RedisPassword.of(redisConfigVo.getPassword()));
+//        return new JedisConnectionFactory(redisConfig, clientConfig);
+//    }
 
 
     @Bean
